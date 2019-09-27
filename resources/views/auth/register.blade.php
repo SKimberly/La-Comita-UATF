@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('welcome')
 
 @section('content')
 <div class="container">
@@ -12,14 +12,42 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                            <label for="fullname" class="col-md-4 col-form-label text-md-right">{{ __('Nombre completo:') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
+                                <input id="fullname" type="text" class="form-control{{ $errors->has('fullname') ? ' is-invalid' : '' }}" name="fullname" value="{{ old('fullname') }}" required autofocus>
 
-                                @if ($errors->has('name'))
+                                @if ($errors->has('fullname'))
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('name') }}</strong>
+                                        <strong>{{ $errors->first('fullname') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="cedula" class="col-md-4 col-form-label text-md-right">{{ __('Cédula:') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="cedula" type="number" class="form-control{{ $errors->has('cedula') ? ' is-invalid' : '' }}" name="cedula" value="{{ old('cedula') }}" required>
+
+                                @if ($errors->has('cedula'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('cedula') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="telefono" class="col-md-4 col-form-label text-md-right">{{ __('Teléfono:') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="telefono" type="number" class="form-control{{ $errors->has('telefono') ? ' is-invalid' : '' }}" name="telefono" value="{{ old('telefono') }}" required>
+
+                                @if ($errors->has('telefono'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('telefono') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -29,7 +57,7 @@
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
+                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}">
 
                                 @if ($errors->has('email'))
                                     <span class="invalid-feedback" role="alert">
