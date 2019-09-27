@@ -7,8 +7,29 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+@import '~admin-lte/dist/css/adminlte.css';
+
+@import '~@fortawesome/fontawesome-free/scss/fontawesome.scss';
+@import '~@fortawesome/fontawesome-free/scss/solid.scss';
+@import '~@fortawesome/fontawesome-free/scss/brands.scss';
 
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+body{
+    font-family: "Times New Roman", Times, serif;
+}
+
+.sidebar-dark-primary{
+  background-color: #c9ece8;
+}
+
+[class*='sidebar-dark-'] .nav-treeview > .nav-item > .nav-link {
+    color: #1a1a1a;
+}
+
+[class*='sidebar-dark-'] .sidebar a {
+    color: #1a1a1a;
 }
