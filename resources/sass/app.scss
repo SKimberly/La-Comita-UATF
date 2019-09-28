@@ -17,19 +17,34 @@
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
-
+//tipo de letra del sistema
 body{
     font-family: "Times New Roman", Times, serif;
 }
-
+//color para el sidebar
 .sidebar-dark-primary{
-  background-color: #c9ece8;
+   background: #1FA2FF;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to left, #A6FFCB, #12D8FA, #1FA2FF);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to left, #A6FFCB, #12D8FA, #1FA2FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 }
 
+// son colores para las letra del sidebar
 [class*='sidebar-dark-'] .nav-treeview > .nav-item > .nav-link {
     color: #1a1a1a;
 }
-
 [class*='sidebar-dark-'] .sidebar a {
     color: #1a1a1a;
 }
+
+//color para el active del sidebar
+.sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link.active, .sidebar-light-primary .nav-sidebar > .nav-item > .nav-link.active {
+    background-color: #12d8fa;
+    color: #ffffff;
+}
+
+[class*='sidebar-dark-'] .nav-treeview > .nav-item > .nav-link.active, [class*='sidebar-dark-'] .nav-treeview > .nav-item > .nav-link.active:hover, [class*='sidebar-dark-'] .nav-treeview > .nav-item > .nav-link.active:focus {
+    background-color: rgba(255, 255, 255, 0.5);
+    color: #343a40;
+}
+

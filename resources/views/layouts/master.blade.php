@@ -182,7 +182,7 @@
                with font-awesome or any other icon font library -->
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-home"></i>
+              <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Escritorio
               </p>
@@ -192,7 +192,8 @@
             <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-users"></i>
               <p>
-                  Usuarios fas fa-tachometer-alt
+                  Usuarios
+
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -235,8 +236,8 @@
             </ul>
           </li>
           <li class="nav-item has-treeview menu-open">
-            <a href="#" class="nav-link active">
-              <i class="nav-icon fas fa-users"></i>
+            <a href="#" class="nav-link ">
+              <i class="nav-icon fas fa-shopping-cart"></i>
               <p>
                   Pedidos
                 <i class="right fas fa-angle-left"></i>
@@ -245,7 +246,7 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="#" class="nav-link ">
-                  <i class="nav-icon fas fa-users-cog"></i>
+                  <i class="nav-icon fas fa-list-ol"></i>
                   <p>Ver lista</p>
                 </a>
               </li>
@@ -258,8 +259,8 @@
             </ul>
           </li>
           <li class="nav-item has-treeview menu-open">
-            <a href="#" class="nav-link active">
-              <i class="nav-icon fas fa-users"></i>
+            <a href="#" class="nav-link ">
+              <i class="nav-icon fas fa-money-check-alt"></i>
               <p>
                   Cotizaciones
                 <i class="right fas fa-angle-left"></i>
@@ -267,8 +268,8 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link active">
-                  <i class="nav-icon fas fa-users-cog"></i>
+                <a href="#" class="nav-link ">
+                  <i class="nav-icon fas fa-clipboard-list"></i>
                   <p>Ver lista</p>
                 </a>
               </li>
@@ -281,7 +282,7 @@
             </ul>
           </li>
           <li class="nav-item has-treeview menu-open">
-            <a href="#" class="nav-link active">
+            <a href="#" class="nav-link ">
               <i class="nav-icon fas fa-cash-register"></i>
               <p>
                   Ventas

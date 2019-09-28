@@ -23,9 +23,9 @@
     <div id="app">
         <header>
             <nav>
-                <a href="">Inicio</a>
-                <a href="">Acerca de</a>
-                <a href="">Portafolio</a>
+                <a href="">INICIO</a>
+                <a href="">NOSOTROS</a>
+                <a href="">PRODUCTOS</a>
                 <a href="">Servicios</a>
                 <a href="">Contacto</a>
                 @if (Route::has('login'))
@@ -52,7 +52,7 @@
         <main>
             <section class="contenedor sobre-nosotros">
                 <h2 class="titulo">
-                    Nuestro producto
+                    NUESTROS SERVICIOS
                 </h2>
                 <div class="contenedor-sobre-nosotros">
                     <img src="img/developer.svg" alt="" class="imagen-developer">
@@ -65,6 +65,102 @@
 
                         <h3><span>3</span> Los mejores productos</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore vero, perspiciatis doloribus totam beatae provident quo natus consequuntur autem facilis! Sit eius deleniti dicta veritatis quam accusantium nemo modi qui!</p>
+                    </div>
+                </div>
+            </section>
+            <section class="about-services">
+                <div class="contenedor">
+                    <h2 class="titulo">Nuestros Productos</h2>
+                    <div class="servicio-cont">
+                      <div class="servicio-ind">
+                        <div class="card shadow">
+                          <div class="card-body">
+                            <div style="text-align: center;">
+                            <img src="images/99A.jpg" class="img-fluid  w-50"> </div>
+                            <h3 class="text-center">John Carter</h3>
+                            <p class="text-justify">
+                              Dolor modi repudiandae quia beatae consectetur? Nam ullafugit ullam, accusamus! Totam mollitia eveniet!
+                            </p> <hr>
+                            <div class="d-flex flex-row justify-content-center">
+                              <b>Unid.:</b> <span>Bs. 170 </span>
+                                <a href="#" class="btn btn-warning btn-sm ml-auto">Ordenar</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="servicio-ind">
+                        <div class="card shadow">
+                          <div class="card-body">
+                            <div style="text-align: center;">
+                            <img src="images/99A.jpg" class="img-fluid  w-50"> </div>
+                            <h3 class="text-center">John Carter</h3>
+                            <p class="text-justify">
+                              Dolor modi repudiandae quia beatae consectetur? Nam ullafugit ullam, accusamus! Totam mollitia eveniet!
+                            </p> <hr>
+                            <div class="d-flex flex-row justify-content-center">
+                              <b>Unid.:</b> <span>Bs. 170 </span>
+                                <a href="#" class="btn btn-warning btn-sm ml-auto">Ordenar</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="servicio-ind">
+                        <div class="card shadow">
+                          <div class="card-body">
+                            <div style="text-align: center;">
+                            <img src="images/99A.jpg" class="img-fluid  w-50"> </div>
+                            <h3 class="text-center">John Carter</h3>
+                            <p class="text-justify">
+                              Dolor modi repudiandae quia beatae consectetur? Nam ullafugit ullam, accusamus! Totam mollitia eveniet!
+                            </p> <hr>
+                            <div class="d-flex flex-row justify-content-center">
+                              <b>Unid.:</b> <span>Bs. 170 </span>
+                                <a href="#" class="btn btn-warning btn-sm ml-auto">Ordenar</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {{--  <div class="servicio-ind">
+                        <div class="card">
+                          <div class="card-body">
+                            <img src="img/ilustracion2.svg" class="img-fluid w-100">
+                            <h3 class="text-center">John Carter</h3>
+                            <p class="text-justify">
+                              Dolor modi repudiandae quia beatae consectetur? Nam ullafugit ullam, accusamus! Totam mollitia eveniet!
+                            </p>
+                            <div class="d-flex flex-row justify-content-center">
+                                 <span>Bs. 170 </span>
+
+                                <a href="#" class="btn btn-warning btn-sm ml-auto">Ordenar</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="servicio-ind">
+                        <div class="card">
+                          <div class="card-body">
+                            <img src="img/ilustracion2.svg" class="img-fluid w-100">
+                            <h3 class="text-center">John Carter</h3>
+                            <p class="text-justify">
+                              Dolor modi repudiandae quia beatae consectetur? Nam ullafugit ullam, accusamus! Totam mollitia eveniet!
+                            </p>
+                            <div class="d-flex flex-row justify-content-center">
+                              <div class="p-4">
+                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                              </div>
+                              <div class="p-4">
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                              </div>
+                              <div class="p-4">
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>   --}}
+
                     </div>
                 </div>
             </section>
@@ -160,6 +256,7 @@
                             <h3>Marcos andia</h3>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore quisquam iu e officia quibusdam provident perspiciatis, deserunt similique! Sapiente, corporis.</p>
                         </div>
+
                         <div class="servicio-ind">
                             <img src="img/ilustracion2.svg" alt="">
                             <h3>Marcos andia</h3>
