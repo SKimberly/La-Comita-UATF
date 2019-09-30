@@ -164,6 +164,7 @@
                     </div>
                 </div>
             </section>
+
             <section class="portafolio">
                 <div class="contenedor">
                     <h2 class="titulo">Portafolio</h2>
@@ -270,6 +271,7 @@
                     </div>
                 </div>
             </section>
+
         </main>
         <footer>
             <div class="contenedor-footer">
