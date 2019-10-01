@@ -13,6 +13,8 @@
                   <th scope="col">Descripción</th>
                   <th scope="col">Detalle</th>
                   <th scope="col">Precio</th>
+                  <th scope="col">Categoria</th>
+                  <th scope="col">Foto</th>
                   <th scope="col">Fecha</th>
                   <th scope="col">Opciones</th>
                 </tr>
@@ -25,6 +27,8 @@
                         <td>{{ $producto->descripcion }}</td>
                         <td>{{ $producto->detallelargo }}</td>
                         <td>{{ $producto->precio }}</td>
+                        <td>{{ $producto->categoria->nombre }}</td>
+                        <td><img src="{{ $producto->fotos->first()->imagen }}" alt="" ></td>
                         <td>{{ $producto->created_at }}</td>
                         <td>
                           <button class="btn btn-sm btn-block btn-info">
