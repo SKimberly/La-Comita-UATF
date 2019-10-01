@@ -23,3 +23,5 @@ Route::get('redirect', function(){
 	//alert()->error('Success Message', 'Optional Title');
 	return redirect('/home')->with('success', 'Bienvenido!');
 });
+
+Route::get('/productos','ProductoController@index');

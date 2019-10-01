@@ -14,8 +14,19 @@ class ProductosTableSeeder extends Seeder
      */
     public function run()
     {
-    	factory(Categoria::class, 5)->create();
+    	/*factory(Categoria::class, 5)->create();
     	factory(Producto::class, 10)->create();
-    	factory(ProductoFoto::class, 20)->create();
+    	factory(ProductoFoto::class, 20)->create();*/
+
+        $categoria = factory(Categoria::class, 5)->create();
+        $categoria->each(function($cate){
+            $productos = factory(Producto::class, 10)->create();
+            $cate->productos()->saveMany($productos); //saveMany-->guardar de uno a muchos
+
+            $productos->each(function($fot){
+                $fotos = factory(ProductoFoto::class, 20)->create();
+                $fot->fotos()->saveMany($fotos);
+            });
+        });
     }
 }
