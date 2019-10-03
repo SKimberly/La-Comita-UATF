@@ -19,8 +19,12 @@ $green: #38c172;
 $teal: #4dc0b5;
 $cyan: #6cb2eb;
 
-$colorbase: #B43CCA;
 
+$colorbase: #B43CCA;
+$side: #0c1926;
+.side{
+	color:$side;
+}
 .colorbase{
 	color: $colorbase;
 }

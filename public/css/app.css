@@ -24124,6 +24124,14 @@ a.text-muted:hover {
   color: #e6e8ea;
 }@charset "UTF-8";
 
+.side {
+  color: #0c1926;
+}
+
+.colorbase {
+  color: #B43CCA;
+}
+
 .blue {
   color: #3490dc;
 }
@@ -40679,19 +40687,7 @@ body {
 }
 
 .sidebar-dark-primary {
-  background: #1FA2FF;
-  /* fallback for old browsers */
-  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to left, #A6FFCB, #12D8FA, #1FA2FF);
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-}
-
-[class*=sidebar-dark-] .nav-treeview > .nav-item > .nav-link {
-  color: #1a1a1a;
-}
-
-[class*=sidebar-dark-] .sidebar a {
-  color: #1a1a1a;
+  background: #0c1926;
 }
 
 .sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link.active,
@@ -40703,7 +40699,7 @@ body {
 [class*=sidebar-dark-] .nav-treeview > .nav-item > .nav-link.active,
 [class*=sidebar-dark-] .nav-treeview > .nav-item > .nav-link.active:hover,
 [class*=sidebar-dark-] .nav-treeview > .nav-item > .nav-link.active:focus {
-  background-color: rgba(255, 255, 255, 0.5);
-  color: #343a40;
+  background-color: #024d5a;
+  color: #fff;
 }
 

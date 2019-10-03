@@ -18,6 +18,7 @@ class ProductoController extends Controller
     //Aqui enviamos a la vista create.blade.php
     public function create(){
     	//Aqui devuelves a la vista donde esta el formulario de registro de productos
+        return view('admin.productos.create');
     }
 
     //Aqui vamos a guardar los datos

@@ -15,13 +15,24 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::group([
+	'prefix' => 'admin',
+	'middleware' => 'auth'],
+function(){
+	Route::get('/', 'AdminController@index')->name('admin');
+
+	Route::get('productos','ProductoController@index')->name('admin.productos.index');
+	Route::get('productos/crear','ProductoController@create')->name('admin.productos.crear');
+
+});
+
+
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+
 
 Route::get('redirect', function(){
 	//alert()->error('Success Message', 'Optional Title');
 	return redirect('/home')->with('success', 'Bienvenido!');
 });
 
-Route::get('/productos','ProductoController@index');

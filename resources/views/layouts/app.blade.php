@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>@yield('titulo')</title>
 
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -92,7 +92,7 @@
                         <div class="card shadow">
                           <div class="card-body">
                             <div style="text-align: center;">
-                            <img src="images/99A.jpg" class="img-fluid  w-50"> </div>
+                            <img src="img/99A.jpg" class="img-fluid  w-50"> </div>
                             <h3 class="text-center">John Carter</h3>
                             <p class="text-justify">
                               Dolor modi repudiandae quia beatae consectetur? Nam ullafugit ullam, accusamus! Totam mollitia eveniet!
@@ -108,7 +108,7 @@
                         <div class="card shadow">
                           <div class="card-body">
                             <div style="text-align: center;">
-                            <img src="images/99A.jpg" class="img-fluid  w-50"> </div>
+                            <img src="img/99A.jpg" class="img-fluid  w-50"> </div>
                             <h3 class="text-center">John Carter</h3>
                             <p class="text-justify">
                               Dolor modi repudiandae quia beatae consectetur? Nam ullafugit ullam, accusamus! Totam mollitia eveniet!
@@ -124,7 +124,7 @@
                         <div class="card shadow">
                           <div class="card-body">
                             <div style="text-align: center;">
-                            <img src="images/99A.jpg" class="img-fluid  w-50"> </div>
+                            <img src="img/99A.jpg" class="img-fluid  w-50"> </div>
                             <h3 class="text-center">John Carter</h3>
                             <p class="text-justify">
                               Dolor modi repudiandae quia beatae consectetur? Nam ullafugit ullam, accusamus! Totam mollitia eveniet!

@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('titulo','App La-Comita')
+
 @section('contentpri')
 <section class="textos-header">
     <div class="container">
@@ -12,7 +14,7 @@
                 @if (Route::has('login'))
                         {{-- "auth" verifica si se authentico el usuario--}}
                         @auth
-                            <a href="{{ url('/home') }}"  class="btn btn-lg  btn-outline-light">ESCRITORIO</a>
+                            <a href="{{ url('/admin') }}"  class="btn btn-lg  btn-outline-light">ESCRITORIO</a>
                         @else
                             <a href="{{ route('login') }}" class="btn btn-lg   btn-light">INGRESAR</a>
 
