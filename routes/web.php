@@ -22,7 +22,11 @@ function(){
 	Route::get('/', 'AdminController@index')->name('admin');
 
 	Route::get('productos','ProductoController@index')->name('admin.productos.index');
-	Route::get('productos/crear','ProductoController@create')->name('admin.productos.crear');
+	Route::get('productos/create','ProductoController@create')->name('admin.productos.create');
+
+	/*Route::get('productos/{id}/fotos','ProductoController@show')->name('admin.productos.fotos');*/
+
+	Route::post('productos','ProductoController@store')->name('admin.productos.store');
 
 });
 

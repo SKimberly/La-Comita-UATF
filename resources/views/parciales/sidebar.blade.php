@@ -70,7 +70,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('admin.productos.crear') }}" class="nav-link {{ request()->is('admin/productos/crear') ? 'active' : '' }}">
+                <a href="{{ route('admin.productos.create') }}" class="nav-link {{ request()->is('admin/productos/crear') ? 'active' : '' }}">
                   <i class="fas fa-share-square"></i>
                   <p>Agregar nuevo</p>
                 </a>
