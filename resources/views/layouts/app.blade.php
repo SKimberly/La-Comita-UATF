@@ -13,7 +13,7 @@
 
         <link rel="shortcut icon" href="{{ asset('/img/sport.png') }}" />
 
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
         <script src="{{ asset('js/app.js') }}" defer></script>
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -28,7 +28,9 @@
                 </button>
                 <div class="collapse navbar-collapse " id="navbarTogglerDemo01">
                     <div class="logo navbar-brand">
+                        <a href="/">
                         <img src="{{ asset('/img/logo.png') }}" alt="">
+                        </a>
                     </div>
                     <ul class="enlaces navbar-nav  ml-auto mt-2 mt-lg-0 " id="enlaces">
                         <li class="nav-item active">
@@ -38,10 +40,10 @@
                             <a href="#nosotros" class="" >NOSOTROS</a>
                         </li>
                         <li class="nav-item active">
-                            <a href="#productos" class="" >PRODUCTOS</a>
+                            <a href="#servicio" class="" >SERVICIO</a>
                         </li>
                         <li class="nav-item active">
-                            <a href="#servicios" class="" >SERVICIOS</a>
+                            <a href="#galeria" class="">GALERIA</a>
                         </li>
                         <li class="nav-item active">
                             <a href="#opiniones" class="" >OPINIONES</a>
@@ -71,135 +73,102 @@
         <main>
             <section class="contenedor sobre-nosotros" id="nosotros">
                 <h2 class="titulo">
-                    NUESTROS SERVICIOS
+                    INFORMACIÓN
                 </h2>
                 <div class="contenedor-sobre-nosotros row">
                     <img src="{{ asset('/img/portada.svg') }}" alt="img-sobre-nosotros" class="imagen-developer">
                     <div class="contenido-textos col-md-6">
-                        <h3><span>1</span> Los mejores productos</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore vero, perspiciatis doloribus totam beatae provident quo natus consequuntur autem facilis! Sit eius deleniti dicta veritatis quam accusantium nemo modi qui!</p>
+                        <h3><span>1</span> ¿Quiénes somos?</h3>
+                        <p>Sport La Comita, somos una empresa lider en el mercado de implemento y artículos deportivos, que buscamos posicionamiento en el estado Boliviano, brindando productos de calidad.</p>
 
-                        <h3><span>2</span> Los mejores productos</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore vero, perspiciatis doloribus totam beatae provident quo natus consequuntur autem facilis! Sit eius deleniti dicta veritatis quam accusantium nemo modi qui!</p>
+                        <h3><span>2</span> ¿Qué ofrecemos?</h3>
+                        <p>La fábrica de ropa "Sport La Comita" ofrece a su distinguida clientela todo tipo de ropa deportiva, como ser: Poleras, cortos, polerones, chaquetas, busos, parkas, chamarras, etc. Con los diseños a gusto del cliente de la mejor calidad.</p>
 
-                        <h3><span>3</span> Los mejores productos</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore vero, perspiciatis doloribus totam beatae provident quo natus consequuntur autem facilis! Sit eius deleniti dicta veritatis quam accusantium nemo modi qui!</p>
+                        <h3><span>3</span> ¿Por qué esta página web?</h3>
+                        <p>Te ofrecemos la facilidad de poder ver nuestros productos, realizar cotizaciones, consultar sobre los ultimos o nuevos diseños, todo eso en está página web.</p>
                     </div>
                 </div>
             </section>
-            <section class="about-services" id="productos">
+            <section class="about-services" id="servicio">
                 <div class="contenedor">
-                    <h2 class="titulo">Nuestros Productos</h2>
-                    <div class="servicio-cont col-lg-12 d-flex align-items-stretch">
-                        <div class="servicio-ind ">
-                            <div class="card shadow">
-                              <div class="card-body">
-                                <img src="{{ asset('/img/basquet.svg') }}" class="img-fluid w-100">
-                                <h3 class="text-center">FUTBOL</h3>
-                                <p class="text-justify">
-                                  Dolor modi repudiandae quia beatae consectetur? Nam ullafugit ullam, accusamus! Totam mollitia eveniet!
-                                </p>
-                                <div class="d-flex flex-row justify-content-center">
-                                     <span>Bs. 170 </span>
-
-                                    <a href="#" class="btn btn-warning btn-sm ml-auto">Ordenar</a>
-                                </div>
-                              </div>
-                            </div>
+                    <h2 class="titulo">SERVICIO</h2>
+                    <div class="servicio-cont">
+                        <div class="servicio-ind">
+                            <img src="{{ asset('/img/dudas.svg') }}" alt="">
+                            <h3>Atendemos tus dudas</h3>
+                            <p>Atendemos rápidamente cualquier consulta que tengas via chat. No estás sólo, sino que siempre estamos atentos a tus inquietudes.</p>
                         </div>
-                        <div class="servicio-ind ">
-                            <div class="card shadow">
-                              <div class="card-body">
-                                <img src="{{ asset('/img/futbol.svg') }}" class="img-fluid w-100">
-                                <h3 class="text-center">FUTBOL</h3>
-                                <p class="text-justify">
-                                  Dolor modi repudiandae quia beatae consectetur? Nam ullafugit ullam, accusamus! Totam mollitia eveniet!
-                                </p>
-                                <div class="d-flex flex-row justify-content-center">
-                                     <span>Bs. 170 </span>
 
-                                    <a href="#" class="btn btn-warning btn-sm ml-auto">Ordenar</a>
-                                </div>
-                              </div>
-                            </div>
+                        <div class="servicio-ind">
+                            <img src="{{ asset('/img/money.svg') }}" alt="">
+                            <h3>Pago seguro</h3>
+                            <p>Todo pedido que realices será confirmado a travéz de una llamada. Todos los pagos los puedes realizar contra entrega el valor acordado.</p>
                         </div>
-                        <div class="servicio-ind ">
-                            <div class="card shadow">
-                              <div class="card-body">
-                                <img src="{{ asset('/img/gim.svg') }}" class="img-fluid w-100">
-                                <h3 class="text-center">GIMNACSIO</h3>
-                                <p class="text-justify">
-                                  Dolor modi repudiandae quia beatae consectetur? Nam ullafugit ullam, accusamus! Totam mollitia eveniet!
-                                </p>
-                                <div class="d-flex flex-row justify-content-center">
-                                     <span>Bs. 170 </span>
-
-                                    <a href="#" class="btn btn-warning btn-sm ml-auto">Ordenar</a>
-                                </div>
-                              </div>
-                            </div>
+                        <div class="servicio-ind">
+                            <img src="{{ asset('/img/security.svg') }}" alt="">
+                            <h3>Información privada</h3>
+                            <p>Los pedidos que realices sólo los conocerás tú a través de tu panel de usuario. Nadie más tiene acceso a esta información.</p>
                         </div>
                     </div>
                 </div>
             </section>
-
-            <section class="portafolio" id=servicios>
+            <section class="portafolio" id="galeria">
                 <div class="contenedor">
-                    <h2 class="titulo">Portafolio</h2>
+                    <h2 class="titulo">GALERIA</h2>
                     <div class="galeria-port">
                         <div class="imagen-port">
                             <img src="{{ asset('/img/portafolio/port1.png') }}" alt="">
                             <div class="hover-galeria">
-                                <img src="img/icono1.png" alt="">
+                                <img src="{{ asset('/img/icono1.png') }}" alt="">
                                 <p>Nuestro trabajo</p>
                             </div>
                         </div>
                         <div class="imagen-port">
                             <img src="{{ asset('/img/portafolio/port2.png') }}" alt="">
                             <div class="hover-galeria">
-                                <img src="img/icono1.png" alt="">
+                                <img src="{{ asset('/img/icono1.png') }}" alt="">
                                 <p>Nuestro trabajo</p>
                             </div>
                         </div>
                         <div class="imagen-port">
                             <img src="{{ asset('/img/portafolio/port3.png') }}" alt="">
                             <div class="hover-galeria">
-                                <img src="img/icono1.png" alt="">
+                                <img src="{{ asset('/img/icono1.png') }}" alt="">
                                 <p>Nuestro trabajo</p>
                             </div>
                         </div>
                         <div class="imagen-port">
                             <img src="{{ asset('/img/portafolio/port4.png') }}" alt="">
                             <div class="hover-galeria">
-                                <img src="img/icono1.png" alt="">
+                                <img src="{{ asset('/img/icono1.png') }}" alt="">
                                 <p>Nuestro trabajo</p>
                             </div>
                         </div>
                         <div class="imagen-port">
                             <img src="{{ asset('/img/portafolio/port5.png') }}" alt="">
                             <div class="hover-galeria">
-                                <img src="img/icono1.png" alt="">
+                                <img src="{{ asset('/img/icono1.png') }}" alt="">
                                 <p>Nuestro trabajo</p>
                             </div>
                         </div>
                         <div class="imagen-port">
                             <img src="{{ asset('/img/portafolio/port6.png') }}" alt="">
                             <div class="hover-galeria">
-                                <img src="img/icono1.png" alt="">
+                                <img src="{{ asset('/img/icono1.png') }}" alt="">
                                 <p>Nuestro trabajo</p>
                             </div>
                         </div>
                         <div class="imagen-port">
                             <img src="{{ asset('/img/portafolio/port7.png') }}" alt="">
                             <div class="hover-galeria">
-                                <img src="img/icono1.png" alt="">
+                                <img src="{{ asset('/img/icono1.png') }}" alt="">
                                 <p>Nuestro trabajo</p>
                             </div>
                         </div>
                         <div class="imagen-port">
                             <img src="{{ asset('/img/portafolio/port8.png') }}" alt="">
                             <div class="hover-galeria">
-                                <img src="img/icono1.png" alt="">
+                                <img src="{{ asset('/img/icono1.png') }}" alt="">
                                 <p>Nuestro trabajo</p>
                             </div>
                         </div>
@@ -208,49 +177,77 @@
                 </div>
             </section>
             <section class="clientes contenedor" id="opiniones">
-                <h2 class="titulo">Qué dicen nuestro clientes</h2>
+                <h2 class="titulo">Qué opinan nuestro clientes</h2>
                 <div class="cards">
                     <div class="card">
-                        <img src="img/face1.jpg" alt="">
+                        <img src="{{ asset('/img/face1.jpg') }}" alt="">
                         <div class="contenido-textos-card">
-                            <h4>Jorge Peralta</h4>
-                            <p>Lorem ipsum laboriosam, repellat odit voluptatem ipsum laboriosam, repellat odit voluptatem!</p>
+                            <h4>Orlando Fuentes</h4>
+                            <p>Buena atención... y muy puntuales en la entrega de su trabajo, gracias sigan adelante!</p>
                         </div>
                     </div>
                     <div class="card">
-                        <img src="img/face2.jpg" alt="">
+                        <img src="{{ asset('/img/face2.jpg') }}" alt="">
                         <div class="contenido-textos-card">
-                            <h4>Silvana marquina</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur  ipsum laboriosam, repellat odit volupt atemvo luptatem!</p>
+                            <h4>Juan Ovejero</h4>
+                            <p>Gracias por su excelente servicio, buena calidad en sus productos.</p>
                         </div>
                     </div>
                 </div>
             </section>
-            <section class="about-services" id="contacto">
+
+            <section class="about-services" id="contacto" >
                 <div class="contenedor">
-                    <h2 class="titulo">Nuestros servicios</h2>
-                    <div class="servicio-cont">
-                        <div class="servicio-ind">
-                            <img src="img/ilustracion1.svg" alt="">
-                            <h3>Marcos andia</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore quisquam iu e officia quibusdam provident perspiciatis, deserunt similique! Sapiente, corporis.</p>
+                    <h2 class="titulo">CONTÁCTANOS</h2>
+                    <div class="servicio-cont col-lg-12 d-flex align-items-stretch">
+                        <div class="col-12 col-lg-6" >
+                            <form class="bg-white shadow rounded py-3 px-4"
+                                method="POST"
+                                action="">
+                                 @csrf
+                                 <div class="form-group">
+                                    <label for="name">Nombre:</label>
+                                    <input class="form-control bg-light shadow-sm {{ $errors->has('name') ? ' is-invalid' : 'border-0' }}"
+                                        id="name"
+                                        name="name"
+                                        placeholder="Ingrese su nombre completo" value="{{ old('name') }}" >
+                                    @if ($errors->has('name'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('name') }}</strong>
+                                        </span>
+                                    @endif
+                                 </div>
+                                <div class="form-group">
+                                    <label for="email">E-mail:</label>
+                                    <input class="form-control bg-light shadow-sm {{ $errors->has('email') ? ' is-invalid' : 'border-0' }}" id="email"
+                                        type="email"
+                                        name="email"
+                                        placeholder="Ingrese su correo eléctronico" value="{{ old('email') }}" >
+                                    @if ($errors->has('email'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('email') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                                <div class="form-group">
+                                    <label for="content">Contenido:</label>
+                                    <textarea class="form-control bg-light shadow-sm {{ $errors->has('content') ? ' is-invalid' : 'border-0' }}" rows="2" name="content" placeholder="Ingrese su mensaje" >{{ old('content') }}</textarea>
+                                    @if ($errors->has('content'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('content') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                                <button class="btn btn-primary btn-lg btn-block" style="background-color: #B43CCA;">Enviar</button>
+                            </form>
+                        </div><hr>
+                        <div class="col-12 col-lg-6 shadow embed-responsive embed-responsive-1by1">
+                          <iframe class="embed-responsive-item" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d939.7436407343811!2d-65.75643947083583!3d-19.585585699174853!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x93f94e76c52e1119%3A0xed6b59af8ea1b01f!2sOruro%20178%2C%20Villa%20Imperial%20de%20Potos%C3%AD!5e0!3m2!1ses-419!2sbo!4v1570242707496!5m2!1ses-419!2sbo"></iframe>
                         </div>
 
-                        <div class="servicio-ind">
-                            <img src="img/ilustracion2.svg" alt="">
-                            <h3>Marcos andia</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore quisquam iusto officia quibusdam provident perspiciatis, deserunt similique! Sapiente, corporis.</p>
-                        </div>
-                        <div class="servicio-ind">
-                            <img src="img/ilustracion3.svg" alt="">
-                            <h3>Marcos andia</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore quisquam iust officia quibusdam provident perspiciatis, deserunt similique! Sapiente, corporis.</p>
-
-                        </div>
                     </div>
                 </div>
             </section>
-
         </main>
         <footer>
             <div class="contenedor-footer">
