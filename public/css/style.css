@@ -4,13 +4,8 @@
 	padding: 0;
 	box-sizing: border-box;
 }
-
-body{
-	font-family: 'Kaushan Script', cursive;
-}
-
 .contenedor{
-	padding: 60px 0; /*Espacio en el contenedor de 60px y cero a los lados*/
+	padding: 70px 0; /*Espacio en el contenedor de 60px y cero a los lados*/
 	width: 90%;
 	max-width: 1000px;
 	margin: auto; /*margen auto a dispositivos moviles*/
@@ -29,8 +24,8 @@ header{
 	width: 100%;
 	height: 600px;
 	background: #B43CCA;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, hsla(340, 95%, 50%, 0.459), hsla(317, 45%, 52%, 0.664)), url(../img/potosi10.jpg);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, hsla(340, 95%, 50%, 0.459), hsla(317, 45%, 52%, 0.664)), url(../img/potosi10.jpg); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: -webkit-linear-gradient(to right, hsla(340, 95%, 50%, 0.459), hsla(317, 45%, 52%, 0.664)), url(../img/potosi.jpg);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, hsla(340, 95%, 50%, 0.459), hsla(317, 45%, 52%, 0.664)), url(../img/potosi.jpg); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 	background-size: cover;
 	background-attachment: fixed;
 	position: relative;
@@ -38,43 +33,74 @@ header{
 }
 
 nav{
-	text-align: right;
-	padding: 30px 50px 0 0;
-
+  width: 100%;
+  position: fixed;
+  box-shadow: 0 0 10px 0 rgba(0,0,0,.5)
 }
 
-nav > a{
-	color: #fff;
-	font-weight: 300;
-	text-decoration: none;
-	margin-right: 10px;
-}
-/*cuando pasemos el maus por aqui*/
-nav > a:hover{
-	text-decoration: underline;
+.contenedor-nav{
+  display: flex;
+  margin: auto;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  max-width:initial;
+  height:auto; /*height:inherit;*/
+  overflow: hidden;
 }
 
-header .textos-header{
-	display: flex;
-	height: 430px;
-	width: 100%;
+nav .enlaces a{
+  /*display: inline-block;*/
+  padding: 5px 0;
+  margin-right: 10px;
+  font-size: 17px;
+  font-weight: 300;
+  text-decoration: none;
+  border-bottom: 3px solid transparent;
+  color: #ffd700;/*color: inherit;*/
+}
+
+nav .enlaces a:hover{
+  border-bottom: 3px solid #B43CCA;
+  transition: 0.6s;
+}
+
+.logo, .logo img{ height:60px; padding-left: 10px;}
+
+
+header .caratula{
+	padding: 30px 0 5px 0 !important;
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
 	text-align: center;
 }
+.caratula-cont{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.caratula-ind{
+	width: 48%;
+	text-align: center;
+	padding-bottom: 20px;
+}
+
+.caratula-ind img{
+	width: 90%;
+}
+/*////////////////////*/
 
 .textos-header h1{
 	font-size: 50px;
 	color: #B43CCA;
 }
-
 .textos-header h2{
 	font-size: 30px;
 	font-weight: 300;
 	color: #FFFF00;
 }
-
 .holaa{
 	position: absolute;
 	bottom: 0;
@@ -414,9 +440,11 @@ footer{
 }
 
 
-
-
-
+@media screen and (max-width:780px ){
+	.caratula-ind img{
+		width: 60%;
+	}
+}
 
 
 

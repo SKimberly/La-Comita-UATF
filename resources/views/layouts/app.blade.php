@@ -1,77 +1,80 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="es">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>@yield('titulo')</title>
+        <meta name="description" content="Sistema de información bajo plataforma web para el control de ventas, pedidos y cotizaciones para la fabrica de ropa Sport La Comita de la ciudad de Potosí">
+        <meta name="author" content="Univ. Silvana Kimberly Marquina Chambi">
+        <meta name="keyword" content="Sistema web Sport La Comita">
 
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <link href="https://fonts.googleapis.com/css?family=Kaushan+Script&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <link rel="shortcut icon" href="{{ asset('/img/sport.png') }}" />
+
         <link rel="stylesheet" href="css/style.css">
-
         <script src="{{ asset('js/app.js') }}" defer></script>
-
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     </head>
     <body>
     <div id="app">
-        <header>
-            <nav class="navbar   navbar-expand-lg   shadow-sm">
-                <a href="/">INICIO</a>
-                <a href="">NOSOTROS</a>
-                <a href="">PRODUCTOS</a>
-                <a href="">Servicios</a>
-                <a href="">Contacto</a>
-
+        <header id="inicio">
+            <nav class="contenedor-nav navbar fixed-top  navbar-expand-lg navbar-light shadow-none">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse " id="navbarTogglerDemo01">
+                    <div class="logo navbar-brand">
+                        <img src="{{ asset('/img/logo.png') }}" alt="">
+                    </div>
+                    <ul class="enlaces navbar-nav  ml-auto mt-2 mt-lg-0 " id="enlaces">
+                        <li class="nav-item active">
+                            <a href="#inicio" class="">INICIO</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a href="#nosotros" class="" >NOSOTROS</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a href="#productos" class="" >PRODUCTOS</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a href="#servicios" class="" >SERVICIOS</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a href="#opiniones" class="" >OPINIONES</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a href="#contacto" class="" >CONTACTO</a>
+                        </li>
+                    </ul>
+                </div>
             </nav>
+            <section class="caratula">
 
+                <div class="contenedor">
+                    <div class="caratula-cont row">
 
-            <main class="py-4">
-                @yield('contentpri')
-            </main>
+                        @yield('contentpri')
 
-            <div class="holaa" style="height: 150px; overflow: hidden;" ><svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100%; width: 100%;"><path d="M-4.22,54.77 C262.69,157.39 235.04,-24.17 504.79,69.56 L500.00,150.00 L0.00,150.00 Z" style="stroke: none; fill: #fff;"></path></svg></div>
+                        <div class="caratula-ind col-md-6">
+                            <img src="{{ asset('/img/principal.svg') }}" alt="Tienda Comita" >
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="holaa" style="height: 150px; overflow: hidden;" ><svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100%; width: 100%;"><path d="M-2.25,74.50 C256.20,250.16 247.74,-88.31 502.25,74.50 L500.00,150.00 L0.00,150.00 Z" style="stroke: none; fill: #fff;"></path></svg></div>
         </header>
         <main>
-            <section class="contenedor sobre-nosotros">
+            <section class="contenedor sobre-nosotros" id="nosotros">
                 <h2 class="titulo">
                     NUESTROS SERVICIOS
                 </h2>
                 <div class="contenedor-sobre-nosotros row">
-                    <div class="col-md-6" style="background-position: center; background-size:cover">
-                        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                              <ol class="carousel-indicators">
-                                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                              </ol>
-                              <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                  <img class="d-block img-fluid" src="img/face1.jpg" alt="First slide">
-                                </div>
-                                <div class="carousel-item">
-                                  <img class="d-block img-fluid" src="img/face1.jpg" alt="Second slide">
-                                </div>
-                                <div class="carousel-item">
-                                  <img class="d-block img-fluid" src="img/face1.jpg" alt="Third slide">
-                                </div>
-                              </div>
-                              <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Previous</span>
-                              </a>
-                              <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Next</span>
-                              </a>
-                            </div>
-                    </div>
+                    <img src="{{ asset('/img/portada.svg') }}" alt="img-sobre-nosotros" class="imagen-developer">
                     <div class="contenido-textos col-md-6">
                         <h3><span>1</span> Los mejores productos</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore vero, perspiciatis doloribus totam beatae provident quo natus consequuntur autem facilis! Sit eius deleniti dicta veritatis quam accusantium nemo modi qui!</p>
@@ -84,158 +87,117 @@
                     </div>
                 </div>
             </section>
-            <section class="about-services">
+            <section class="about-services" id="productos">
                 <div class="contenedor">
                     <h2 class="titulo">Nuestros Productos</h2>
-                    <div class="servicio-cont">
-                      <div class="servicio-ind">
-                        <div class="card shadow">
-                          <div class="card-body">
-                            <div style="text-align: center;">
-                            <img src="img/99A.jpg" class="img-fluid  w-50"> </div>
-                            <h3 class="text-center">John Carter</h3>
-                            <p class="text-justify">
-                              Dolor modi repudiandae quia beatae consectetur? Nam ullafugit ullam, accusamus! Totam mollitia eveniet!
-                            </p> <hr>
-                            <div class="d-flex flex-row justify-content-center">
-                              <b>Unid.:</b> <span>Bs. 170 </span>
-                                <a href="#" class="btn btn-warning btn-sm ml-auto">Ordenar</a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="servicio-ind">
-                        <div class="card shadow">
-                          <div class="card-body">
-                            <div style="text-align: center;">
-                            <img src="img/99A.jpg" class="img-fluid  w-50"> </div>
-                            <h3 class="text-center">John Carter</h3>
-                            <p class="text-justify">
-                              Dolor modi repudiandae quia beatae consectetur? Nam ullafugit ullam, accusamus! Totam mollitia eveniet!
-                            </p> <hr>
-                            <div class="d-flex flex-row justify-content-center">
-                              <b>Unid.:</b> <span>Bs. 170 </span>
-                                <a href="#" class="btn btn-warning btn-sm ml-auto">Ordenar</a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="servicio-ind">
-                        <div class="card shadow">
-                          <div class="card-body">
-                            <div style="text-align: center;">
-                            <img src="img/99A.jpg" class="img-fluid  w-50"> </div>
-                            <h3 class="text-center">John Carter</h3>
-                            <p class="text-justify">
-                              Dolor modi repudiandae quia beatae consectetur? Nam ullafugit ullam, accusamus! Totam mollitia eveniet!
-                            </p> <hr>
-                            <div class="d-flex flex-row justify-content-center">
-                              <b>Unid.:</b> <span>Bs. 170 </span>
-                                <a href="#" class="btn btn-warning btn-sm ml-auto">Ordenar</a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                    <div class="servicio-cont col-lg-12 d-flex align-items-stretch">
+                        <div class="servicio-ind ">
+                            <div class="card shadow">
+                              <div class="card-body">
+                                <img src="{{ asset('/img/basquet.svg') }}" class="img-fluid w-100">
+                                <h3 class="text-center">FUTBOL</h3>
+                                <p class="text-justify">
+                                  Dolor modi repudiandae quia beatae consectetur? Nam ullafugit ullam, accusamus! Totam mollitia eveniet!
+                                </p>
+                                <div class="d-flex flex-row justify-content-center">
+                                     <span>Bs. 170 </span>
 
-                      {{--  <div class="servicio-ind">
-                        <div class="card">
-                          <div class="card-body">
-                            <img src="img/ilustracion2.svg" class="img-fluid w-100">
-                            <h3 class="text-center">John Carter</h3>
-                            <p class="text-justify">
-                              Dolor modi repudiandae quia beatae consectetur? Nam ullafugit ullam, accusamus! Totam mollitia eveniet!
-                            </p>
-                            <div class="d-flex flex-row justify-content-center">
-                                 <span>Bs. 170 </span>
-
-                                <a href="#" class="btn btn-warning btn-sm ml-auto">Ordenar</a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="servicio-ind">
-                        <div class="card">
-                          <div class="card-body">
-                            <img src="img/ilustracion2.svg" class="img-fluid w-100">
-                            <h3 class="text-center">John Carter</h3>
-                            <p class="text-justify">
-                              Dolor modi repudiandae quia beatae consectetur? Nam ullafugit ullam, accusamus! Totam mollitia eveniet!
-                            </p>
-                            <div class="d-flex flex-row justify-content-center">
-                              <div class="p-4">
-                                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                              </div>
-                              <div class="p-4">
-                                <a href="#"><i class="fab fa-twitter"></i></a>
-                              </div>
-                              <div class="p-4">
-                                <a href="#"><i class="fab fa-instagram"></i></a>
+                                    <a href="#" class="btn btn-warning btn-sm ml-auto">Ordenar</a>
+                                </div>
                               </div>
                             </div>
-                          </div>
                         </div>
-                      </div>   --}}
+                        <div class="servicio-ind ">
+                            <div class="card shadow">
+                              <div class="card-body">
+                                <img src="{{ asset('/img/futbol.svg') }}" class="img-fluid w-100">
+                                <h3 class="text-center">FUTBOL</h3>
+                                <p class="text-justify">
+                                  Dolor modi repudiandae quia beatae consectetur? Nam ullafugit ullam, accusamus! Totam mollitia eveniet!
+                                </p>
+                                <div class="d-flex flex-row justify-content-center">
+                                     <span>Bs. 170 </span>
 
+                                    <a href="#" class="btn btn-warning btn-sm ml-auto">Ordenar</a>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="servicio-ind ">
+                            <div class="card shadow">
+                              <div class="card-body">
+                                <img src="{{ asset('/img/gim.svg') }}" class="img-fluid w-100">
+                                <h3 class="text-center">GIMNACSIO</h3>
+                                <p class="text-justify">
+                                  Dolor modi repudiandae quia beatae consectetur? Nam ullafugit ullam, accusamus! Totam mollitia eveniet!
+                                </p>
+                                <div class="d-flex flex-row justify-content-center">
+                                     <span>Bs. 170 </span>
+
+                                    <a href="#" class="btn btn-warning btn-sm ml-auto">Ordenar</a>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            <section class="portafolio">
+            <section class="portafolio" id=servicios>
                 <div class="contenedor">
                     <h2 class="titulo">Portafolio</h2>
                     <div class="galeria-port">
                         <div class="imagen-port">
-                            <img src="img/img1.jpg" alt="">
+                            <img src="{{ asset('/img/portafolio/port1.png') }}" alt="">
                             <div class="hover-galeria">
                                 <img src="img/icono1.png" alt="">
                                 <p>Nuestro trabajo</p>
                             </div>
                         </div>
                         <div class="imagen-port">
-                            <img src="img/img2.jpg" alt="">
+                            <img src="{{ asset('/img/portafolio/port2.png') }}" alt="">
                             <div class="hover-galeria">
                                 <img src="img/icono1.png" alt="">
                                 <p>Nuestro trabajo</p>
                             </div>
                         </div>
                         <div class="imagen-port">
-                            <img src="img/img3.jpg" alt="">
+                            <img src="{{ asset('/img/portafolio/port3.png') }}" alt="">
                             <div class="hover-galeria">
                                 <img src="img/icono1.png" alt="">
                                 <p>Nuestro trabajo</p>
                             </div>
                         </div>
                         <div class="imagen-port">
-                            <img src="img/img4.jpg" alt="">
+                            <img src="{{ asset('/img/portafolio/port4.png') }}" alt="">
                             <div class="hover-galeria">
                                 <img src="img/icono1.png" alt="">
                                 <p>Nuestro trabajo</p>
                             </div>
                         </div>
                         <div class="imagen-port">
-                            <img src="img/img5.jpg" alt="">
+                            <img src="{{ asset('/img/portafolio/port5.png') }}" alt="">
                             <div class="hover-galeria">
                                 <img src="img/icono1.png" alt="">
                                 <p>Nuestro trabajo</p>
                             </div>
                         </div>
                         <div class="imagen-port">
-                            <img src="img/img6.jpg" alt="">
+                            <img src="{{ asset('/img/portafolio/port6.png') }}" alt="">
                             <div class="hover-galeria">
                                 <img src="img/icono1.png" alt="">
                                 <p>Nuestro trabajo</p>
                             </div>
                         </div>
                         <div class="imagen-port">
-                            <img src="img/img7.jpg" alt="">
+                            <img src="{{ asset('/img/portafolio/port7.png') }}" alt="">
                             <div class="hover-galeria">
                                 <img src="img/icono1.png" alt="">
                                 <p>Nuestro trabajo</p>
                             </div>
                         </div>
                         <div class="imagen-port">
-                            <img src="img/img8.jpg" alt="">
+                            <img src="{{ asset('/img/portafolio/port8.png') }}" alt="">
                             <div class="hover-galeria">
                                 <img src="img/icono1.png" alt="">
                                 <p>Nuestro trabajo</p>
@@ -245,8 +207,8 @@
                     </div>
                 </div>
             </section>
-            <section class="clientes contenedor">
-                <h2 class="titulo">Que NO dicen nuestro clientes</h2>
+            <section class="clientes contenedor" id="opiniones">
+                <h2 class="titulo">Qué dicen nuestro clientes</h2>
                 <div class="cards">
                     <div class="card">
                         <img src="img/face1.jpg" alt="">
@@ -264,7 +226,7 @@
                     </div>
                 </div>
             </section>
-            <section class="about-services">
+            <section class="about-services" id="contacto">
                 <div class="contenedor">
                     <h2 class="titulo">Nuestros servicios</h2>
                     <div class="servicio-cont">
@@ -283,6 +245,7 @@
                             <img src="img/ilustracion3.svg" alt="">
                             <h3>Marcos andia</h3>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore quisquam iust officia quibusdam provident perspiciatis, deserunt similique! Sapiente, corporis.</p>
+
                         </div>
                     </div>
                 </div>
@@ -292,19 +255,23 @@
         <footer>
             <div class="contenedor-footer">
                 <div class="content-foo">
-                    <h4>Teléfono</h4>
-                    <p>312685161</p>
+                    <h4>Celular</h4>
+                    <p>70462939</p>
                 </div>
                 <div class="content-foo">
                     <h4>E-mail</h4>
                     <p>jorge@gmail.com</p>
                 </div>
                 <div class="content-foo">
-                    <h4>Dirección</h4>
-                    <p>312685161</p>
+                    <h4>Dirección (Tienda)</h4>
+                    <p>Calle Oruro Nro. 184</p>
+                </div>
+                <div class="content-foo">
+                    <h4>Dirección (Taller)</h4>
+                    <p>Calle América esq. San Alberto</p>
                 </div>
             </div>
-            <h2 class="titulo-final">&copy; Jorge Peralta | UATF </h2>
+            <h2 class="titulo-final">&copy; S. Kimberly Marquina Ch. | UATF Potosí </h2>
         </footer>
         </div>
     </body>
