@@ -40717,3 +40717,7 @@ body {
   border-color: #ff66cb;
 }
 
+.custom-file-input:lang(en) ~ .custom-file-label::after {
+  content: "SELECCIONAR";
+}
+

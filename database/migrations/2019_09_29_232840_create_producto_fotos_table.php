@@ -17,7 +17,7 @@ class CreateProductoFotosTable extends Migration
             $table->increments('id');
             $table->string('imagen');
             $table->boolean('favorito')->default(false);
-            $table->integer('producto_id')->unsigned()->nullable();
+            $table->integer('producto_id')->unsigned();
             $table->foreign('producto_id')->references('id')->on('productos');
             $table->timestamps();
         });

@@ -68,7 +68,7 @@
 				                <div class="input-group-prepend">
 				                    <span class="input-group-text">Bs.</span>
 				                </div>
-				                <input type="number" name="precio" class="form-control {{ $errors->has('precio') ? ' is-invalid' : 'border-1' }}" value="{{ old('precio') }}">
+				                <input type="number" name="precio" step="0.01" class="form-control {{ $errors->has('precio') ? ' is-invalid' : 'border-1' }}" value="{{ old('precio') }}">
 				                <div class="input-group-append">
 				                    <span class="input-group-text">.00</span>
 				                </div>

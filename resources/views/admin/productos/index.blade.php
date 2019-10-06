@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('titulo','Productos')
+@section('titulo','Listar Productos')
 
 @section('cabecera')
 <div class="content-header">
@@ -17,53 +17,62 @@
         </div><!-- /.col -->
       </div><!-- /.row -->
     </div><!-- /.container-fluid -->
-  </div>
+</div>
 @endsection
 
 @section('content')
-<div class="container">
-  <h2 class="text-center">LISTA DE PRODUCTOS</h2>
-    <div class="row justify-content-center">
-        <div class="table-responsive">
-          <table class="table table-striped">
-              <thead>
-                <tr class="text-center">
-                  <th scope="col">#</th>
-                  <th scope="col">Nombre</th>
-                  <th scope="col">Descripción</th>
-                  <th scope="col">Detalle</th>
-                  <th scope="col">Precio</th>
-                  <th scope="col">Categoria</th>
-                  <th scope="col">Fecha</th>
-                  <th scope="col">Opciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                 @foreach($productos as $producto)
-                    <tr>
-                        <th scope="row">{{ $producto->id }}</th>
-                        <td>{{ $producto->nombre }}</td>
-                        <td>{{ $producto->descripcion }}</td>
-                        <td>{{ $producto->detallelargo }}</td>
-                        <td>{{ $producto->precio }}</td>
-                        <td>{{ $producto->categoria->nombre }}</td>
-                        {{--  <td><img src="{{ $producto->fotos->first()->imagen   }}" alt="" ></td> --}}
-                        <td>{{ $producto->created_at }}</td>
-                        <td>
-                          <button class="btn btn-sm btn-block btn-info">
-                            Editar
-                          </button>
-                          {{-- <a href="{{ route('admin.productos.fotos', $producto->id) }}" class="btn btn-sm btn-block btn-warning">Fotos</a>  --}}
-                          <button class="btn btn-sm btn-block btn-danger">
-                            Eliminar
-                          </button>
-                        </td>
-                    </tr>
-                 @endforeach
-              </tbody>
-            </table>
-            {{ $productos->links() }}
-        </div>
+<section class="content">
+    <div class="container-fluid">
+      <div class="card card-info">
+          <div class="card-header">
+          </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-striped">
+                      <thead>
+                        <tr class="text-center">
+                          <th scope="col">#</th>
+                          <th scope="col">Nombre</th>
+                          <th scope="col">Descripción</th>
+                          <th scope="col">Detalle</th>
+                          <th scope="col">Precio</th>
+                          <th scope="col">Categoria</th>
+                          <th scope="col">Fecha</th>
+                          <th scope="col">Opciones</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                         @foreach($productos as $producto)
+                            <tr>
+                                <th scope="row">{{ $producto->id }}</th>
+                                <td>{{ $producto->nombre }}</td>
+                                <td>{{ $producto->descripcion }}</td>
+                                <td>{{ $producto->detallelargo }}</td>
+                                <td>{{ $producto->precio }}</td>
+                                <td>{{ $producto->categoria->nombre }}</td>
+                                {{--  <td><img src="{{ $producto->fotos->first()->imagen   }}" alt="" ></td> --}}
+                                <td>{{ $producto->created_at }}</td>
+                                <td>
+                                  <a href="{{ route('admin.productos.edit',$producto->id) }}" class="btn btn-sm btn-block btn-info">
+                                    Editar
+                                  </a>
+                                  <a href="{{ url('admin/productos/'.$producto->id.'/foto') }}" class="btn btn-sm btn-block btn-warning">Fotos</a>
+                                  <form method="post" action="{{ route('admin.productos.delete', $producto->id) }}">
+                                      @method('DELETE') @csrf
+                                      <button class="btn btn-sm btn-block btn-danger" type="submit">
+                                        Eliminar
+                                      </button>
+                                  </form>
+
+                                </td>
+                            </tr>
+                         @endforeach
+                      </tbody>
+                    </table>
+                    {{ $productos->links() }}
+                </div>
+            </div>
+      </div>
     </div>
-</div>
+</section>
 @endsection

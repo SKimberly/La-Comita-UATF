@@ -19,4 +19,17 @@ class Producto extends Model
     public function fotos(){
     	return $this->hasMany(ProductoFoto::class);
     }
+
+    //Accesor para imagen por defecto
+    public function getFavoritoImagenUrlAttribute()
+    {
+        $favorito = $this->fotos()->where('favorito',true)->first();
+        if(!$favorito){ //En caso que la imagen no sea destacada
+            $fotoFavorito = $this->fotos()->first();
+        }
+        if($fotoFavorito){
+            return $fotoFavorito->url;//del otro mutator que hicimos en el modelo ProductImage
+        }
+        return '/img/productos/default.jpg';
+    }
 }

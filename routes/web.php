@@ -23,10 +23,18 @@ function(){
 
 	Route::get('productos','ProductoController@index')->name('admin.productos.index');
 	Route::get('productos/create','ProductoController@create')->name('admin.productos.create');
-
-	/*Route::get('productos/{id}/fotos','ProductoController@show')->name('admin.productos.fotos');*/
-
 	Route::post('productos','ProductoController@store')->name('admin.productos.store');
+	Route::get('productos/{id}/edit', 'ProductoController@edit')->name('admin.productos.edit');
+	Route::put('productos/{producto}','ProductoController@update')->name('admin.productos.update');
+	Route::delete('productos/{id}','ProductoController@destroy')->name('admin.productos.delete');
+
+	//Rutas para las fotos de cada producto
+	Route::get('productos/{id}/foto','FotoController@index');
+	Route::post('productos/{id}/foto','FotoController@store');
+	Route::delete('productos/{id}/foto','FotoController@destroy');
+	//Ruata para hacer una imagen favorito
+	Route::get('productos/{id}/foto/select/{image}','FotoController@select');
+
 
 });
 

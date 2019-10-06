@@ -10,4 +10,13 @@ class ProductoFoto extends Model
     public function producto(){
     	return $this->belongsTo(Producto::class);
     }
+
+    // Accesor ----- con url  getXAttibute()
+    public function getUrlAttribute()
+    {
+    	if(substr($this->imagen, 0, 4) === "http"){
+    		return $this->imagen;
+    	}
+    	return '/img/productos/'.$this->imagen;
+    }
 }

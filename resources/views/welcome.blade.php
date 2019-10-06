@@ -11,7 +11,7 @@
     @if (Route::has('login'))
             {{-- "auth" verifica si se authentico el usuario--}}
             @auth
-                <a href="{{ url('/home') }}"  class="btn btn-lg  btn-outline-light" >INICIO</a>
+                <a href="{{ url('/admin') }}"  class="btn btn-lg  btn-outline-light" >INICIO</a>
             @else
                 <a href="{{ route('login') }}" class="btn btn-lg  btn-light">INGRESAR</a>
 
