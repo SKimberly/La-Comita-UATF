@@ -59,9 +59,13 @@
 
   <!-- Main Footer -->
       @include('parciales.footer')
+
 </div>
+
+
 <script src="/sweetalert/sweetalert.min.js"></script>
 <!-- ./wrapper -->
 @include('sweet::alert')
+
 </body>
 </html>

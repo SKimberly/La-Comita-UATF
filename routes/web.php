@@ -21,6 +21,7 @@ Route::group([
 function(){
 	Route::get('/', 'AdminController@index')->name('admin');
 
+	//Rutas para PRODUCTOS
 	Route::get('productos','ProductoController@index')->name('admin.productos.index');
 	Route::get('productos/create','ProductoController@create')->name('admin.productos.create');
 	Route::post('productos','ProductoController@store')->name('admin.productos.store');
@@ -28,12 +29,23 @@ function(){
 	Route::put('productos/{producto}','ProductoController@update')->name('admin.productos.update');
 	Route::delete('productos/{id}','ProductoController@destroy')->name('admin.productos.delete');
 
+	//Rutas USUARIOS
+	Route::get('users', 'UserController@index')->name('admin.users.index');
+	Route::post('users', 'UserController@store')->name('admin.users.store');
+	Route::get('users/{id}', 'UserController@edit')->name('admin.users.edit');
+	Route::put('users/{user}','UserController@update')->name('admin.users.update');
+	Route::delete('users/{id}','UserController@destroy')->name('admin.users.delete');
+
 	//Rutas para las fotos de cada producto
 	Route::get('productos/{id}/foto','FotoController@index');
 	Route::post('productos/{id}/foto','FotoController@store');
 	Route::delete('productos/{id}/foto','FotoController@destroy');
 	//Ruata para hacer una imagen favorito
 	Route::get('productos/{id}/foto/select/{image}','FotoController@select');
+
+	//Rutas para PERFIL de usuario
+	Route::get('users/{id}/show','UserController@show')->name('admin.users.show');
+	Route::put('users/{user}/show','UserController@create')->name('admin.users.create');
 
 
 });

@@ -14,7 +14,7 @@
           <img src="{{ asset('img/sidebar/userdefault.svg') }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block "><b>{{ Auth::user()->fullname }}</b></a>
+          <a href="{{ route('admin.users.show',Auth::user()->id) }}" class="d-block "><b>{{ Auth::user()->fullname }}</b></a>
         </div>
       </div>
 
@@ -31,28 +31,13 @@
               </p>
             </a>
           </li>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <img src="{{ asset('img/sidebar/users.svg') }}" alt="" class="nav-icon">
+          <li class="nav-item">
+            <a href="{{ route('admin.users.index') }}" class="nav-link {{ request()->is('admin/users*') ? 'active' : '' }}">
+              <img src="{{ asset('img/sidebar/users.svg') }}" alt="usuarios" class="nav-icon">
               <p>
                   Usuarios
-                <i class="right fas fa-angle-left"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-users-cog"></i>
-                  <p>Ver lista</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-user-plus"></i>
-                  <p>Agregar nuevo</p>
-                </a>
-              </li>
-            </ul>
           </li>
           <li class="nav-item has-treeview {{ request()->is('admin/productos*') ? 'menu-open' : '' }}">
             <a href="#" class="nav-link {{ request()->is('admin/productos*') ? 'active' : '' }}">
