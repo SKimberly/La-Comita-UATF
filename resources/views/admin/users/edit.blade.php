@@ -83,7 +83,7 @@
 				                <label for="password">Contraseña:</label>
 				                <input class="form-control bg-light shadow-sm {{ $errors->has('password') ? ' is-invalid' : 'border-0' }}"
 				                        id="password" name="password" type="password"
-				                        placeholder="Clave o contraseña" value="{{ old('password',$user->password) }}" required >
+				                        placeholder="Clave o contraseña" value="{{ old('password') }}"  >
 				                @if ($errors->has('password'))
 				                        <span class="invalid-feedback" role="alert">
 				                        	<strong>{{ $errors->first('password') }}</strong>

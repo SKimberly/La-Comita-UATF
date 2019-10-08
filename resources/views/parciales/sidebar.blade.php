@@ -39,6 +39,14 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{ route('admin.categorias') }}" class="nav-link {{ request()->is('admin/categorias*') ? 'active' : '' }}">
+              <img src="{{ asset('img/sidebar/categorias.svg') }}" alt="categorias" class="nav-icon">
+              <p>
+                  Categorias
+              </p>
+            </a>
+          </li>
           <li class="nav-item has-treeview {{ request()->is('admin/productos*') ? 'menu-open' : '' }}">
             <a href="#" class="nav-link {{ request()->is('admin/productos*') ? 'active' : '' }}">
               <img src="{{ asset('img/sidebar/producto.svg') }}" alt="usuarios" class="nav-icon">

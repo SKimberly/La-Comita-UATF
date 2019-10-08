@@ -121,7 +121,10 @@ class UserController extends Controller
         $user->cedula = $request['cedula'];
         $user->telefono = $request['telefono'];
         $user->email = $request['email'];
-        $user->password = bcrypt($request['password']);
+        if(!empty($request['password']))
+        {
+            $user->password = bcrypt($request['password']);
+        }
         $user->tipo = $request['tipo'];
         $user->save();
 

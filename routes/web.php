@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'WellcomeController@index');
 
 Route::group([
 	'prefix' => 'admin',
@@ -47,7 +45,13 @@ function(){
 	Route::get('users/{id}/show','UserController@show')->name('admin.users.show');
 	Route::put('users/{user}/show','UserController@create')->name('admin.users.create');
 
-
+	//Rutas para CATEGORIAS
+	Route::get('categorias', 'CategoriaController@index')->name('admin.categorias');
+	Route::get('categorias/create', 'CategoriaController@create')->name('admin.categorias.create');
+	Route::post('categorias', 'CategoriaController@store')->name('admin.categorias.store');
+	Route::get('categorias/{id}/edit', 'CategoriaController@edit')->name('admin.categorias.edit');
+	Route::put('categorias/{categoria}', 'CategoriaController@update')->name('admin.categorias.update');
+	Route::delete('categorias/{id}', 'CategoriaController@destroy')->name('admin.categorias.delete');
 });
 
 

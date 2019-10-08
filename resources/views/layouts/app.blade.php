@@ -37,16 +37,16 @@
                             <a href="#inicio" class="">INICIO</a>
                         </li>
                         <li class="nav-item active">
-                            <a href="#nosotros" class="" >NOSOTROS</a>
-                        </li>
-                        <li class="nav-item active">
                             <a href="#servicio" class="" >SERVICIO</a>
                         </li>
                         <li class="nav-item active">
-                            <a href="#galeria" class="">GALERIA</a>
+                            <a href="#producto" class="">PRODUCTOS</a>
                         </li>
                         <li class="nav-item active">
                             <a href="#opiniones" class="" >OPINIONES</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a href="#nosotros" class="" >NOSOTROS</a>
                         </li>
                         <li class="nav-item active">
                             <a href="#contacto" class="" >CONTACTO</a>
@@ -71,24 +71,7 @@
             <div class="holaa" style="height: 150px; overflow: hidden;" ><svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100%; width: 100%;"><path d="M-2.25,74.50 C256.20,250.16 247.74,-88.31 502.25,74.50 L500.00,150.00 L0.00,150.00 Z" style="stroke: none; fill: #fff;"></path></svg></div>
         </header>
         <main>
-            <section class="contenedor sobre-nosotros" id="nosotros">
-                <h2 class="titulo">
-                    INFORMACIÓN
-                </h2>
-                <div class="contenedor-sobre-nosotros row">
-                    <img src="{{ asset('/img/portada.svg') }}" alt="img-sobre-nosotros" class="imagen-developer">
-                    <div class="contenido-textos col-md-6">
-                        <h3><span>1</span> ¿Quiénes somos?</h3>
-                        <p>Sport La Comita, somos una empresa lider en el mercado de implemento y artículos deportivos, que buscamos posicionamiento en el estado Boliviano, brindando productos de calidad.</p>
 
-                        <h3><span>2</span> ¿Qué ofrecemos?</h3>
-                        <p>La fábrica de ropa "Sport La Comita" ofrece a su distinguida clientela todo tipo de ropa deportiva, como ser: Poleras, cortos, polerones, chaquetas, busos, parkas, chamarras, etc. Con los diseños a gusto del cliente de la mejor calidad.</p>
-
-                        <h3><span>3</span> ¿Por qué esta página web?</h3>
-                        <p>Te ofrecemos la facilidad de poder ver nuestros productos, realizar cotizaciones, consultar sobre los ultimos o nuevos diseños, todo eso en está página web.</p>
-                    </div>
-                </div>
-            </section>
             <section class="about-services" id="servicio">
                 <div class="contenedor">
                     <h2 class="titulo">SERVICIO</h2>
@@ -112,18 +95,21 @@
                     </div>
                 </div>
             </section>
-            <section class="portafolio" id="galeria">
+            <section class="portafolio" id="producto">
                 <div class="contenedor">
-                    <h2 class="titulo">GALERIA</h2>
+                    <h2 class="titulo">PRODUCTOS</h2>
                     <div class="galeria-port">
+                    @foreach($categorias as $categoria)
                         <div class="imagen-port">
-                            <img src="{{ asset('/img/portafolio/port1.png') }}" alt="">
+                            <img src="{{ $categoria->urlcate }}" alt="Categoria Foto">
                             <div class="hover-galeria">
                                 <img src="{{ asset('/img/icono1.png') }}" alt="">
-                                <p>Nuestro trabajo</p>
+                                <p>{{ $categoria->nombre }}</p>
+                                <p>{{ $categoria->descripcion }}</p>
                             </div>
                         </div>
-                        <div class="imagen-port">
+                    @endforeach
+                       {{--  <div class="imagen-port">
                             <img src="{{ asset('/img/portafolio/port2.png') }}" alt="">
                             <div class="hover-galeria">
                                 <img src="{{ asset('/img/icono1.png') }}" alt="">
@@ -171,8 +157,7 @@
                                 <img src="{{ asset('/img/icono1.png') }}" alt="">
                                 <p>Nuestro trabajo</p>
                             </div>
-                        </div>
-
+                        </div> --}}
                     </div>
                 </div>
             </section>
@@ -195,7 +180,24 @@
                     </div>
                 </div>
             </section>
+            <section class="contenedor sobre-nosotros" id="nosotros">
+                <h2 class="titulo">
+                    INFORMACIÓN
+                </h2>
+                <div class="contenedor-sobre-nosotros row">
+                    <img src="{{ asset('/img/portada.svg') }}" alt="img-sobre-nosotros" class="imagen-developer">
+                    <div class="contenido-textos col-md-6">
+                        <h3><span>1</span> ¿Quiénes somos?</h3>
+                        <p>Sport La Comita, somos una empresa lider en el mercado de implemento y artículos deportivos, que buscamos posicionamiento en el estado Boliviano, brindando productos de calidad.</p>
 
+                        <h3><span>2</span> ¿Qué ofrecemos?</h3>
+                        <p>La fábrica de ropa "Sport La Comita" ofrece a su distinguida clientela todo tipo de ropa deportiva, como ser: Poleras, cortos, polerones, chaquetas, busos, parkas, chamarras, etc. Con los diseños a gusto del cliente de la mejor calidad.</p>
+
+                        <h3><span>3</span> ¿Por qué esta página web?</h3>
+                        <p>Te ofrecemos la facilidad de poder ver nuestros productos, realizar cotizaciones, consultar sobre los ultimos o nuevos diseños, todo eso en está página web.</p>
+                    </div>
+                </div>
+            </section>
             <section class="about-services" id="contacto" >
                 <div class="contenedor">
                     <h2 class="titulo">CONTÁCTANOS</h2>

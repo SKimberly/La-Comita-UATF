@@ -18,6 +18,11 @@ class FotoController extends Controller
     }
     public function store(Request $request, $id)
     {
+        $this->validate($request, [
+
+            'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+
+        ]);
     	// 1) Guardamos la imagen en nuestro proyecto
         $file = $request->file('foto');  //obtiene lo que se envia el campo con el nombre file
         $path = public_path() . '/img/productos';  //es la ruta donde guardamos la imagen "public_path()"->es la rutahacia la carpeta public
@@ -32,7 +37,7 @@ class FotoController extends Controller
             $productImage->producto_id = $id;
             $productImage->save();//INSERT
         }
-        return back()->with('success', 'Imagen Guardad Correctamente!');
+        return back()->with('success', 'Imagen guardada correctamente!');
     }
     public function destroy(Request $request, $id)
     {
