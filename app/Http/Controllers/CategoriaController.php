@@ -39,6 +39,7 @@ class CategoriaController extends Controller
     {
         $this->validate($request, [
             'imagen' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+            'nombre' => 'unique:categorias,nombre',
         ]);
         // 1) Guardamos la imagen en nuestro proyecto
         $file = $request->file('imagen');  //obtiene lo que se envia el campo con el nombre file
@@ -91,6 +92,7 @@ class CategoriaController extends Controller
     {
         $this->validate($request, [
             'imagen' => 'image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+            'nombre' => 'unique:categorias,nombre',
         ]);
 
         //Primero eliminaremos la imagen del proyecto

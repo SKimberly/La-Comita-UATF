@@ -58,12 +58,15 @@
 							<div class="custom-file">
 								<input type="file" name="imagen" class="custom-file-input" id="imagen" required>
 							    <label class="custom-file-label" for="imagen"> Seleccione una imgen  </label>
-							    <div class="invalid-feedback">Selecciona una imgen no mayor a 2mb.</div>
+							    <div class="invalid-feedback">Selecciona una imgen no mayor a 1mb.</div>
 							</div>
 						</div>
 		                <button class="btn btn-block colorcard" type="submit" >
 	                      CREAR
 	                    </button>
+	                    <a href="{{ route('admin.categorias') }}" class="btn btn-block " style="background-color:#49d2e8; ">
+	                      CANCELAR
+	                    </a>
 				</form>
 			</div>
 		</div>

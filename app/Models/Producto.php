@@ -32,4 +32,9 @@ class Producto extends Model
         }
         return '/img/productos/default.jpg';
     }
+
+    //Esta es la relacion para q un producto tenga varias tallas
+    public function tallas(){
+        return $this->belongsToMany(Talla::class);
+    }
 }

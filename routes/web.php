@@ -13,6 +13,15 @@
 
 Route::get('/', 'WellcomeController@index');
 
+Auth::routes();
+
+Route::get('redirect', function(){
+	//alert()->error('Success Message', 'Optional Title');
+	return redirect('/home')->with('success', 'Bienvenido!');
+});
+
+
+
 Route::group([
 	'prefix' => 'admin',
 	'middleware' => 'auth'],
@@ -55,12 +64,5 @@ function(){
 });
 
 
-Auth::routes();
 
-
-
-Route::get('redirect', function(){
-	//alert()->error('Success Message', 'Optional Title');
-	return redirect('/home')->with('success', 'Bienvenido!');
-});
 

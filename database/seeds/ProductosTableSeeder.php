@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 use Lacomita\Models\Categoria;
 use Lacomita\Models\Producto;
 use Lacomita\Models\ProductoFoto;
+use Lacomita\Models\Talla;
 
 class ProductosTableSeeder extends Seeder
 {
@@ -19,13 +20,16 @@ class ProductosTableSeeder extends Seeder
     	factory(ProductoFoto::class, 20)->create();*/
 
         $categoria = factory(Categoria::class, 5)->create();
+
         $categoria->each(function($cate){
             $productos = factory(Producto::class, 10)->create();
             $cate->productos()->saveMany($productos); //saveMany-->guardar de uno a muchos
 
             $productos->each(function($fot){
                 $fotos = factory(ProductoFoto::class, 20)->create();
+                $tallas = factory(Talla::class, 3)->create();
                 $fot->fotos()->saveMany($fotos);
+                $fot->tallas()->saveMany($tallas);
             });
         });
     }

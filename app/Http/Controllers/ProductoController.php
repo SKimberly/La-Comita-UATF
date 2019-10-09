@@ -35,6 +35,11 @@ class ProductoController extends Controller
             'categoria' => 'required',
         ]);
 
+        $nomcate = Categoria::find($request->categoria);
+        if(strcasecmp($request['nombre'] , $nomcate->nombre) === 0)
+        {
+             return back()->withInput()->withErrors(['El nombre del producto no debe ser igual al nombre de la categoria.']);
+        }
     	//aqui devolvemos a cualquier vista despues de haber creado los datos
         //dd($request->all());
          $producto = new Producto;
