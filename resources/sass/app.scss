@@ -13,6 +13,17 @@
 @import '~@fortawesome/fontawesome-free/scss/solid.scss';
 @import '~@fortawesome/fontawesome-free/scss/brands.scss';
 
+@import '~select2/dist/css/select2.min.css';
+@import '~select2/src/scss/_multiple.scss';
+@import '~select2/src/scss/core.scss';
+@import '~select2/src/scss/_dropdown.scss';
+
+@import '~sweetalert2/src/scss/_animations.scss';
+@import '~sweetalert2/src/scss/_body.scss';
+@import '~sweetalert2/src/scss/_theming.scss';
+
+
+
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);

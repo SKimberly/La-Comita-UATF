@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Lacomita\Models\Producto;
 use Lacomita\Models\Categoria;
 use Lacomita\Models\ProductoFoto;
+use Lacomita\Models\Talla;
 
 class ProductoController extends Controller
 {
@@ -21,18 +22,22 @@ class ProductoController extends Controller
     public function create(){
     	//Aqui devuelves a la vista donde esta el formulario de registro de productos
         $categorias = Categoria::orderBy('id','DESC')->get();
+        //Le mandamos tambien las tallas
+        $tallas = Talla::all();
         //Con compact enviamos datos
-        return view('admin.productos.create', compact('categorias'));
+        return view('admin.productos.create', compact('categorias','tallas'));
     }
 
     //Aqui vamos a guardar los datos
     public function store(Request $request){
+        //dd($request->all());
         //validación
         $this->validate($request, [
             'nombre' => 'required|min:5|max:100',
             'descripcion' => 'required|min:10|max:150',
             'precio' => 'required',
             'categoria' => 'required',
+            'tallas' => 'required',
         ]);
 
         $nomcate = Categoria::find($request->categoria);
@@ -50,6 +55,9 @@ class ProductoController extends Controller
          $producto->categoria_id = $request['categoria'];
          $producto->save();
 
+         //La funcion "attach" adjunta un array depalabras en un sola columna
+         $producto->tallas()->attach($request->get('tallas'));
+
         return redirect('/admin/productos')->with('success', 'Producto creado correctamente!');
     }
 
@@ -58,8 +66,9 @@ class ProductoController extends Controller
     	//Aqui devolvemos datos del producto a editar a la vista edit.blade.php reciviendo un (id) del producto
         $producto = Producto::find($id);
         $categorias = Categoria::orderBy('id','DESC')->get();
+        $tallas = Talla::orderBy('id','DESC')->get();
         //dd($producto);
-        return view('admin.productos.edit', compact('producto','categorias'));
+        return view('admin.productos.edit', compact('producto','categorias','tallas'));
     }
 
     //Aqui actualizamos los datos
@@ -70,6 +79,7 @@ class ProductoController extends Controller
             'descripcion' => 'required',
             'precio' => 'required',
             'categoria' => 'required',
+            'tallas' => 'required',
         ]);
 
          $producto = Producto::findOrFail($id);
@@ -79,6 +89,9 @@ class ProductoController extends Controller
          $producto->precio = $request['precio'];
          $producto->categoria_id = $request['categoria'];
          $producto->save();
+
+         //La funcion "sync" adjunta un array depalabras para actualizar
+         $producto->tallas()->sync($request->get('tallas'));
 
          return redirect('admin/productos')->with('success', 'Producto Actualizado!');
     }

@@ -14,7 +14,7 @@
         <link rel="shortcut icon" href="{{ asset('/img/sport.png') }}" />
 
         <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
-        <script src="{{ asset('js/app.js') }}" defer></script>
+        <script src="{{ asset('js/app.js') }}"></script>
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 

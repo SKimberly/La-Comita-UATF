@@ -17,7 +17,6 @@ class CreateProductoTallaTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('producto_id');
             $table->unsignedInteger('talla_id');
-            $table->timestamps();
         });
     }
 

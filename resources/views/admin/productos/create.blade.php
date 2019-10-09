@@ -81,7 +81,7 @@
 			                </div>
 			                <div class="form-group">
 			                  <label>Categoria:</label>
-			                  <select class="form-control {{ $errors->has('categoria') ? ' is-invalid' : 'border-1' }}" name="categoria">
+			                  <select class="form-control select2 {{ $errors->has('categoria') ? ' is-invalid' : 'border-1' }}" name="categoria">
 			                    <option value="">Seleccione una opcion</option>
 			                    @foreach($categorias as $categoria)
 									<option value="{{ $categoria->id }}"
@@ -92,6 +92,19 @@
 			                   @if ($errors->has('categoria'))
 					                <span class="invalid-feedback" role="alert">
 					                    <strong>{{ $errors->first('categoria') }}</strong>
+					                </span>
+					            @endif
+			                </div>
+			                <div class="form-group">
+								  <label>Tallas:</label>
+				                  <select class="form-control select2 {{ $errors->has('tallas') ? ' is-invalid' : 'border-1' }}" name="tallas[]" multiple="multiple" style="width: 100%;"   data-placeholder="Seleccione las tallas" >
+										@foreach($tallas as $talla)
+											<option {{ collect(old('tallas'))->contains($talla->id) ? 'selected' : '' }} value="{{ $talla->id }}">{{ $talla->nombre }}</option>
+										@endforeach
+				                  </select>
+				                @if ($errors->has('tallas'))
+					                <span class="invalid-feedback" role="alert">
+					                    <strong>{{ $errors->first('tallas') }}</strong>
 					                </span>
 					            @endif
 			                </div>
@@ -108,3 +121,15 @@
    	</div>
 </section>
 @endsection
+
+@push('scripts')
+<script type="text/javascript">
+ $(function () {
+    //Initialize Select2 Elements
+    $('.select2').select2({
+      theme: "classic",
+    })
+  })
+</script>
+@endpush
+

@@ -16,11 +16,12 @@
   <link rel="shortcut icon" href="{{ asset('/img/sport.png') }}" />
 
     <!-- Scripts -->
-  <script src="{{ asset('js/app.js') }}" defer></script>
+  <script src="{{ asset('js/app.js') }}" ></script>
 
   <!-- Styles -->
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
+  @stack('scripts')
 
 </head>
 <body class="hold-transition sidebar-mini">
@@ -66,6 +67,7 @@
 <script src="/sweetalert/sweetalert.min.js"></script>
 <!-- ./wrapper -->
 @include('sweet::alert')
+
 
 </body>
 </html>

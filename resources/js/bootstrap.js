@@ -13,6 +13,8 @@ try {
 
     require('bootstrap');
     require('admin-lte');
+    require('sweetalert2');
+    require('select2');
 } catch (e) {}
 
 /**
