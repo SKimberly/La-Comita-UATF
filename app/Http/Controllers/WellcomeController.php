@@ -4,6 +4,7 @@ namespace Lacomita\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Lacomita\Models\Categoria;
+use Lacomita\Models\Producto;
 
 class WellcomeController extends Controller
 {
@@ -23,9 +24,10 @@ class WellcomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+        $productos = Producto::orderBy('id','DESC')->paginate(20);
+        return view('productos',compact('productos'));
     }
 
     /**
@@ -47,7 +49,10 @@ class WellcomeController extends Controller
      */
     public function show($id)
     {
-        //
+        $producto = Producto::find($id);
+        $imagenes = $producto->fotos;
+        $imagenes = $producto->fotos()->orderBy('favorito','DESC')->get();
+        return view('detalles', compact('producto','imagenes'));
     }
 
     /**

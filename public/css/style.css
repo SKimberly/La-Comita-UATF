@@ -32,6 +32,10 @@ header{
 	background-position: center center;
 }
 
+.header-secundario{
+	height: 450px;
+}
+
 nav{
   width: 100%;
   position: fixed;
@@ -66,8 +70,12 @@ nav .enlaces a:hover{
 }
 
 .logo, .logo img{ height:50px; padding-left: 10px;}
-
-
+/*Imagen la el centro del secundario*/
+.img-secunpro{
+	max-width: 90%;
+	height: auto;
+}
+/**/
 header .caratula{
 	padding: 30px 0 5px 0 !important;
 	align-items: center;

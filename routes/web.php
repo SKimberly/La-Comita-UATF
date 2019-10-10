@@ -20,6 +20,8 @@ Route::get('redirect', function(){
 	return redirect('/home')->with('success', 'Bienvenido!');
 });
 
+Route::get('categoria/{id}/productos','WellcomeController@create')->name('categoria.productos');
+Route::get('categoria/producto/{id}/detalle','WellcomeController@show')->name('productos.detalles');
 
 
 Route::group([

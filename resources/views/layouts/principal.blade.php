@@ -103,61 +103,14 @@
                         <div class="imagen-port">
                             <img src="{{ $categoria->urlcate }}" alt="Categoria Foto">
                             <div class="hover-galeria">
+                                <a href="{{ route('categoria.productos', $categoria->id) }}" class="text-center" style="text-decoration: none;">
                                 <img src="{{ asset('/img/icono1.png') }}" alt="">
                                 <p>{{ $categoria->nombre }}</p>
-                                <p>{{ $categoria->descripcion }}</p>
+                                <p class="text-justify" style="padding-left:12px; padding-right: 12px;">{{ $categoria->descripcion }}</p>
+                                </a>
                             </div>
                         </div>
                     @endforeach
-                       {{--  <div class="imagen-port">
-                            <img src="{{ asset('/img/portafolio/port2.png') }}" alt="">
-                            <div class="hover-galeria">
-                                <img src="{{ asset('/img/icono1.png') }}" alt="">
-                                <p>Nuestro trabajo</p>
-                            </div>
-                        </div>
-                        <div class="imagen-port">
-                            <img src="{{ asset('/img/portafolio/port3.png') }}" alt="">
-                            <div class="hover-galeria">
-                                <img src="{{ asset('/img/icono1.png') }}" alt="">
-                                <p>Nuestro trabajo</p>
-                            </div>
-                        </div>
-                        <div class="imagen-port">
-                            <img src="{{ asset('/img/portafolio/port4.png') }}" alt="">
-                            <div class="hover-galeria">
-                                <img src="{{ asset('/img/icono1.png') }}" alt="">
-                                <p>Nuestro trabajo</p>
-                            </div>
-                        </div>
-                        <div class="imagen-port">
-                            <img src="{{ asset('/img/portafolio/port5.png') }}" alt="">
-                            <div class="hover-galeria">
-                                <img src="{{ asset('/img/icono1.png') }}" alt="">
-                                <p>Nuestro trabajo</p>
-                            </div>
-                        </div>
-                        <div class="imagen-port">
-                            <img src="{{ asset('/img/portafolio/port6.png') }}" alt="">
-                            <div class="hover-galeria">
-                                <img src="{{ asset('/img/icono1.png') }}" alt="">
-                                <p>Nuestro trabajo</p>
-                            </div>
-                        </div>
-                        <div class="imagen-port">
-                            <img src="{{ asset('/img/portafolio/port7.png') }}" alt="">
-                            <div class="hover-galeria">
-                                <img src="{{ asset('/img/icono1.png') }}" alt="">
-                                <p>Nuestro trabajo</p>
-                            </div>
-                        </div>
-                        <div class="imagen-port">
-                            <img src="{{ asset('/img/portafolio/port8.png') }}" alt="">
-                            <div class="hover-galeria">
-                                <img src="{{ asset('/img/icono1.png') }}" alt="">
-                                <p>Nuestro trabajo</p>
-                            </div>
-                        </div> --}}
                     </div>
                 </div>
             </section>
@@ -259,7 +212,7 @@
                 </div>
                 <div class="content-foo">
                     <h4>E-mail</h4>
-                    <p>jorge@gmail.com</p>
+                    <p>lacomita@gmail.com</p>
                 </div>
                 <div class="content-foo">
                     <h4>Dirección (Tienda)</h4>
