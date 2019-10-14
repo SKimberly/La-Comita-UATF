@@ -19,6 +19,7 @@
 @endsection
 
 @section('contenproducto')
+@include('parciales.modalCarrito')
 <section class="portafolio" id="fotos">
     <div class="contenedor" style="padding: 30px 0;">
         <h2 class="titulo" style="margin-bottom: 30px;">{{ $producto->nombre }}</h2>
@@ -44,7 +45,9 @@
                     </div>
                     <hr>
                     <div class="d-flex flex-row justify-content-center">
-                        <a href="#" class="btn colorprin ml-auto btn-block">Ordenar</a>
+                        <button type="button" class="btn colorprin ml-auto btn-block"  data-toggle="modal" data-target="#modalCarrito">
+                         <i class="fas fa-shopping-basket"></i> Ordenar
+                        </button>
                     </div>
                 </div>
             </div>
@@ -61,4 +64,17 @@
         </div>
     </div>
 </section>
+
 @endsection
+
+@push('scripts')
+<script type="text/javascript">
+ $(function () {
+    //Initialize Select2 Elements
+    $('.select2').select2({
+      theme: "classic",
+      placeholder: "Seleccione las tallas"
+    })
+  })
+</script>
+@endpush
