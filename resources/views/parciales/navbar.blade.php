@@ -38,6 +38,12 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
+        <li class="nav-item ">
+          <a class="nav-link"  href="{{ route('carrito.detalle') }}">
+            <i class="fas fa-cart-arrow-down side" style="font-size: 2rem;"></i>
+            <span class="badge badge-warning navbar-badge">{{ auth()->user()->carrito->detalles->count() }}</span>
+          </a>
+        </li>
       <!-- Messages Dropdown Menu -->
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">

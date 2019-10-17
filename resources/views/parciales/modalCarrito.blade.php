@@ -9,8 +9,9 @@
       </div>
       <div class="modal-body">
          	<form class="bg-white shadow rounded py-3 px-4"
-                 method="POST" action="{{ route('admin.users.store') }}">
+                 method="POST" action="{{ route('carrito.store') }}">
                  @csrf
+                 <input type="hidden" value="{{ $producto->id }}" name="producto_id">
                  <div class="form-group row">
 		            <label for="cantidad" class="col-sm-4 col-form-label">Cantidad:</label>
 		            <div class="col-sm-8">

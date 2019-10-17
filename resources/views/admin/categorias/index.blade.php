@@ -50,7 +50,7 @@
 									<td>{{ $categoria->nombre }}</td>
 									<td>{{ $categoria->descripcion }}</td>
 									<td class="text-center">
-										<img src="{{ $categoria->urlcate }}" class="img-fluid" style="width: 30%;" alt="Categoria Foto">
+										<img src="{{ asset($categoria->urlcate) }}" class="img-fluid" style="width: 30%;" alt="Categoria Foto">
 									</td>
 									<td>{{ $categoria->created_at }}</td>
 									<td>

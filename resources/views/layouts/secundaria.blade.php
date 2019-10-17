@@ -41,6 +41,22 @@
                         <li class="nav-item active">
                             <a href="javascript:history.back(-1);" class="" >VOLVER</a>
                         </li>
+                        @guest
+                            <li class="nav-item active">
+                                <a  href="{{ route('login') }}">{{ __('INGRESAR') }}</a>
+                            </li>
+                            @if (Route::has('register'))
+                              <li class="nav-item active">
+                                <a   href="{{ route('register') }}">{{ __('REGISTRARSE') }}</a>
+                              </li>
+                            @endif
+                        @else
+                            <li class="nav-item dropdown">
+                                    <a href="{{ route('admin') }}" role="button" class="text-white">
+                                       {{ strtoupper(Auth::user()->fullname) }}
+                                    </a>
+                            </li>
+                        @endguest
                     </ul>
                 </div>
             </nav>
@@ -81,5 +97,8 @@
             <h2 class="titulo-final">&copy; S. Kimberly Marquina Ch. | UATF Potosí </h2>
         </footer>
         </div>
+        <script src="/sweetalert/sweetalert.min.js"></script>
+        <!-- ./wrapper -->
+        @include('sweet::alert')
     </body>
 </html>

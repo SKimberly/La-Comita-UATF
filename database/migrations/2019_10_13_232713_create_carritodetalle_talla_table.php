@@ -13,9 +13,9 @@ class CreateCarritodetalleTallaTable extends Migration
      */
     public function up()
     {
-        Schema::create('carritodetalle_talla', function (Blueprint $table) {
+        Schema::create('carrito_detalle_talla', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('carritodetalle_id');
+            $table->unsignedInteger('carrito_detalle_id');
             $table->unsignedInteger('talla_id');
         });
     }

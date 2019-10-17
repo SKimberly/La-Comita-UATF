@@ -12,4 +12,8 @@ class CarritoDetalle extends Model
     public function tallas(){
         return $this->belongsToMany(Talla::class);
     }
+    //Un carritoDetalle pertenece a un producto
+    public function producto(){
+    	return $this->belongsTo(Producto::class);
+    }
 }

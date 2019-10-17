@@ -13,7 +13,7 @@ class CreateCarritoDetallesTable extends Migration
      */
     public function up()
     {
-        Schema::create('carritodetalles', function (Blueprint $table) {
+        Schema::create('carrito_detalles', function (Blueprint $table) {
             $table->increments('id');
 
             $table->integer('carrito_id')->unsigned();
@@ -24,7 +24,7 @@ class CreateCarritoDetallesTable extends Migration
 
             $table->integer('cantidad');
             $table->string('descripcion');
-            $table->integer('descuento')->nullable();
+            $table->integer('descuento')->default(0);
             $table->timestamps();
         });
     }

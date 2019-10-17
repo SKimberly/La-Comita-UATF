@@ -23,6 +23,11 @@ Route::get('redirect', function(){
 Route::get('categoria/{id}/productos','WellcomeController@create')->name('categoria.productos');
 Route::get('categoria/producto/{id}/detalle','WellcomeController@show')->name('productos.detalles');
 
+//Rutas para el carrito
+Route::get('/carrito/detalle', 'CarritoDetalleController@index')->name('carrito.detalle');
+Route::post('/carrito', 'CarritoDetalleController@store')->name('carrito.store');
+Route::delete('/carrito/{id}/eliminar','CarritoDetalleController@destroy')->name('carrito.eliminar');
+Route::post('/realizar/pedido', 'CarritoDetalleController@create')->name('realizar.orden');
 
 Route::group([
 	'prefix' => 'admin',

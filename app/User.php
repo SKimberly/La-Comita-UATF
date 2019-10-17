@@ -5,6 +5,7 @@ namespace Lacomita;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Lacomita\Models\Carrito;
 
 class User extends Authenticatable
 {
@@ -36,4 +37,26 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    //relación de uno a muchos --> Un usuario puede tener muchos carritos
+    public function carritos()
+    {
+        return $this->hasMany(Carrito::class);
+    }
+    //este es nuestro axesor para sacar el id del carrito para cada usuario-->carrito_id
+    public function getCarritoAttribute()
+    {
+        $carrito = $this->carritos()->where('estado', 'Activo')->first();
+
+        if ($carrito){
+            return $carrito;
+        }
+        else{
+            $carrito = new Carrito();
+            $carrito->estado = 'Activo';
+            $carrito->user_id = $this->id;
+            $carrito->save();
+            return $carrito;
+        }
+    }
 }
