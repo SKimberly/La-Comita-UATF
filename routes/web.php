@@ -27,7 +27,7 @@ Route::get('categoria/producto/{id}/detalle','WellcomeController@show')->name('p
 Route::get('/carrito/detalle', 'CarritoDetalleController@index')->name('carrito.detalle');
 Route::post('/carrito', 'CarritoDetalleController@store')->name('carrito.store');
 Route::delete('/carrito/{id}/eliminar','CarritoDetalleController@destroy')->name('carrito.eliminar');
-Route::post('/realizar/pedido', 'CarritoDetalleController@create')->name('realizar.orden');
+Route::post('/realizar/pedido', 'CarritoController@create')->name('realizar.orden');
 
 Route::group([
 	'prefix' => 'admin',
@@ -68,6 +68,12 @@ function(){
 	Route::get('categorias/{id}/edit', 'CategoriaController@edit')->name('admin.categorias.edit');
 	Route::put('categorias/{categoria}', 'CategoriaController@update')->name('admin.categorias.update');
 	Route::delete('categorias/{id}', 'CategoriaController@destroy')->name('admin.categorias.delete');
+
+	//Ruta para actualizar el Carrito de pedidos a anticipo y fecha de entrega
+	Route::get('pedidos','CarritoController@index')->name('admin.pedidos.index');
+	Route::get('pedidos/{id}/ver','CarritoController@show')->name('ver.pedido.pendiente');
+	Route::post('/pedidos', 'CarritoController@store')->name('pedido.cancelar');
+
 });
 
 

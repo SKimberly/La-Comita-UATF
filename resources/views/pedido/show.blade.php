@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('titulo','Carrito Compras')
+@section('titulo','Pedido de un Usuario')
 
 @section('cabecera')
 <div class="content-header">
@@ -12,7 +12,7 @@
         <div class="col-sm-4">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{{ route('admin') }}">Inicio</a></li>
-            <li class="breadcrumb-item active">Carrito de Compras</li>
+            <li class="breadcrumb-item active">Pedidos</li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
@@ -21,11 +21,17 @@
 @endsection
 
 @section('content')
+@include('pedido.createModal')
 <section class="content">
     <div class="container-fluid">
+      <div class="col-12 col-sm-10 col-lg-3 mx-auto">
+          <button class="btn colorprin btn-block" data-toggle="modal" data-target="#modalCancelar">
+              <i class="fas fa-comment-dollar"></i> Concretar el Pago
+          </button>
+      </div>
       <div class="card card-info">
           <div class="card-header">
-             <h5 class="card-title ">CARRITO DE PEDIDO</h5>
+             <h5 class="card-title ">PEDIDO DE: <strong>{{ $user->fullname }}</strong></h5>
              <p class="text-right">Tu carrito de compras presenta {{ $detalles->count() }} productos.</p>
           </div>
             <div class="card-body">
@@ -41,7 +47,6 @@
                           <th scope="col">Precio</th>
                           <th scope="col">Cantidad</th>
                           <th scope="col">Sub Total</th>
-                          <th scope="col">Opciones</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -63,25 +68,14 @@
                          <td class="text-center">{{ $detalle->producto->precio }}</td>
                          <td class="text-center">{{ $detalle->cantidad }}</td>
                          <td class="text-center"><b>Bs.</b> {{ $detalle->producto->precio*$detalle->cantidad }}</td>
-                         <td>
-                           <form method="POST" action="{{ route('carrito.eliminar', $detalle->id) }}">
-                             @csrf @method('DELETE')
-                            <a href="{{ route('productos.detalles',$detalle->producto->id) }}" target="_blank" class="btn btn-info btn-block btn-sm"><i class="fas fa-eye"></i> Ver</a>
-                             <button type="submit" class="btn btn-danger btn-block btn-sm">  Eliminar
-                             </button>
-                           </form>
-                         </td>
                       </tr>
                       @endforeach
                       </tbody>
                   </table>
                   <div class="text-center">
-                    <form method="POST" action="{{ route('realizar.orden') }}">
-                      @csrf
-                      <button class="btn colorcard">
-                        <i class="fas fa-money-check-alt"></i> Realizar pedido
-                      </button>
-                    </form>
+                      <a href="javascript:history.back(-1);" class="btn colorcard">
+                        <i class="fas fa-arrow-circle-left"></i> VOLVER
+                      </a>
                   </div>
                 </div>
             </div>

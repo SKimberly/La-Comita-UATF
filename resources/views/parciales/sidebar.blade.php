@@ -70,28 +70,13 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item has-treeview ">
-            <a href="#" class="nav-link ">
+          <li class="nav-item">
+            <a href="{{ route('admin.pedidos.index') }}" class="nav-link {{ request()->is('admin/pedidos*') ? 'active' : '' }}">
               <img src="{{ asset('img/sidebar/pedidos.svg') }}" alt="pedidos" class="nav-icon">
               <p>
                   Pedidos
-                <i class="right fas fa-angle-left"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="#" class="nav-link ">
-                  <i class="fas fa-shipping-fast"></i>
-                  <p>Ver lista</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="fas fa-shopping-basket"></i>
-                  <p>Agregar nuevo</p>
-                </a>
-              </li>
-            </ul>
           </li>
           <li class="nav-item has-treeview ">
             <a href="#" class="nav-link ">

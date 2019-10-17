@@ -3,8 +3,11 @@
 namespace Lacomita\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Lacomita\Models\CarritoDetalle;
-class CarritoDetalleController extends Controller
+use Lacomita\Models\Carrito;
+use Lacomita\User;
+use Carbon\Carbon;
+
+class CarritoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,8 +16,8 @@ class CarritoDetalleController extends Controller
      */
     public function index()
     {
-        $detalles = auth()->user()->carrito->detalles;
-        return view('carrito.index',compact('detalles'));
+        $carritos = Carrito::where('estado','Pendiente')->orderBy('updated_at', 'DESC')->paginate(10);
+        return view('pedido.index', compact('carritos'));
     }
 
     /**
@@ -24,7 +27,11 @@ class CarritoDetalleController extends Controller
      */
     public function create()
     {
-
+        $carrito = auth()->user()->carrito;
+        $carrito->fecha_orden = Carbon::now();
+        $carrito->estado = 'Pendiente';
+        $carrito->save();
+        return back()->with('success', "Tu pedido se ha registrado correctamente, tienes que realizar pago del 20% en las próximas 72 horas a partir de ahora!");
     }
 
     /**
@@ -35,17 +42,11 @@ class CarritoDetalleController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->all());
-        $cartDetail = new CarritoDetalle();
-        $cartDetail->carrito_id = auth()->user()->carrito->id;
-        $cartDetail->producto_id = $request['producto_id'];
-        $cartDetail->cantidad = $request['cantidad'];
-        $cartDetail->descripcion = $request['descripcion'];
-        $cartDetail->save();
-
-        $cartDetail->tallas()->attach($request->get('tallas'));
-
-        return back()->with('success', 'Producto agregado al carrito!');
+        $carrito = Carrito::where('id',$request['carrito_id'])->first();
+        $carrito->anticipo = $request['anticipo'];
+        $carrito->fecha_entrega = $request['fecha_entrega'];
+        $carrito->save();
+        return redirect('/admin/pedidos')->with('success', "Excelente... ahora prepararemos el pedido!");
     }
 
     /**
@@ -56,7 +57,14 @@ class CarritoDetalleController extends Controller
      */
     public function show($id)
     {
-        //
+        //Aqui mostraremos el pedido que esta pendiente recibimos un id de carrito
+        $carrito = Carrito::findOrFail($id);
+        $user = User::findOrFail($carrito->user_id);
+        $detalle = Carrito::where('id',$id)->first();
+        $detalles = $detalle->detalles;
+        //dd($detalles->all());
+
+        return view('pedido.show', compact('user','detalles','carrito'));
     }
 
     /**
@@ -79,7 +87,7 @@ class CarritoDetalleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        dd($id);
     }
 
     /**
@@ -90,11 +98,6 @@ class CarritoDetalleController extends Controller
      */
     public function destroy($id)
     {
-        $detalle = CarritoDetalle::find($id);
-        //si el id del carrito es igual al usuario autentificado su carrito_id, hara la eliminacion
-        if ($detalle->carrito_id == auth()->user()->carrito->id) {
-            $detalle->delete();
-        }
-        return back()->with('success', 'Producto eliminado del carrito!');
+        //
     }
 }
