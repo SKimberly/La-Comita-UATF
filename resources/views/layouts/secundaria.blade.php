@@ -83,7 +83,7 @@
                 </div>
                 <div class="content-foo">
                     <h4>E-mail</h4>
-                    <p>lacomita@gmail.com</p>
+                    <p>sport.lacomita19@gmail.com</p>
                 </div>
                 <div class="content-foo">
                     <h4>Dirección (Tienda)</h4>

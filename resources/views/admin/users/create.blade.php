@@ -1,7 +1,7 @@
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header colorprin">
         <h5 class="modal-title" id="exampleModalLabel">Nuevo Usuario</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -15,7 +15,7 @@
 	                <label for="fullname">Nombre completo:</label>
 	                <input class="form-control bg-light shadow-sm {{ $errors->has('fullname') ? ' is-invalid' : 'border-0' }}"
 	                        id="fullname" name="fullname"
-	                        placeholder="Ingrese su nombre completo" value="{{ old('fullname') }}" >
+	                        placeholder="Ingrese su nombre completo" value="{{ old('fullname') }}" autofocus >
 	                @if ($errors->has('fullname'))
 	                        <span class="invalid-feedback" role="alert">
 	                        	<strong>{{ $errors->first('fullname') }}</strong>
@@ -39,7 +39,7 @@
 		                <label for="cedula">Cédula:</label>
 		                <input class="form-control bg-light shadow-sm {{ $errors->has('cedula') ? ' is-invalid' : 'border-0' }}"
 		                        id="cedula" name="cedula" type="number"
-		                        placeholder="Cédula de identidad" value="{{ old('cedula') }}" required>
+		                        placeholder="Cédula de identidad" value="{{ old('cedula') }}" >
 		                @if ($errors->has('cedula'))
 		                        <span class="invalid-feedback" role="alert">
 		                        	<strong>{{ $errors->first('cedula') }}</strong>
@@ -50,7 +50,7 @@
 		                <label for="telefono">Teléfono:</label>
 		                <input class="form-control bg-light shadow-sm {{ $errors->has('telefono') ? ' is-invalid' : 'border-0' }}"
 		                        id="telefono" name="telefono" type="number"
-		                        placeholder="Teléfono o celular" value="{{ old('telefono') }}" required>
+		                        placeholder="Teléfono o celular" value="{{ old('telefono') }}" >
 		                @if ($errors->has('telefono'))
 		                        <span class="invalid-feedback" role="alert">
 		                        	<strong>{{ $errors->first('telefono') }}</strong>
@@ -63,7 +63,7 @@
 		                <label for="password">Contraseña:</label>
 		                <input class="form-control bg-light shadow-sm {{ $errors->has('password') ? ' is-invalid' : 'border-0' }}"
 		                        id="password" name="password" type="password"
-		                        placeholder="Clave o contraseña" value="{{ old('password') }}" required >
+		                        placeholder="Clave o contraseña" value="{{ old('password') }}"  >
 		                @if ($errors->has('password'))
 		                        <span class="invalid-feedback" role="alert">
 		                        	<strong>{{ $errors->first('password') }}</strong>
@@ -94,19 +94,4 @@
   </div>
 </div>
 
-{{--
-<script>
-    if(window.location.hash === '#create')
-    {
-       	$('#myModal').modal('show');
-    }
-    $('#myModal').on('hide.bs.modal', function(){
-      //console.log('El modal se cierra');
-      window.location.hash = '#';
-    });
-    $('#myModal').on('show.bs.modal', function(){
-       window.location.hash = '#create';
-    });
-</script>
 
- --}}

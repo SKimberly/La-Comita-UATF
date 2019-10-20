@@ -42,6 +42,11 @@ class CarritoController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'anticipo' => 'required',
+            'fecha_entrega' => 'required'
+        ]);
+
         $carrito = Carrito::where('id',$request['carrito_id'])->first();
         $carrito->anticipo = $request['anticipo'];
         $carrito->fecha_entrega = $request['fecha_entrega'];

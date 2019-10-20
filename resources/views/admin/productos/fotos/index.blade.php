@@ -27,20 +27,20 @@
       <div class="card card-info">
           <div class="card-header d-flex justify-content-between align-items-center">
             Producto: {{ $producto->nombre }}
-            <form method="POST" action="" enctype="multipart/form-data">
+            <form class="form-inline" method="POST" action="" enctype="multipart/form-data">
                 @csrf
-                <div class="input-group">
-                    <div class="custom-file">
-                      <input type="file" name="foto" class="custom-file-input" required>
-                      <label class="custom-file-label" for="exampleInputFile">Imagen</label>
+                <div class="form-group">
+
+                    <div class="form-group">
+                      <input type="file" name="foto" class="form-control-file mb-2 mr-sm-2" id="imagenes" required>
                     </div>
-                    <div class="input-group-append">
-                       <button type="submit" style="background-color: #12d8fa;"> Subir nueva imagen</button>
+                    <div class="form-group">
+
+                    <button type="submit" class="btn btn-default mb-2" style="background-color: #12d8fa;"> Subir nueva imagen</button>
                     </div>
-                    <a href="{{ route('admin.productos.index') }}" class="btn btn-default" style="background-color: #1AB2CB;" >Cancelar</a>
+                    <a href="{{ route('admin.productos.index') }}" class="btn btn-default  mb-2" style="background-color: #1AB2CB;" >Cancelar</a>
                 </div>
             </form>
-
           </div>
           <div class="card-body">
               <div class="row">

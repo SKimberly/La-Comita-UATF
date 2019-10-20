@@ -54,15 +54,13 @@
 		                        </span>
 		                    @endif
 		                </div>
-		                <div class="form-group">
+		                <div class="form-group text-center">
 		                	<img src="{{ $categoria->urlcate }}" class="img-fluid" style="width: 30%;" alt="Categoria Foto">
 		                </div>
 						<div class="form-group">
-							<div class="custom-file">
-								<input type="file" name="imagen" class="custom-file-input" id="imagen">
-							    <label class="custom-file-label" for="imagen"> Seleccione una imgen  </label>
-							    <div class="invalid-feedback">Selecciona una imgen no mayor a 1mb.</div>
-							</div>
+							<label class="form-control-file" for="imagen" > Seleccione una imagen  </label>
+							<input type="file" name="imagen" class="form-control-file" id="imagenes">
+							<div class="invalid-feedback">La imagen no debe ser mayor a 1mb.</div>
 						</div>
 		                <button class="btn btn-block colorcard" type="submit" >
 	                      ACTUALIZAR

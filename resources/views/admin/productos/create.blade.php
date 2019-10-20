@@ -24,7 +24,7 @@
 @section('content')
 <section class="content">
     <div class="container-fluid">
-		<form method="POST" action="{{ route('admin.productos.store') }}">
+		<form method="POST" action="{{ route('admin.productos.store') }}" class="was-validated">
 			@csrf
 	        <div class="row">
 	            <div class="col-md-8">
@@ -34,7 +34,7 @@
 		                <div class="card-body">
 			                <div class="form-group">
 			                    <label for="nombre">Nombre del producto</label>
-			                    <input type="text" class="form-control {{ $errors->has('nombre') ? ' is-invalid' : 'border-1' }}" id="nombre" name="nombre" placeholder="Ingrese el nombre del nuevo producto" value="{{ old('nombre') }}">
+			                    <input type="text" class="form-control {{ $errors->has('nombre') ? ' is-invalid' : 'border-1' }}" id="nombre" name="nombre" placeholder="Ingrese el nombre del nuevo producto" value="{{ old('nombre') }}" required>
 			                    @if ($errors->has('nombre'))
 					                <span class="invalid-feedback" role="alert">
 					                    <strong>{{ $errors->first('nombre') }}</strong>
@@ -43,7 +43,7 @@
 			                </div>
 			                <div class="form-group">
 			                    <label for="descripcion">Descripción del producto</label>
-			                    <textarea class="form-control {{ $errors->has('descripcion') ? ' is-invalid' : 'border-1' }}" rows="2" name="descripcion" id="descripcion"  placeholder="Ingrese una breve descripción del producto">{{ old('descripcion') }}</textarea>
+			                    <textarea class="form-control {{ $errors->has('descripcion') ? ' is-invalid' : 'border-1' }}" rows="2" name="descripcion" id="descripcion"  placeholder="Ingrese una breve descripción del producto" required>{{ old('descripcion') }}</textarea>
 			                    @if ($errors->has('descripcion'))
 					                <span class="invalid-feedback" role="alert">
 					                    <strong>{{ $errors->first('descripcion') }}</strong>
@@ -68,7 +68,7 @@
 				                <div class="input-group-prepend">
 				                    <span class="input-group-text">Bs.</span>
 				                </div>
-				                <input type="number" name="precio" step="0.01" class="form-control {{ $errors->has('precio') ? ' is-invalid' : 'border-1' }}" value="{{ old('precio') }}">
+				                <input type="number" name="precio" step="0.01" class="form-control {{ $errors->has('precio') ? ' is-invalid' : 'border-1' }}" value="{{ old('precio') }}" required>
 				                <div class="input-group-append">
 				                    <span class="input-group-text">.00</span>
 				                </div>

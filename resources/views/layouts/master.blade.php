@@ -21,7 +21,7 @@
   <!-- Styles -->
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-  @stack('scripts')
+
 
 </head>
 <body class="hold-transition sidebar-mini">
@@ -68,6 +68,7 @@
 <!-- ./wrapper -->
 @include('sweet::alert')
 
+@stack('scripts')
 
 </body>
 </html>

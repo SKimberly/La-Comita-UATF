@@ -22,13 +22,14 @@
 @endsection
 
 @section('content')
+@include('admin.categorias.create')
 <section class="content">
 	<div class="container-fluid">
 		<div class="card card-info">
 			<div class="card-header" >
-				<a href="{{ route('admin.categorias.create') }}" class="btn btn-default" style="background-color: rgb(18, 216, 250);">
-				 <i class="fas fa-calendar-check"></i> Nueva Categoria
-				</a>
+				<button type="button" class="btn" style="background-color: rgb(18, 216, 250);" data-toggle="modal" data-target="#modalCategoria">
+				   <i class="fas fa-calendar-check"></i> Crear Categoria
+				</button>
 			</div>
 			<div class="card-body">
 					<div class="table-responsive">
@@ -76,3 +77,21 @@
 </section>
 @endsection
 
+@push('scripts')
+@unless(request()->is('admin/categorias/*'))
+<script>
+    if(window.location.hash === '#create')
+    {
+       	$('#modalCategoria').modal('show');
+    }
+    $('#modalCategoria').on('hide.bs.modal', function(){
+      //console.log('El modal se cierra');
+      window.location.hash = '#';
+    });
+    $('#modalCategoria').on('shown.bs.modal', function(){
+       $('#fullname').focus();
+       window.location.hash = '#create';
+    });
+</script>
+@endunless
+@endpush

@@ -24,7 +24,8 @@
 <section class="content">
     <div class="container-fluid">
       <div class="card card-info">
-          <div class="card-header">
+          <div class="card-header text-center">
+              NUESTROS PRODUCTOS
           </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -53,15 +54,18 @@
                                 {{--  <td><img src="{{ $producto->fotos->first()->imagen   }}" alt="" ></td> --}}
                                 <td>{{ $producto->created_at }}</td>
                                 <td>
-                                  <a href="{{ route('admin.productos.edit',$producto->id) }}" class="btn btn-sm btn-block btn-info">
-                                    Editar
-                                  </a>
-                                  <a href="{{ url('admin/productos/'.$producto->id.'/foto') }}" class="btn btn-sm btn-block btn-warning">Fotos</a>
+
                                   <form method="post" action="{{ route('admin.productos.delete', $producto->id) }}">
                                       @method('DELETE') @csrf
+
+                                      <a href="{{ route('admin.productos.edit',$producto->id) }}" class="btn btn-sm btn-block colorcard">
+                                        Editar
+                                      </a>
+                                      <a href="{{ url('admin/productos/'.$producto->id.'/foto') }}" class="btn btn-sm btn-block btn-warning">Fotos</a>
                                       <button class="btn btn-sm btn-block btn-danger" type="submit">
                                         Eliminar
                                       </button>
+
                                   </form>
 
                                 </td>

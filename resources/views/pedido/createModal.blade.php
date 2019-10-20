@@ -1,7 +1,7 @@
 <div class="modal fade" id="modalCancelar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header colorcard">
         <h5 class="modal-title" id="exampleModalLabel">Cancelar Pedido de: {{ $carrito->user->fullname }}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -18,7 +18,7 @@
     		                <input class="form-control bg-light shadow-sm {{ $errors->has('anticipo') ? ' is-invalid' : 'border-0' }}"
     		                id="anticipo"
     		                name="anticipo"
-    		                placeholder="Ingrese el monto de anticipo" type="number" required>
+    		                placeholder="Ingrese el monto de anticipo" type="number" >
     		                @if ($errors->has('anticipo'))
     		                    <span class="invalid-feedback" role="alert">
     		                        <strong>{{ $errors->first('anticipo') }}</strong>
@@ -32,7 +32,7 @@
                         <input class="form-control bg-light shadow-sm {{ $errors->has('fecha_entrega') ? ' is-invalid' : 'border-0' }}"
                         id="fecha_entrega"
                         name="fecha_entrega"
-                        placeholder="Ingrese la fecha de entrega" value="1" type="date" required>
+                        placeholder="Ingrese la fecha de entrega" value="1" type="date" >
                         @if ($errors->has('fecha_entrega'))
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $errors->first('fecha_entrega') }}</strong>

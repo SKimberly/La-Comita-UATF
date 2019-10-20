@@ -44,7 +44,7 @@
 @section('contenproducto')
 <section class="about-services" id="productos">
     <div class="contenedor" style="padding: 30px 0;">
-        <h2 class="titulo" style="margin-bottom: 30px;">Productos</h2>
+        <h2 class="titulo" style="margin-bottom: 30px;">LISTA DE PRODUCTOS</h2>
         <div class="servicio-cont">
             <div class="card-deck row">
             @foreach($productos as $producto)

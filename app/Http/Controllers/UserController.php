@@ -3,7 +3,9 @@
 namespace Lacomita\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use Lacomita\User;
+use Lacomita\Http\Requests\UserGuardarRequest;
 
 class UserController extends Controller
 {
@@ -53,16 +55,17 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserGuardarRequest $request)
     {
-        $this->validate($request, [
+        //Estoy validando con el archi UserGuardarRequest
+        /*$this->validate($request, [
             'fullname' => 'required|min:5|max:50',
             'cedula' => 'required|min:5|max:12',
             'telefono' => 'required|min:5|max:12',
             'email' => 'unique:users,email',
             'password' => 'required|min:5',
             'tipo' => 'required',
-        ]);
+        ]);*/
         //dd($request->all());
         $user = new User;
         $user->fullname = $request['fullname'];
@@ -73,7 +76,7 @@ class UserController extends Controller
         $user->tipo = $request['tipo'];
         $user->save();
 
-        return redirect('/admin/users')->with('success', 'Usuario registrado correctamente');
+        return redirect('/admin/users#')->with('success', 'Usuario registrado correctamente');
     }
 
     /**
@@ -107,14 +110,15 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserGuardarRequest $request, $id)
     {
-        $this->validate($request, [
+        //Estoy validando via UserGuardarRequest
+        /*$this->validate($request, [
             'fullname' => 'required',
             'cedula' => 'required',
             'telefono' => 'required',
             'tipo' => 'required',
-        ]);
+        ]);*/
 
         $user = User::findOrFail($id);
         $user->fullname = $request['fullname'];

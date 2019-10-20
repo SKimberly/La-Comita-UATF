@@ -29,6 +29,9 @@ Route::post('/carrito', 'CarritoDetalleController@store')->name('carrito.store')
 Route::delete('/carrito/{id}/eliminar','CarritoDetalleController@destroy')->name('carrito.eliminar');
 Route::post('/realizar/pedido', 'CarritoController@create')->name('realizar.orden');
 
+//Rutas para enviar mensajes de contacto ants de iniciar sesión
+Route::resource('smscontactos','ContactoController');
+
 Route::group([
 	'prefix' => 'admin',
 	'middleware' => 'auth'],

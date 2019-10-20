@@ -21,6 +21,7 @@
 @endsection
 
 @section('content')
+@include('admin.users.create')
 <section class="content">
 	<div class="container-fluid">
 		<div class="card card-info">
@@ -76,6 +77,23 @@
 	</div>
 </section>
 <!-- Modal -->
-@include('admin.users.create')
 @endsection
 
+@push('scripts')
+@unless(request()->is('admin/users/*'))
+<script>
+    if(window.location.hash === '#create')
+    {
+       	$('#myModal').modal('show');
+    }
+    $('#myModal').on('hide.bs.modal', function(){
+      //console.log('El modal se cierra');
+      window.location.hash = '#';
+    });
+    $('#myModal').on('shown.bs.modal', function(){
+       $('#fullname').focus();
+       window.location.hash = '#create';
+    });
+</script>
+@endunless
+@endpush

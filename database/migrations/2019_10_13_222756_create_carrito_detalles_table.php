@@ -23,7 +23,7 @@ class CreateCarritoDetallesTable extends Migration
             $table->foreign('producto_id')->references('id')->on('productos');
 
             $table->integer('cantidad');
-            $table->string('descripcion');
+            $table->text('descripcion')->nullable();
             $table->integer('descuento')->default(0);
             $table->timestamps();
         });

@@ -3,8 +3,9 @@
 namespace Lacomita\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Lacomita\Models\CarritoDetalle;
-class CarritoDetalleController extends Controller
+use Illuminate\Support\Facades\Mail;
+
+class ContactoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,8 +14,7 @@ class CarritoDetalleController extends Controller
      */
     public function index()
     {
-        $detalles = auth()->user()->carrito->detalles;
-        return view('carrito.index',compact('detalles'));
+        //
     }
 
     /**
@@ -24,7 +24,7 @@ class CarritoDetalleController extends Controller
      */
     public function create()
     {
-
+        //
     }
 
     /**
@@ -36,21 +36,21 @@ class CarritoDetalleController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'cantidad' => 'required',
-            'tallas' => 'required'
+            'nombre' => 'required',
+            'telefono' => 'required',
+            'email' => 'required',
+            'contenido' => 'required'
         ]);
 
-        //dd($request->all());
-        $cartDetail = new CarritoDetalle();
-        $cartDetail->carrito_id = auth()->user()->carrito->id;
-        $cartDetail->producto_id = $request['producto_id'];
-        $cartDetail->cantidad = $request['cantidad'];
-        $cartDetail->descripcion = $request['descripcion'];
-        $cartDetail->save();
-
-        $cartDetail->tallas()->attach($request->get('tallas'));
-
-        return back()->with('success', 'Producto agregado al carrito!');
+        $deEmail = $request->email;
+        $deNombre = $request->nombre;
+        Mail::send('emails.contacto',$request->all(), function($msj) use($deEmail,$deNombre){
+            $msj->cc($deEmail);
+            $msj->from($deEmail, $deNombre );
+            $msj->subject('Mensaje recibido desde el contacto del sitio web Sport La Comita');
+            $msj->to('sport.lacomita19@gmail.com');
+        });
+        return redirect('/#contacto')->with('success', 'Mensaje enviado correctamente... Se te enviara la respuesta a tu correo o celular!');
     }
 
     /**
@@ -95,11 +95,6 @@ class CarritoDetalleController extends Controller
      */
     public function destroy($id)
     {
-        $detalle = CarritoDetalle::find($id);
-        //si el id del carrito es igual al usuario autentificado su carrito_id, hara la eliminacion
-        if ($detalle->carrito_id == auth()->user()->carrito->id) {
-            $detalle->delete();
-        }
-        return back()->with('success', 'Producto eliminado del carrito!');
+        //
     }
 }

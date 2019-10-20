@@ -54,7 +54,7 @@ class CategoriaController extends Controller
             $categoriaImage->descripcion = $request['descripcion'];
             $categoriaImage->save();//INSERT
         }
-        return redirect('/admin/categorias')->with('success', 'Categoria creada correctamente!');
+        return redirect('/admin/categorias#')->with('success', 'Categoria creada correctamente!');
 
     }
 
@@ -91,8 +91,7 @@ class CategoriaController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'imagen' => 'image|mimes:jpeg,png,jpg,gif,svg|max:1024',
-            'nombre' => 'unique:categorias,nombre',
+            'imagen' => 'image|mimes:jpeg,png,jpg,gif,svg|max:1024'
         ]);
 
         //Primero eliminaremos la imagen del proyecto

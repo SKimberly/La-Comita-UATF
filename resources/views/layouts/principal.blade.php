@@ -113,7 +113,7 @@
             </section>
             <section class="portafolio" id="producto">
                 <div class="contenedor">
-                    <h2 class="titulo">PRODUCTOS</h2>
+                    <h2 class="titulo">CATEGORIA DE LOS PRODUCTOS</h2>
                     <div class="galeria-port">
                     @foreach($categorias as $categoria)
                         <div class="imagen-port">
@@ -172,19 +172,31 @@
                     <h2 class="titulo">CONTÁCTANOS</h2>
                     <div class="servicio-cont col-lg-12 d-flex align-items-stretch">
                         <div class="col-12 col-lg-6" >
-                            <form class="bg-white shadow rounded py-3 px-4"
+                            <form class="bg-white shadow rounded py-3 px-4 was-validated"
                                 method="POST"
-                                action="">
+                                action="{{ route('smscontactos.store') }}">
                                  @csrf
                                  <div class="form-group">
-                                    <label for="name">Nombre:</label>
-                                    <input class="form-control bg-light shadow-sm {{ $errors->has('name') ? ' is-invalid' : 'border-0' }}"
-                                        id="name"
-                                        name="name"
-                                        placeholder="Ingrese su nombre completo" value="{{ old('name') }}" >
-                                    @if ($errors->has('name'))
+                                    <label for="nombre">Nombre:</label>
+                                    <input class="form-control bg-light shadow-sm {{ $errors->has('nombre') ? ' is-invalid' : 'border-0' }}"
+                                        id="nombre"
+                                        name="nombre"
+                                        placeholder="Ingrese su nombre completo" value="{{ old('nombre') }}" required >
+                                    @if ($errors->has('nombre'))
                                         <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('name') }}</strong>
+                                            <strong>{{ $errors->first('nombre') }}</strong>
+                                        </span>
+                                    @endif
+                                 </div>
+                                 <div class="form-group">
+                                    <label for="telefono">Celular/Teléfono:</label>
+                                    <input class="form-control bg-light shadow-sm {{ $errors->has('telefono') ? ' is-invalid' : 'border-0' }}"
+                                        id="telefono"
+                                        name="telefono"
+                                        placeholder="Ingrese su teléfono o celular." value="{{ old('telefono') }}" type="number" required >
+                                    @if ($errors->has('telefono'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('telefono') }}</strong>
                                         </span>
                                     @endif
                                  </div>
@@ -193,7 +205,7 @@
                                     <input class="form-control bg-light shadow-sm {{ $errors->has('email') ? ' is-invalid' : 'border-0' }}" id="email"
                                         type="email"
                                         name="email"
-                                        placeholder="Ingrese su correo eléctronico" value="{{ old('email') }}" >
+                                        placeholder="Ingrese su correo eléctronico" value="{{ old('email') }}" required >
                                     @if ($errors->has('email'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('email') }}</strong>
@@ -201,15 +213,15 @@
                                     @endif
                                 </div>
                                 <div class="form-group">
-                                    <label for="content">Contenido:</label>
-                                    <textarea class="form-control bg-light shadow-sm {{ $errors->has('content') ? ' is-invalid' : 'border-0' }}" rows="2" name="content" placeholder="Ingrese su mensaje" >{{ old('content') }}</textarea>
-                                    @if ($errors->has('content'))
+                                    <label for="contenido">Contenido:</label>
+                                    <textarea class="form-control bg-light shadow-sm {{ $errors->has('contenido') ? ' is-invalid' : 'border-0' }}" rows="4" name="contenido" placeholder="Ingrese el contenido de su mensaje" required>{{ old('contenido') }}</textarea>
+                                    @if ($errors->has('contenido'))
                                         <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('content') }}</strong>
+                                            <strong>{{ $errors->first('contenido') }}</strong>
                                         </span>
                                     @endif
                                 </div>
-                                <button class="btn btn-primary btn-lg btn-block" style="background-color: #B43CCA;">Enviar</button>
+                                <button type="submit" class="btn colorprin btn-lg btn-block">Enviar</button>
                             </form>
                         </div><hr>
                         <div class="col-12 col-lg-6 shadow embed-responsive embed-responsive-1by1">
@@ -228,7 +240,7 @@
                 </div>
                 <div class="content-foo">
                     <h4>E-mail</h4>
-                    <p>lacomita@gmail.com</p>
+                    <p>sport.lacomita19@gmail.com</p>
                 </div>
                 <div class="content-foo">
                     <h4>Dirección (Tienda)</h4>
