@@ -38,6 +38,7 @@
                           <th scope="col">Orden</th>
                           <th scope="col">Anticipo</th>
                           <th scope="col">Entrega</th>
+                          <th scope="col">Observaciones</th>
                           <th scope="col">Opciones</th>
                         </tr>
                       </thead>
@@ -55,8 +56,11 @@
                           @else
                               <td>{{ $carrito->fecha_entrega }}</td>
                           @endif
+                          <td>{{ $carrito->observaciones }}</td>
                           <td>
                               <a href="{{ route('ver.pedido.pendiente', $carrito->id) }}" class="btn colorcard btn-block"> Ver y Concretar</a>
+
+                              <a href="{{ route('ver.pedido.baja', $carrito->id) }}" class="btn btn-block" style="background-color: #49d2e8;"> Dar de baja</a>
                           </td>
                       </tr>
                       @endforeach

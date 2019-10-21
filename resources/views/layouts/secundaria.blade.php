@@ -18,7 +18,7 @@
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         @yield('styles')
-         @stack('scripts')
+
     </head>
     <body>
     <div id="app">
@@ -100,5 +100,8 @@
         <script src="/sweetalert/sweetalert.min.js"></script>
         <!-- ./wrapper -->
         @include('sweet::alert')
+
+        @stack('scripts')
+
     </body>
 </html>

@@ -4,6 +4,8 @@ namespace Lacomita\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Lacomita\Models\CarritoDetalle;
+use Auth;
+
 class CarritoDetalleController extends Controller
 {
     /**
@@ -41,16 +43,23 @@ class CarritoDetalleController extends Controller
         ]);
 
         //dd($request->all());
-        $cartDetail = new CarritoDetalle();
-        $cartDetail->carrito_id = auth()->user()->carrito->id;
-        $cartDetail->producto_id = $request['producto_id'];
-        $cartDetail->cantidad = $request['cantidad'];
-        $cartDetail->descripcion = $request['descripcion'];
-        $cartDetail->save();
+        if(Auth::guest())
+        {
+            \Alert::error('Tienes que registrarte e autentificarte primero!', 'Oops!')->persistent("Cerrar");
+            return redirect('/login');
+        }else{
+            $cartDetail = new CarritoDetalle();
+            $cartDetail->carrito_id = auth()->user()->carrito->id;
+            $cartDetail->producto_id = $request['producto_id'];
+            $cartDetail->cantidad = $request['cantidad'];
+            $cartDetail->descripcion = $request['descripcion'];
+            $cartDetail->save();
 
-        $cartDetail->tallas()->attach($request->get('tallas'));
+            $cartDetail->tallas()->attach($request->get('tallas'));
 
-        return back()->with('success', 'Producto agregado al carrito!');
+            return redirect('/#producto')->with('success', 'Producto agregado al carrito!');
+        }
+
     }
 
     /**

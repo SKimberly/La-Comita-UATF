@@ -77,6 +77,10 @@ function(){
 	Route::get('pedidos/{id}/ver','CarritoController@show')->name('ver.pedido.pendiente');
 	Route::post('/pedidos', 'CarritoController@store')->name('pedido.cancelar');
 
+	//pARA DAR DE BAJA UN PEDIDO y que el cliente vuelva a tener los mismos producto en el carrito
+	Route::get('pedidos/{id}/baja','CarritoController@edit')->name('ver.pedido.baja');
+
+
 });
 
 

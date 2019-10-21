@@ -50,6 +50,7 @@ class CarritoController extends Controller
         $carrito = Carrito::where('id',$request['carrito_id'])->first();
         $carrito->anticipo = $request['anticipo'];
         $carrito->fecha_entrega = $request['fecha_entrega'];
+        $carrito->observaciones = $request['observaciones'];
         $carrito->save();
         return redirect('/admin/pedidos')->with('success', "Excelente... ahora prepararemos el pedido!");
     }
@@ -79,8 +80,20 @@ class CarritoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        //
+    {   //dd($id);
+
+        $carrito = Carrito::find($id);
+        if($carrito->anticipo !== 0)
+        {
+            \Alert::error('No se puede dar de baja por que ya se realizo un anticipo!', 'Oops!')->persistent("Cerrar");
+            return redirect('admin/pedidos');
+        }
+        \DB::table('carritos')->where('user_id', $carrito->user_id)->where('estado','Activo')->delete();
+        $carrito->estado = 'Activo';
+        $carrito->save();
+
+
+        return back()->with('success', "El pedido se dio de baja. Ahora el cliente puede volver a verlo en su carrito de compras!");
     }
 
     /**

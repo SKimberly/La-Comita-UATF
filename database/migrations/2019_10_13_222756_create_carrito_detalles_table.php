@@ -17,7 +17,7 @@ class CreateCarritoDetallesTable extends Migration
             $table->increments('id');
 
             $table->integer('carrito_id')->unsigned();
-            $table->foreign('carrito_id')->references('id')->on('carritos');
+            $table->foreign('carrito_id')->references('id')->on('carritos')->onDelete('cascade');
 
             $table->integer('producto_id')->unsigned();
             $table->foreign('producto_id')->references('id')->on('productos');

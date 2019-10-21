@@ -18,7 +18,7 @@
     		                <input class="form-control bg-light shadow-sm {{ $errors->has('anticipo') ? ' is-invalid' : 'border-0' }}"
     		                id="anticipo"
     		                name="anticipo"
-    		                placeholder="Ingrese el monto de anticipo" type="number" >
+    		                placeholder="Ingrese el monto de anticipo" type="number" value="{{ old('anticipo',$carrito->anticipo) }}">
     		                @if ($errors->has('anticipo'))
     		                    <span class="invalid-feedback" role="alert">
     		                        <strong>{{ $errors->first('anticipo') }}</strong>
@@ -32,12 +32,18 @@
                         <input class="form-control bg-light shadow-sm {{ $errors->has('fecha_entrega') ? ' is-invalid' : 'border-0' }}"
                         id="fecha_entrega"
                         name="fecha_entrega"
-                        placeholder="Ingrese la fecha de entrega" value="1" type="date" >
+                        placeholder="Ingrese la fecha de entrega" value="{{ old('fecha_entrega',$carrito->fecha_entrega) }}" type="date" >
                         @if ($errors->has('fecha_entrega'))
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $errors->first('fecha_entrega') }}</strong>
                             </span>
                         @endif
+                    </div>
+                 </div>
+                 <div class="form-group row">
+                    <label for="observaciones" class="col-sm-6 col-form-label">Observaciones:</label>
+                    <div class="col-sm-6">
+                        <textarea class="form-control" rows="2" name="observaciones" id="observaciones"  placeholder="¿Alguna observación?">{{ old('observaciones',$carrito->observaciones) }}</textarea>
                     </div>
                  </div>
 

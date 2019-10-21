@@ -19,6 +19,7 @@ class CreateCarritosTable extends Migration
             $table->unsignedInteger('anticipo')->default(0);
             $table->date('fecha_entrega')->nullable();
             $table->string('estado');
+            $table->string('observaciones')->default('ninguno');
 
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');

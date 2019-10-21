@@ -76,5 +76,17 @@
       placeholder: "Seleccione las tallas"
     })
   })
+
+    if(window.location.hash === '#create')
+    {
+        $('#modalCarrito').modal('show');
+    }
+    $('#modalCarrito').on('hide.bs.modal', function(){
+      //console.log('El modal se cierra');
+      window.location.hash = '#';
+    });
+    $('#modalCarrito').on('show.bs.modal', function(){
+       window.location.hash = '#create';
+    });
 </script>
 @endpush

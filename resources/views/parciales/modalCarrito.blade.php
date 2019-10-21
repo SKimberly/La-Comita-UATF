@@ -9,7 +9,7 @@
       </div>
       <div class="modal-body">
          	<form class="bg-white shadow rounded py-3 px-4"
-                 method="POST" action="{{ route('carrito.store') }}">
+                 method="POST" action="{{ route('carrito.store','#create') }}">
                  @csrf
                  <input type="hidden" value="{{ $producto->id }}" name="producto_id">
                  <div class="form-group row">
@@ -52,20 +52,3 @@
     </div>
   </div>
 </div>
-
-{{--
-<script>
-    if(window.location.hash === '#create')
-    {
-       	$('#myModal').modal('show');
-    }
-    $('#myModal').on('hide.bs.modal', function(){
-      //console.log('El modal se cierra');
-      window.location.hash = '#';
-    });
-    $('#myModal').on('show.bs.modal', function(){
-       window.location.hash = '#create';
-    });
-</script>
-
- --}}

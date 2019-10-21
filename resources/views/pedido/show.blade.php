@@ -26,7 +26,13 @@
     <div class="container-fluid">
       <div class="col-12 col-sm-10 col-lg-3 mx-auto">
           <button class="btn colorprin btn-block" data-toggle="modal" data-target="#modalCancelar">
-              <i class="fas fa-comment-dollar"></i> Concretar el Pago
+              <i class="fas fa-comment-dollar"></i>
+              @if($carrito->anticipo !== 0)
+                  Editar Pago
+              @else
+                  Concretar el pago
+
+              @endif
           </button>
       </div>
       <div class="card card-info">
