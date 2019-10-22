@@ -83,7 +83,8 @@ function(){
 
     //Para la Cotizaciones el el usuario ya tiene que estar registrado y athenticado
 	Route::resource('cotizaciones','CotizacionController');
-	Route::post('cotizaciones/fotos','CotizacionController@store');
+	//Route::post('cotizaciones/fotos','CotizacionController@store');
+	Route::get('cotizaciones/{cotizacion}/edit','CotizacionController@edit')->name('admin.cotizaciones.edit');
 
 });
 

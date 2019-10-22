@@ -17,8 +17,8 @@ class CreateCotizacionesTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->integer('cantidad');
-            $table->text('descripcion');
+            $table->integer('cantidad')->nullable();
+            $table->text('descripcion')->nullable();
             $table->timestamps();
         });
     }

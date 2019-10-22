@@ -8,6 +8,7 @@ use Lacomita\User;
 class Cotizacion extends Model
 {
     protected $table = 'cotizaciones';
+    protected $guarded = [];
     //una cotizacion tiene muchas fotos--> Relacion de uno a muchos
     public function fotos(){
     	return $this->hasMany(CotizacionFoto::class);

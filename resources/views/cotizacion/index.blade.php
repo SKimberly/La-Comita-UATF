@@ -22,13 +22,17 @@
 @endsection
 
 @section('content')
+@include('cotizacion.create')
 <section class="content">
 	<div class="container-fluid">
 		<div class="card card-info">
 			<div class="card-header" >
-				<a href="{{ route('cotizaciones.create') }}" class="btn" style="background-color: rgb(18, 216, 250);">
+				{{-- <a href="{{ route('cotizaciones.create') }}" class="btn" style="background-color: rgb(18, 216, 250);">
 					<i class="fas fa-calculator"></i> Nueva Cotización
-				</a>
+				</a> --}}
+				<button type="button" class="btn pull-right" style="background-color: rgb(18, 216, 250);" data-toggle="modal" data-target="#modalCotizacion">
+				   <i class="fas fa-calculator"></i> Nueva Cotización
+				</button>
 			</div>
 			<div class="card-body">
 					<div class="table-responsive">
@@ -76,5 +80,31 @@
 </section>
 @endsection
 
+
+@push('scripts')
+@unless(request()->is('admin/cotizaciones/*'))
+<script>
+	$(function () {
+	    //Initialize Select2 Elements
+	    $('.select2').select2({
+	      theme: "classic",
+	    })
+	  });
+
+    /*if(window.location.hash === '#create')
+    {
+       	$('#modalCotizacion').modal('show');
+    }
+    $('#modalCotizacion').on('hide.bs.modal', function(){
+      //console.log('El modal se cierra');
+      window.location.hash = '#';
+    });
+    $('#modalCotizacion').on('shown.bs.modal', function(){
+
+       window.location.hash = '#create';
+    });*/
+</script>
+@endunless
+@endpush
 
 

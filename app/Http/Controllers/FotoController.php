@@ -20,7 +20,7 @@ class FotoController extends Controller
     {
         $this->validate($request, [
 
-            'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
 
         ]);
     	// 1) Guardamos la imagen en nuestro proyecto
