@@ -78,28 +78,13 @@
               </p>
             </a>
           </li>
-          <li class="nav-item has-treeview ">
-            <a href="#" class="nav-link ">
-              <img src="{{ asset('img/sidebar/cotizacion.svg') }}" alt="calendario" class="nav-icon">
+          <li class="nav-item">
+            <a href="{{ route('cotizaciones.index') }}" class="nav-link {{ request()->is('admin/cotizaciones*') ? 'active' : '' }}">
+              <img src="{{ asset('img/sidebar/cotizacion.svg') }}" alt="pedidos" class="nav-icon">
               <p>
                   Cotizaciones
-                <i class="right fas fa-angle-left"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="#" class="nav-link ">
-                  <i class="fas fa-scroll"></i>
-                  <p>Ver lista</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="fas fa-cash-register"></i>
-                  <p>Agregar nuevo</p>
-                </a>
-              </li>
-            </ul>
           </li>
           <li class="nav-item has-treeview ">
             <a href="#" class="nav-link ">

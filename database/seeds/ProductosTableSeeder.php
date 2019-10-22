@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Lacomita\Material;
 use Lacomita\Models\Categoria;
 use Lacomita\Models\Producto;
 use Lacomita\Models\ProductoFoto;
@@ -17,7 +18,8 @@ class ProductosTableSeeder extends Seeder
     {
     	/*factory(Categoria::class, 5)->create();
     	factory(Producto::class, 10)->create();
-    	factory(ProductoFoto::class, 20)->create();*/
+        factory(ProductoFoto::class, 20)->create();*/
+    	factory(Material::class, 30)->create();
 
         $categoria = factory(Categoria::class, 5)->create();
 

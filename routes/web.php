@@ -81,6 +81,10 @@ function(){
 	Route::get('pedidos/{id}/baja','CarritoController@edit')->name('ver.pedido.baja');
 
 
+    //Para la Cotizaciones el el usuario ya tiene que estar registrado y athenticado
+	Route::resource('cotizaciones','CotizacionController');
+	Route::post('cotizaciones/fotos','CotizacionController@store');
+
 });
 
 

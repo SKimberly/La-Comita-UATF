@@ -2,10 +2,11 @@
 
 namespace Lacomita;
 
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 use Lacomita\Models\Carrito;
+use Lacomita\Models\Cotizacion;
 
 class User extends Authenticatable
 {
@@ -58,5 +59,11 @@ class User extends Authenticatable
             $carrito->save();
             return $carrito;
         }
+    }
+
+    //relación de uno a muchos --> Un usuario puede tener muchas cotizaciones
+    public function cotizaciones()
+    {
+        return $this->hasMany(Cotizacion::class);
     }
 }
