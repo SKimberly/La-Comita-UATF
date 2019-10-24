@@ -42861,3 +42861,17 @@ body {
   border-color: #ff66cb;
 }
 
+.select2-container--classic .select2-search--inline .select2-search__field {
+  outline: 0;
+  box-shadow: none;
+  width: auto !important;
+}
+
+.cotizfoto {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  display: block;
+}
+

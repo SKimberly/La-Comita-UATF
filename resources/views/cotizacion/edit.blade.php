@@ -24,13 +24,29 @@
 @section('content')
 <section class="content">
 	<div class="container-fluid">
-		<div class="col-12 col-sm-10 col-lg-10 mx-auto">
+		 <div class="row justify-content-center">
+		<div class="col-md-10">
 		<div class="card card-info">
 			<div class="card-header" >
 			</div>
 			<div class="card-body">
+				@if($cotizacion->fotos->count())
+				<div class="form-group">
+					<div class="card-deck">
+						@foreach($cotizacion->fotos as $foto)
+							<form method="POST" action="{{ route('cotizaciones.destroy',$foto->id) }}" class="">
+								@csrf @method('DELETE')
+								<div class="card" style="width: 18rem;">
+								   <button class="btn btn-danger btn-xs" style="position:absolute" type="submit"><i class="fas fa-times-circle"></i></button>
+								   <img src="{{ url($foto->imagen) }}" alt="" class="card-img-top cotizfoto">
+								</div>
+							</form>
+						@endforeach
+					</div>
+				</div>
+				@endif
 	            <form method="POST" action="{{ route('cotizaciones.update',$cotizacion) }}" class="bg-white shadow rounded py-3 px-4 was-validated" enctype="multipart/form-data" >
-				@csrf
+				@csrf @method('PUT')
 			        <div class="form-group">
 			            <label for="producto">Nombre del producto:</label>
 						 <select class="form-control select2 {{ $errors->has('productos') ? ' is-invalid' : 'border-1' }}" name="productos[]" multiple="multiple" style="width: 100%;"   data-placeholder="Seleccione los productos" >
@@ -45,7 +61,7 @@
 			            @endif
 			        </div>
 			        <div class="form-group row">
-						  <label for="cantidad" class="col-sm-2 col-form-label">Cantidad:</label>
+						  <label for="cantidad" class="col-sm-3 col-form-label">Cantidad Total:</label>
 						  <div class="col-sm-3">
 				                <input class="form-control bg-light shadow-sm {{ $errors->has('cantidad') ? ' is-invalid' : 'border-0' }}"
 				                id="cantidad"
@@ -59,10 +75,10 @@
 	                      </div>
 
 						  <label for="tallas" class="col-sm-2 col-form-label">Tallas:</label>
-						  <div class="col-sm-5">
+						  <div class="col-sm-4">
 		                  <select class="form-control select2 {{ $errors->has('tallas') ? ' is-invalid' : 'border-1' }}" name="tallas[]" multiple="multiple" style="width: 100%;"   data-placeholder="Seleccione las tallas" >
 								@foreach($tallas as $talla)
-									<option {{ collect(old('tallas'))->contains($talla->id) ? 'selected' : '' }} value="{{ $talla->id }}">{{ $talla->nombre }}</option>
+									<option {{ collect(old('tallas', $cotizacion->tallas->pluck('id')))->contains($talla->id) ? 'selected' : '' }} value="{{ $talla->id }}">{{ $talla->nombre }}</option>
 								@endforeach
 		                  </select>
 			                @if ($errors->has('tallas'))
@@ -73,13 +89,13 @@
 				          </div>
 		            </div>
 					<div class="form-group">
-						<div class="dropzone"></div>
+						<div class="dropzone" style="background-color:#49d2e8; "></div>
 					</div>
 					<div class="form-group">
 			            <label for="materiales">Material del producto:</label>
 						 <select class="form-control select2 {{ $errors->has('materiales') ? ' is-invalid' : 'border-1' }}" name="materiales[]" multiple="multiple" style="width: 100%;"   data-placeholder="Seleccione los materiales" required >
 								@foreach($materiales as $material)
-									<option {{ collect(old('materiales'))->contains($material->id) ? 'selected' : '' }} value="{{ $material->id }}">{{ $material->nombre }}</option>
+									<option {{ collect(old('materiales', $cotizacion->materiales->pluck('id')))->contains($material->id) ? 'selected' : '' }} value="{{ $material->id }}">{{ $material->nombre }}</option>
 								@endforeach
 		                  </select>
 		                @if ($errors->has('materiales'))
@@ -90,7 +106,7 @@
 			        </div>
 		            <div class="form-group">
 	                    <label for="descripcion">Descripción del producto</label>
-	                    <textarea class="form-control {{ $errors->has('descripcion') ? ' is-invalid' : 'border-1' }}" rows="2" name="descripcion" id="descripcion"  placeholder="Ingrese una breve descripción del producto" required>{{ old('descripcion') }}</textarea>
+	                    <textarea class="form-control {{ $errors->has('descripcion') ? ' is-invalid' : 'border-1' }}" rows="2" name="descripcion" id="descripcion"  placeholder="Ingrese una breve descripción del o los productos" required>{{ old('descripcion',$cotizacion->descripcion) }}</textarea>
 	                    @if ($errors->has('descripcion'))
 			                <span class="invalid-feedback" role="alert">
 			                    <strong>{{ $errors->first('descripcion') }}</strong>
@@ -108,6 +124,7 @@
 	      	</div>
 		</div>
 		</div>
+	</div>
 	</div>
 </section>
 @endsection
@@ -129,7 +146,7 @@
 	  });
 
 	var myDropzone = new Dropzone('.dropzone', {
-		url: '/admin/cotizaciones/fotos',
+		url: '/admin/cotizaciones/{{ $cotizacion->id }}/fotos',
 		paramName: 'foto',
 		acceptedFiles: 'image/*',
 		maxFilesize: 1,
@@ -137,7 +154,8 @@
 		headers: {
 			'x-CSRF-TOKEN': '{{ csrf_token() }}'
 		},
-		dictDefaultMessage: 'Arrastra las fotos aquí para enviarlas'
+		dictDefaultMessage: 'Arrastra las fotos aquí para enviarlas',
+		dictMaxFilesExceeded: 'Solo se permiten subir 3 imágenes.'
 	});
 	myDropzone.on('error', function(file, res){
 		var msj = res.errors.foto[0];

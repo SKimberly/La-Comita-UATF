@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Lacomita\Material;
+use Lacomita\Models\Material;
 use Lacomita\Models\Categoria;
 use Lacomita\Models\Producto;
 use Lacomita\Models\ProductoFoto;

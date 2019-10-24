@@ -4,9 +4,9 @@ namespace Lacomita\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Lacomita\Material;
 use Lacomita\Models\Cotizacion;
 use Lacomita\Models\CotizacionFoto;
+use Lacomita\Models\Material;
 use Lacomita\Models\Producto;
 use Lacomita\Models\Talla;
 
@@ -59,7 +59,7 @@ class CotizacionController extends Controller
         //return redirect('cotizacion.edit',compact('cotizacion'));
 
     }
-    /*public function store(Request $request)
+    public function storefotos(Request $request, $id)
     {
         //dd($request->all());
         //aqui se guarda en l aplicacion carpeta storage y en la carpteta public con un simbolink link a la carpeta public del proyecto
@@ -68,9 +68,9 @@ class CotizacionController extends Controller
         //Aqui se guarda a la base de datos con el metodo Storage propio de laravel
         CotizacionFoto::create([
             'imagen' => Storage::url($foto),
-            'cotizacion_id' => 1
+            'cotizacion_id' => $id
         ]);
-    }*/
+    }
 
     /**
      * Display the specified resource.
@@ -108,7 +108,17 @@ class CotizacionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $cotizacion = Cotizacion::findOrFail($id);
+        $cotizacion->cantidad = $request['cantidad'];
+        $cotizacion->descripcion = $request['descripcion'];
+        $cotizacion->save();
+
+        $cotizacion->productos()->sync($request->get('productos'));
+        $cotizacion->tallas()->sync($request->get('tallas'));
+        $cotizacion->materiales()->sync($request->get('materiales'));
+
+        return redirect('admin/cotizaciones')->with('success', "Excelente... ahora espera la respuesta de la cotización!");
+
     }
 
     /**
@@ -119,6 +129,35 @@ class CotizacionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $foto = CotizacionFoto::find($id);
+        //Aqui eliminamos la foto de la base de datos
+        $foto->delete();
+
+        //Aqui eliminamos la foto de nuestra carpeta del sitio Web de la carpeta "STORAGE"
+        $rutafoto = str_replace('storage', 'public', $foto->imagen);
+        Storage::delete($rutafoto);
+
+        return back()->with('success', "Foto de la cotización eliminada!");
+    }
+
+    public function eliminartodo($id)
+    {
+        $cotizacion = Cotizacion::findOrFail($id);
+
+        $cotizacion->productos()->detach();
+        $cotizacion->tallas()->detach();
+        $cotizacion->materiales()->detach();
+
+        foreach($cotizacion->fotos as $foto)
+        {
+            $foto->delete();
+            $rutafoto = str_replace('storage', 'public', $foto->imagen);
+            Storage::delete($rutafoto);
+        }
+
+        $cotizacion->delete();
+
+        return redirect('admin/cotizaciones')->with('success', "La cotización fue eliminada!");
+
     }
 }

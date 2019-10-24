@@ -48,28 +48,38 @@
 								</tr>
 							</thead>
 							<tbody>
-								{{--  @foreach($categorias as $categoria)
+							@foreach($cotizaciones as $key => $cotizacion)
 								<tr>
-									<th scope="row">{{ $categoria->id }}</th>
-									<td>{{ $categoria->nombre }}</td>
-									<td>{{ $categoria->descripcion }}</td>
-									<td class="text-center">
-										<img src="{{ asset($categoria->urlcate) }}" class="img-fluid" style="width: 30%;" alt="Categoria Foto">
-									</td>
-									<td>{{ $categoria->created_at }}</td>
+									<th scope="row">{{ ++$key }}</th>
+									<td>{{ $cotizacion->user->fullname }}</td>
 									<td>
-										<a href="{{ route('admin.categorias.edit',$categoria->id) }}" class="btn btn-sm btn-block btn-info">
-											Editar
-										</a>
-										<form method="post" action="{{ route('admin.categorias.delete', $categoria->id) }}">
+									@foreach($cotizacion->productos as $producto)
+										{{ $producto->nombre }} /
+									@endforeach
+									</td>
+									<td>
+										@foreach($cotizacion->tallas as $talla)
+											{{ $talla->nombre }} /
+										@endforeach
+									</td>
+									<td class="text-center">{{ $cotizacion->cantidad }}</td>
+									<td>
+										<form method="post" action="{{ route('admin.cotizaciones.eliminar', $cotizacion->id) }}" style="display:inline">
 											@method('DELETE') @csrf
-											<button class="btn btn-sm btn-block btn-danger" type="submit">
+											<a href="{{ route('cotizaciones.edit',$cotizacion->id) }}" class="btn btn-sm btn-block colorcard">
+												@if($cotizacion->tallas->count())
+													Editar
+												@else
+													COMPLETAR
+												@endif
+											</a>
+											<button class="btn btn-sm btn-block btn-danger" type="submit" onclick="return confirm('¿Estás seguro de eliminar esta cotización?')">
 												Eliminar
 											</button>
 										</form>
 									</td>
 								</tr>
-								@endforeach--}}
+							@endforeach
 							</tbody>
 						</table>
 						{{ $cotizaciones->links() }}

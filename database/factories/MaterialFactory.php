@@ -1,7 +1,7 @@
 <?php
 
 use Faker\Generator as Faker;
-use Lacomita\Material;
+use Lacomita\Models\Material;
 
 $factory->define(Material::class, function (Faker $faker) {
     return [

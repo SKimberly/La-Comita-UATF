@@ -1,6 +1,6 @@
 <?php
 
-namespace Lacomita;
+namespace Lacomita\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

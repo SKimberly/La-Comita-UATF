@@ -14,7 +14,8 @@ class UsersTableSeeder extends Seeder
     	User::create([
     		'fullname' => 'silvana marquina',
     		'cedula' => '12345678',
-    		'telefono' => '78630742',
+            'telefono' => '78630742',
+    		'tipo' => 'SuperAdmin',
     		'email' => 'kimi_123@gmail.com',
     		'password' => bcrypt('secret')
     	]);

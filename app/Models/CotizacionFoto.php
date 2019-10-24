@@ -14,12 +14,5 @@ class CotizacionFoto extends Model
     	return $this->belongsTo(Cotizacion::class);
     }
 
-    // Accesor ----- con url  getXAttibute()
-    public function getFotodesAttribute()
-    {
-    	if(substr($this->imagen, 0, 4) === "http"){
-    		return $this->imagen;
-    	}
-    	return '/img/cotizaciones/'.$this->imagen;
-    }
+
 }
