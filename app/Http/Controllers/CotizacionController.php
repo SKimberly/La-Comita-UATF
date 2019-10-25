@@ -80,7 +80,9 @@ class CotizacionController extends Controller
      */
     public function show($id)
     {
-        //
+        $cotizacion = Cotizacion::findOrFail($id);
+
+        return view('cotizacion.show', compact('cotizacion'));
     }
 
     /**
@@ -109,6 +111,7 @@ class CotizacionController extends Controller
     public function update(Request $request, $id)
     {
         $cotizacion = Cotizacion::findOrFail($id);
+        $cotizacion->codigo = $id.'/'.$cotizacion->created_at->format('Y-M-d');
         $cotizacion->cantidad = $request['cantidad'];
         $cotizacion->descripcion = $request['descripcion'];
         $cotizacion->save();

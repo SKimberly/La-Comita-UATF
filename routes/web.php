@@ -87,6 +87,11 @@ function(){
 	Route::post('cotizaciones/{id}/fotos','CotizacionController@storefotos');
 	Route::delete('cotizaciones/{id}/eliminar','CotizacionController@eliminartodo')->name('admin.cotizaciones.eliminar');
 
+	//Rutas para el envio de notificaciones vía mensajes
+	Route::resource('mensajes','MensajeController');
+	Route::patch('mensajes/{id}/msj', 'MensajeController@marcar')->name('mensajes.leer');
+
+
 });
 
 

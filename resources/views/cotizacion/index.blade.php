@@ -76,6 +76,9 @@
 											<button class="btn btn-sm btn-block btn-danger" type="submit" onclick="return confirm('¿Estás seguro de eliminar esta cotización?')">
 												Eliminar
 											</button>
+												<a href="{{ route('cotizaciones.show',$cotizacion->id) }}" class="btn btn-sm btn-block colorcard">
+													Ver cotización
+											</a>
 										</form>
 									</td>
 								</tr>

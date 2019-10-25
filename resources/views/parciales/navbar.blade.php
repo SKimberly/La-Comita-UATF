@@ -46,11 +46,13 @@
         </li>
       <!-- Messages Dropdown Menu -->
       <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="fas fa-comments side" style="font-size: 2rem;"></i>
-          <span class="badge badge-warning navbar-badge">3</span>
+        <a class="nav-link" href="{{ route('mensajes.index') }}">
+            <i class="fas fa-comments side" style="font-size: 2rem;"></i>
+            @if ($cuantos = Auth::user()->unreadNotifications->count())
+              <span class="badge badge-warning navbar-badge">{{ $cuantos }}</span>
+            @endif
         </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+        {{-- data-toggle="dropdown" <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <a href="#" class="dropdown-item">
             <!-- Message Start -->
             <div class="media">
@@ -100,7 +102,7 @@
           </a>
           <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
-        </div>
+        </div> --}}
       </li>
       <!-- Notifications Dropdown Menu -->
       <li class="nav-item dropdown">
