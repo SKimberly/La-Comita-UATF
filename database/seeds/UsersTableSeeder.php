@@ -19,5 +19,23 @@ class UsersTableSeeder extends Seeder
     		'email' => 'kimi_123@gmail.com',
     		'password' => bcrypt('secret')
     	]);
+
+        User::create([
+            'fullname' => 'Emilio Salas',
+            'cedula' => '87654321',
+            'telefono' => '70000000',
+            'tipo' => 'Administrador',
+            'email' => 'sport.lacomita19@gmail.com',
+            'password' => bcrypt('secret')
+        ]);
+
+        User::create([
+            'fullname' => 'Juancito Pinto',
+            'cedula' => '87654311',
+            'telefono' => '70000011',
+            'tipo' => 'Cliente',
+            'email' => 'kimi.uatf@gmail.com',
+            'password' => bcrypt('secret')
+        ]);
     }
 }

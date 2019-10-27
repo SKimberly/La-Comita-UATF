@@ -120,7 +120,7 @@
 @endsection
 
 @push('scripts')
-@unless(request()->is('admin/cotizaciones/*'))
+@unless(request()->is('admin/cotizaciones/'.$cotizacion->id.'/*'))
 <script>
     if(window.location.hash === '#enviar')
     {
@@ -131,7 +131,7 @@
       window.location.hash = '#';
     });
     $('#modalRes').on('shown.bs.modal', function(){
-
+       $('#mensaje').focus();
        window.location.hash = '#enviar';
     });
 </script>

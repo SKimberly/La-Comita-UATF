@@ -95,7 +95,6 @@
 
 
 @push('scripts')
-@unless(request()->is('admin/cotizaciones/*'))
 <script>
 	$(function () {
 	    //Initialize Select2 Elements
@@ -103,8 +102,10 @@
 	      theme: "classic",
 	    })
 	  });
-
-    /*if(window.location.hash === '#create')
+</script>
+@unless(request()->is('admin/cotizaciones/'))
+<script>
+    if(window.location.hash === '#crear')
     {
        	$('#modalCotizacion').modal('show');
     }
@@ -113,9 +114,8 @@
       window.location.hash = '#';
     });
     $('#modalCotizacion').on('shown.bs.modal', function(){
-
-       window.location.hash = '#create';
-    });*/
+       window.location.hash = '#crear';
+    });
 </script>
 @endunless
 @endpush

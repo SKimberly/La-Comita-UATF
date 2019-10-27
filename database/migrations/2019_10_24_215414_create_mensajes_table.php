@@ -15,7 +15,7 @@ class CreateMensajesTable extends Migration
     {
         Schema::create('mensajes', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('cotiza_id');
+            $table->string('cotiza_id')->nullable();
             $table->unsignedInteger('envio_id');
             $table->unsignedInteger('recibido_id');
             $table->text('contenido');

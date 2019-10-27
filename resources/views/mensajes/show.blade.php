@@ -3,6 +3,7 @@
 @section('titulo','Mensaje')
 
 @section('cabecera')
+@include('cotizacion.modalrescli')
 <div class="content-header">
     <div class="container-fluid">
       	<div class="row mb-2">
@@ -25,7 +26,7 @@
 <section class="content">
     <div class="container-fluid">
 		<div class="row justify-content-center">
-			<div class="col-md-6">
+			<div class="col-md-10">
 				<div class="card card-info">
 					<div class="card-header text-center">
 						MENSAJES NO LEIDOS
@@ -35,9 +36,12 @@
 					</div>
 					<div class="card-footer" style="background-color: #49d2e8;">
 						<div class="d-flex flex-row justify-content-center">
-							<strong>Código de cotizacion: </strong> {{ $coticodigo[0] }}
+							<strong>Código de cotizacion: </strong> {{ $coticodigo }}
 							<span class="ml-auto">
 								<a href="{{ route('mensajes.index') }}" class="btn btn-sm colorcard" > Volver</a>
+								<button type="button" class="btn btn-block colorcard" data-toggle="modal" data-target="#modalRescli">
+								   <i class="fas fa-comment"></i> RESPONDER
+								</button>
 							</span>
 						</div>
 					</div>

@@ -33,8 +33,8 @@ class MensajeEnviado extends Notification
     public function via($notifiable)
     {
         //return ['mail'];
-        //aqui defino q estoy enviando la notificacion via base de datos
-        return ['database'];
+        //aqui defino q estoy enviando la notificacion via base de datos y E-mail
+        return ['database','mail'];
     }
 
     /**
@@ -46,9 +46,11 @@ class MensajeEnviado extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->greeting('¡Hola!')
+                    ->subject('Mensaje recibido desde el sitio web de Sport La Comita')
+                    ->line('Has recibido un mensaje.')
+                    ->action('Click aqui para ver el mensaje', route('mensajes.show', $this->mensaje->id))
+                    ->line('Gracias por utilizar nuestra aplicación.');
     }
 
     /**

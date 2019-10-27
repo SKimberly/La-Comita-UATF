@@ -41,7 +41,9 @@
         <li class="nav-item ">
           <a class="nav-link"  href="{{ route('carrito.detalle') }}">
             <i class="fas fa-cart-arrow-down side" style="font-size: 2rem;"></i>
-            <span class="badge badge-warning navbar-badge">{{ auth()->user()->carrito->detalles->count() }}</span>
+            @if($nummsj = auth()->user()->carrito->detalles->count())
+              <span class="badge badge-warning navbar-badge">{{ $nummsj }}</span>
+            @endif
           </a>
         </li>
       <!-- Messages Dropdown Menu -->

@@ -78,9 +78,11 @@
                   <div class="text-center">
                     <form method="POST" action="{{ route('realizar.orden') }}">
                       @csrf
-                      <button class="btn colorcard">
-                        <i class="fas fa-money-check-alt"></i> Realizar pedido
-                      </button>
+                      @if($detalles->count() !== 0)
+                          <button class="btn colorcard">
+                            <i class="fas fa-money-check-alt"></i> Realizar pedido
+                          </button>
+                      @endif
                     </form>
                   </div>
                 </div>

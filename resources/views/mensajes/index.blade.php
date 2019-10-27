@@ -38,7 +38,7 @@
 								</a>
 								<form method="POST" action="{{ route('mensajes.leer', $msjnoleido->id) }}" class="pull-right">
 									@csrf @method('PATCH')
-									<button class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="right" title="Marcar como leido"><i class="fas fa-envelope-open-text"></i></button>
+									<button class="btn colorcard btn-xs" data-toggle="tooltip" data-placement="right" title="Marcar como leido"><i class="fas fa-envelope-open-text"></i></button>
 								</form>
 							</li>
 						@endforeach

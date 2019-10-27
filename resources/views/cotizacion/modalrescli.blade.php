@@ -1,4 +1,4 @@
-<div class="modal fade" id="modalRes" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalRescli" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header colorcard">
@@ -8,13 +8,12 @@
         </button>
       </div>
         <div class="modal-body">
-            <form method="POST" action="{{ route('mensajes.store','#enviar') }}" class="bg-white shadow rounded py-3 px-4 was-validated" enctype="multipart/form-data" >
+            <form method="POST" action="{{ route('mensajes.store','#enviarcli') }}" class="bg-white shadow rounded py-3 px-4 was-validated" enctype="multipart/form-data" >
 			@csrf
+				<input type="hidden" name="cotiza_id" value="{{ $coticodigo[0] }}">
 				<div class="form-group">
-					<input type="hidden" name="cotiza_id" value="{{ $cotizacion->id }}">
-					<input type="hidden" name="recibido_id" value="{{ $cotizacion->user->id }}">
-					<label for="mensaje">Escribe aqui tu respuesta completa:</label>
-			        <textarea class="form-control" rows="3" name="mensaje" id="mensaje"  placeholder="Ingrese su respuesta completa" required>{{ old('mensaje') }}</textarea>
+					<label for="mensaje">Escribe aqui tu respuesta hacia "Sport La Comita"</label>
+			        <textarea class="form-control" rows="3" name="mensaje" id="mensaje"  placeholder="Ingrese su respuesta completa" >{{ old('mensaje') }}</textarea>
 	                @if ($errors->has('mensaje'))
 		                <span class="invalid-feedback" role="alert">
 		                    <strong>{{ $errors->first('mensaje') }}</strong>

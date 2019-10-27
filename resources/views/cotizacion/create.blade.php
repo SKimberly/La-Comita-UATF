@@ -8,11 +8,11 @@
         </button>
       </div>
         <div class="modal-body">
-            <form method="POST" action="{{ route('cotizaciones.store') }}" class="bg-white shadow rounded py-3 px-4 was-validated" enctype="multipart/form-data" >
+            <form method="POST" action="{{ route('cotizaciones.store','#crear') }}" class="bg-white shadow rounded py-3 px-4 was-validated" enctype="multipart/form-data" >
 			@csrf
 
 				<div class="form-group">
-		            <label for="producto">Seleccione los productos:</label>
+		            <label for="producto">Seleccione uno o varios productos:</label>
 					 <select class="form-control select2 {{ $errors->has('productos') ? ' is-invalid' : 'border-1' }}" name="productos[]" multiple="multiple" style="width: 100%;"   data-placeholder="Seleccione los productos"  >
 							@foreach($productos as $producto)
 								<option {{ collect(old('productos'))->contains($producto->id) ? 'selected' : '' }} value="{{ $producto->id }}">{{ $producto->nombre }}</option>

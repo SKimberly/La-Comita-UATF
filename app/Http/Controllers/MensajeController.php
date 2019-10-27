@@ -47,23 +47,41 @@ class MensajeController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'cotiza_id' => 'required',
-            'recibido_id' => 'required|exists:users,id',
             'mensaje' => 'required'
         ]);
+        //Aqui verifico si existe la variable recibido_id
+        //E n otras palabras si es del "Admin al cliente " o del "Cliente al admin"
+        if(isset($request->recibido_id)){
+            $this->validate($request, [
+                'cotiza_id' => 'required',
+                'recibido_id' => 'required|exists:users,id',
+            ]);
+            //aqui se recibe el usuario para enviar la notificacion
+            $recibido = User::find($request->recibido_id);
 
-        $mensaje = Mensaje::create([
-            'cotiza_id' => $request->cotiza_id,
-            'envio_id' => auth()->id(),
-            'recibido_id' => $request->recibido_id,
-            'contenido' => $request->mensaje
-        ]);
-        //aqui se recibe el usuario para enviar la notificacion
-        $recibido = User::find($request->recibido_id);
+            $mensaje = Mensaje::create([
+                'cotiza_id' => $request->cotiza_id,
+                'envio_id' => auth()->id(),
+                'recibido_id' => $request->recibido_id,
+                'contenido' => $request->mensaje
+            ]);
+        }else{
+            $admin = User::where('tipo','Administrador')->pluck('id')->first();
+            //aqui se recibe el usuario para enviar la notificacion
+            $recibido = User::find($admin);
+
+            $mensaje = Mensaje::create([
+                'cotiza_id' => $request->cotiza_id,
+                'envio_id' => auth()->id(),
+                'recibido_id' => $admin,
+                'contenido' => $request->mensaje
+            ]);
+        }
+
         //aqui estoy enviando la notificacion
         $recibido->notify(new MensajeEnviado($mensaje));
 
-        return back()->with('success', 'Mensaje enviado. Si el usuario responde lo recibirá en la sección de mensajes del sitio web.');
+        return redirect('admin/cotizaciones#')->with('success', 'Mensaje enviado. Si el usuario responde lo recibirá en la sección de mensajes del sitio web.');
     }
 
     /**
@@ -75,9 +93,14 @@ class MensajeController extends Controller
     public function show($id)
     {
         //aqui estoy agarrando uno de los mensajes q el usuario quiere ver
+
         $mensaje = Mensaje::findOrFail($id);
 
-        $coticodigo = Cotizacion::find($mensaje->cotiza_id)->pluck('codigo');
+        if (strpos($mensaje->cotiza_id, '/') !== false) {
+            $coticodigo = $mensaje->cotiza_id;
+        }else{
+            $coticodigo = Cotizacion::find($mensaje->cotiza_id)->pluck('codigo')->first();
+        }
 
         return view('mensajes.show', compact('mensaje','coticodigo'));
     }
