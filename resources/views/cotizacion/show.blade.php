@@ -23,6 +23,7 @@
 
 @section('content')
 @include('cotizacion.modalres')
+@include('pedido.cancelarModal')
 <section class="content">
 	<div class="container-fluid ">
 		<div class="row justify-content-center">
@@ -108,9 +109,16 @@
 			            </div>
 			        </div>
 		            <div class="card-footer">
-			            <button type="button" class="btn btn-block colorcard btn-sm" data-toggle="modal" data-target="#modalRes">
-						   <i class="fas fa-comment"></i> RESPONDER
-						</button>
+			            @if($cotizacion->estado === "Activo")
+				            <button type="button" class="btn btn-block colorcard btn-sm" data-toggle="modal" data-target="#modalRes">
+							   <i class="fas fa-comment"></i> RESPONDER
+							</button>
+			            @else
+							<button class="btn colorprin btn-block" data-toggle="modal" data-target="#modalCancelar">
+					        <i class="fas fa-comment-dollar"></i>
+     		                Concretar el pago/anticipo
+					        </button>
+			            @endif
 		            </div>
 		        </div>
 			</div>
@@ -120,18 +128,18 @@
 @endsection
 
 @push('scripts')
-@unless(request()->is('admin/cotizaciones/'.$cotizacion->id.'/*'))
+@unless(request()->is('admin/cotizaciones/'.$cotizacion->id.'/show'))
 <script>
     if(window.location.hash === '#enviar')
     {
-       	$('#modalRes').modal('show');
+       	$('#modalCancelar').modal('show');
     }
-    $('#modalRes').on('hide.bs.modal', function(){
+    $('#modalCancelar').on('hide.bs.modal', function(){
       //console.log('El modal se cierra');
       window.location.hash = '#';
     });
-    $('#modalRes').on('shown.bs.modal', function(){
-       $('#mensaje').focus();
+    $('#modalCancelar').on('shown.bs.modal', function(){
+       $('#anticipo').focus();
        window.location.hash = '#enviar';
     });
 </script>

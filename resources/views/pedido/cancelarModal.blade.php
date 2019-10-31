@@ -2,23 +2,28 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header colorcard">
-        <h5 class="modal-title" id="exampleModalLabel">Cancelar Pedido de: {{ $carrito->user->fullname }}</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Cancelar pedido de: {{ isset($cotizacion) ? $cotizacion->user->fullname : $carrito->user->fullname }}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
          	<form class="bg-white shadow rounded py-3 px-4"
-                 method="POST" action="{{ route('pedido.cancelar') }}">
+                 method="POST" action="{{ route('cancelar.pedido','#enviar') }}">
                  @csrf
-                 <input type="hidden" value="{{ $carrito->id }}" name="carrito_id">
+                 @if(isset($cotizacion))
+                      <input type="hidden" value="{{ $cotizacion->id }}" name="cotizacion_id">
+                 @else
+                      <input type="hidden" value="{{ $carrito->id }}" name="carrito_id">
+                 @endif
+
                  <div class="form-group row">
     		            <label for="anticipo" class="col-sm-6 col-form-label">Monto de anticipo Bs.:</label>
     		            <div class="col-sm-6">
     		                <input class="form-control bg-light shadow-sm {{ $errors->has('anticipo') ? ' is-invalid' : 'border-0' }}"
     		                id="anticipo"
     		                name="anticipo"
-    		                placeholder="Ingrese el monto de anticipo" type="number" value="{{ old('anticipo',$carrito->anticipo) }}">
+    		                placeholder="Ingrese el monto de anticipo" type="number" value="{{ old('anticipo') }}">
     		                @if ($errors->has('anticipo'))
     		                    <span class="invalid-feedback" role="alert">
     		                        <strong>{{ $errors->first('anticipo') }}</strong>
@@ -32,7 +37,7 @@
                         <input class="form-control bg-light shadow-sm {{ $errors->has('fecha_entrega') ? ' is-invalid' : 'border-0' }}"
                         id="fecha_entrega"
                         name="fecha_entrega"
-                        placeholder="Ingrese la fecha de entrega" value="{{ old('fecha_entrega',$carrito->fecha_entrega) }}" type="date" >
+                        placeholder="Ingrese la fecha de entrega" value="{{ old('fecha_entrega') }}" type="date" >
                         @if ($errors->has('fecha_entrega'))
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $errors->first('fecha_entrega') }}</strong>
@@ -43,7 +48,7 @@
                  <div class="form-group row">
                     <label for="observaciones" class="col-sm-6 col-form-label">Observaciones:</label>
                     <div class="col-sm-6">
-                        <textarea class="form-control" rows="2" name="observaciones" id="observaciones"  placeholder="¿Alguna observación?">{{ old('observaciones',$carrito->observaciones) }}</textarea>
+                        <textarea class="form-control" rows="2" name="observaciones" id="observaciones"  placeholder="¿Alguna observación?">{{ old('observaciones') }}</textarea>
                     </div>
                  </div>
 

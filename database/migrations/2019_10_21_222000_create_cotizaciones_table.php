@@ -16,10 +16,14 @@ class CreateCotizacionesTable extends Migration
         Schema::create('cotizaciones', function (Blueprint $table) {
             $table->increments('id');
             $table->string('codigo')->unique()->nullable();
+
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
+
             $table->integer('cantidad')->nullable();
             $table->text('descripcion')->nullable();
+            $table->string('estado');
+            $table->timestamp('fecha_orden')->nullable();
             $table->timestamps();
         });
     }

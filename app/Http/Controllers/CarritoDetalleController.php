@@ -2,9 +2,10 @@
 
 namespace Lacomita\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Lacomita\Models\CarritoDetalle;
 use Auth;
+use Illuminate\Http\Request;
+use Lacomita\Models\Carrito;
+use Lacomita\Models\CarritoDetalle;
 
 class CarritoDetalleController extends Controller
 {
@@ -70,7 +71,9 @@ class CarritoDetalleController extends Controller
      */
     public function show($id)
     {
-        //
+        $carrito = Carrito::findOrFail($id);
+        $detalles = $carrito->detalles;
+        return view('carrito.index',compact('detalles','carrito'));
     }
 
     /**

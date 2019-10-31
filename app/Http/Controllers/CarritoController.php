@@ -2,10 +2,12 @@
 
 namespace Lacomita\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Lacomita\Models\Carrito;
+use Lacomita\Models\Pedido;
+use Lacomita\Notifications\PedidoCreado;
 use Lacomita\User;
-use Carbon\Carbon;
 
 class CarritoController extends Controller
 {
@@ -28,9 +30,18 @@ class CarritoController extends Controller
     public function create()
     {
         $carrito = auth()->user()->carrito;
-        $carrito->fecha_orden = Carbon::now();
         $carrito->estado = 'Pendiente';
+        $carrito->fecha_orden = Carbon::now();
         $carrito->save();
+
+        Pedido::create([
+            'carrito_id' => $carrito->id,
+            'cotizacion_id' => 0
+        ]);
+
+        $admin = User::where('tipo','Administrador')->first();
+        $admin->notify(new PedidoCreado($carrito));
+
         return back()->with('success', "Tu pedido se ha registrado correctamente, tienes que realizar pago del 20% en las próximas 72 horas a partir de ahora!");
     }
 
@@ -42,17 +53,9 @@ class CarritoController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'anticipo' => 'required',
-            'fecha_entrega' => 'required'
-        ]);
 
-        $carrito = Carrito::where('id',$request['carrito_id'])->first();
-        $carrito->anticipo = $request['anticipo'];
-        $carrito->fecha_entrega = $request['fecha_entrega'];
-        $carrito->observaciones = $request['observaciones'];
-        $carrito->save();
-        return redirect('/admin/pedidos')->with('success', "Excelente... ahora prepararemos el pedido!");
+
+
     }
 
     /**

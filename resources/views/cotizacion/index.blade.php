@@ -41,6 +41,7 @@
 								<tr class="text-center">
 									<th scope="col">#</th>
 									<th scope="col">Nombre</th>
+									<th scope="col">Cod. Cotización</th>
 									<th scope="col">Productos</th>
 									<th scope="col">Tallas</th>
 									<th scope="col">Cantidad</th>
@@ -52,6 +53,7 @@
 								<tr>
 									<th scope="row">{{ ++$key }}</th>
 									<td>{{ $cotizacion->user->fullname }}</td>
+									<td>{{ $cotizacion->codigo }}</td>
 									<td>
 									@foreach($cotizacion->productos as $producto)
 										{{ $producto->nombre }} /
@@ -76,8 +78,11 @@
 											<button class="btn btn-sm btn-block btn-danger" type="submit" onclick="return confirm('¿Estás seguro de eliminar esta cotización?')">
 												Eliminar
 											</button>
-												<a href="{{ route('cotizaciones.show',$cotizacion->id) }}" class="btn btn-sm btn-block colorcard">
+											<a href="{{ route('cotizaciones.show',$cotizacion->id) }}" class="btn btn-sm btn-block colorcard">
 													Ver cotización
+											</a>
+											<a href="{{ route('cotizaciones.cotiapedido',$cotizacion->id) }}" class="btn btn-sm btn-block colorcard">
+													Realizar Pedido
 											</a>
 										</form>
 									</td>

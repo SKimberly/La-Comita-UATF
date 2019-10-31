@@ -8,7 +8,9 @@ use Lacomita\User;
 class Cotizacion extends Model
 {
     protected $table = 'cotizaciones';
-    protected $guarded = [];
+    protected $fillable = ['id','codigo','user_id','cantidad','descripcion','estado','fecha_orden'];
+
+    protected $dates = ['fecha_orden'];
     //una cotizacion tiene muchas fotos--> Relacion de uno a muchos
     public function fotos(){
     	return $this->hasMany(CotizacionFoto::class);
@@ -33,4 +35,8 @@ class Cotizacion extends Model
     public function materiales(){
         return $this->belongsToMany(Material::class);
     }
+
+
+
+
 }

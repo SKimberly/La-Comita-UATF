@@ -29,6 +29,9 @@ Route::post('/carrito', 'CarritoDetalleController@store')->name('carrito.store')
 Route::delete('/carrito/{id}/eliminar','CarritoDetalleController@destroy')->name('carrito.eliminar');
 Route::post('/realizar/pedido', 'CarritoController@create')->name('realizar.orden');
 
+Route::get('/carrito/{id}/show', 'CarritoDetalleController@show')->name('carrito.show');
+
+
 //Rutas para enviar mensajes de contacto ants de iniciar sesión
 Route::resource('smscontactos','ContactoController');
 
@@ -73,9 +76,8 @@ function(){
 	Route::delete('categorias/{id}', 'CategoriaController@destroy')->name('admin.categorias.delete');
 
 	//Ruta para actualizar el Carrito de pedidos a anticipo y fecha de entrega
-	Route::get('pedidos','CarritoController@index')->name('admin.pedidos.index');
+	//Route::get('pedidos','CarritoController@index')->name('admin.pedidos.index');
 	Route::get('pedidos/{id}/ver','CarritoController@show')->name('ver.pedido.pendiente');
-	Route::post('/pedidos', 'CarritoController@store')->name('pedido.cancelar');
 
 	//pARA DAR DE BAJA UN PEDIDO y que el cliente vuelva a tener los mismos producto en el carrito
 	Route::get('pedidos/{id}/baja','CarritoController@edit')->name('ver.pedido.baja');
@@ -86,10 +88,16 @@ function(){
 	Route::get('cotizaciones/{cotizacion}/edit','CotizacionController@edit')->name('admin.cotizaciones.edit');
 	Route::post('cotizaciones/{id}/fotos','CotizacionController@storefotos');
 	Route::delete('cotizaciones/{id}/eliminar','CotizacionController@eliminartodo')->name('admin.cotizaciones.eliminar');
+	Route::get('cotizaciones/{id}/cotiapedi', 'CotizacionController@cotiapedido')->name('cotizaciones.cotiapedido');
+
 
 	//Rutas para el envio de notificaciones vía mensajes
 	Route::resource('mensajes','MensajeController');
 	Route::patch('mensajes/{id}/msj', 'MensajeController@marcar')->name('mensajes.leer');
+
+	Route::resource('pedidos','PedidoController');
+	Route::post('/pedidos', 'PedidoController@store')->name('cancelar.pedido');
+
 
 
 });

@@ -8,6 +8,10 @@ use Lacomita\User;
 
 class Carrito extends Model
 {
+    protected $fillable = ['id','carrito_id','cotizacion_id','anticipo','fecha_entrega','observaciones'];
+
+    protected $dates = ['fecha_orden'];
+
     public function detalles()
     {
     	return $this->hasMany(CarritoDetalle::class);
@@ -17,4 +21,5 @@ class Carrito extends Model
     {
     	return $this->belongsTo(User::class);
     }
+
 }

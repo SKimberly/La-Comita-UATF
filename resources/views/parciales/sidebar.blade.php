@@ -71,7 +71,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="{{ route('admin.pedidos.index') }}" class="nav-link {{ request()->is('admin/pedidos*') ? 'active' : '' }}">
+            <a href="{{ route('pedidos.index') }}" class="nav-link {{ request()->is('admin/pedidos*') ? 'active' : '' }}">
               <img src="{{ asset('img/sidebar/pedidos.svg') }}" alt="pedidos" class="nav-icon">
               <p>
                   Pedidos

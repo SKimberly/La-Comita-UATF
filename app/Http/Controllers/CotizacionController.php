@@ -2,13 +2,18 @@
 
 namespace Lacomita\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Lacomita\Models\Cotizacion;
 use Lacomita\Models\CotizacionFoto;
 use Lacomita\Models\Material;
+use Lacomita\Models\Pedido;
 use Lacomita\Models\Producto;
 use Lacomita\Models\Talla;
+use Lacomita\Notifications\CotizacionCreada;
+use Lacomita\Notifications\CotizacionPedida;
+use Lacomita\User;
 
 class CotizacionController extends Controller
 {
@@ -19,7 +24,7 @@ class CotizacionController extends Controller
      */
     public function index()
     {
-        $cotizaciones = Cotizacion::orderBy('id', 'DESC')->paginate(2);
+        $cotizaciones = Cotizacion::where('estado','Activo')->orderBy('id', 'DESC')->paginate(2);
         $productos = Producto::orderBy('id', 'ASC')->get();
         return view('cotizacion.index', compact('cotizaciones','productos'));
     }
@@ -51,7 +56,8 @@ class CotizacionController extends Controller
         ]);
 
         $cotizacion  = Cotizacion::create([
-            'user_id' => auth()->user()->id
+            'user_id' => auth()->user()->id,
+            'estado'  => 'Activo'
         ]);
 
         $cotizacion->productos()->attach($request->get('productos'));
@@ -120,6 +126,12 @@ class CotizacionController extends Controller
         $cotizacion->tallas()->sync($request->get('tallas'));
         $cotizacion->materiales()->sync($request->get('materiales'));
 
+        //aqui se recibe el usuario para enviar la notificacion
+        $admin = User::where('tipo','Administrador')->first();
+        //aqui estoy enviando la notificacion
+        $admin->notify(new CotizacionCreada($cotizacion));
+
+
         return redirect('admin/cotizaciones')->with('success', "Excelente... ahora espera la respuesta de la cotización!");
 
     }
@@ -163,4 +175,26 @@ class CotizacionController extends Controller
         return redirect('admin/cotizaciones')->with('success', "La cotización fue eliminada!");
 
     }
+
+    public function cotiapedido($id)
+    {
+        $cotizacion = Cotizacion::find($id);
+        $cotizacion->estado = 'Pendiente';
+        $cotizacion->fecha_orden = Carbon::now();
+        $cotizacion->save();
+
+        Pedido::create([
+            'carrito_id' => 0,
+            'cotizacion_id' => $cotizacion->id
+        ]);
+
+        //aqui se recibe el usuario para enviar la notificacion
+        $admin = User::where('tipo','Administrador')->first();
+        //aqui estoy enviando la notificacion
+        $admin->notify(new CotizacionPedida($cotizacion));
+
+        return redirect('admin/pedidos')->with('success', "La cotización fué enviada como pedido!");
+
+    }
+
 }

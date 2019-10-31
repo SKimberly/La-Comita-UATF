@@ -23,7 +23,7 @@
 <section class="portafolio" id="fotos">
     <div class="contenedor" style="padding: 30px 0;">
         <h2 class="titulo" style="margin-bottom: 30px;">{{ $producto->nombre }}</h2>
-        <div class="col-12 col-sm-10 col-lg-4 mx-auto">
+        <div class="col-12 col-sm-10 col-lg-6 mx-auto">
             <div class="card shadow">
                 <div class="card-body">
                     <div style="text-align: center;">

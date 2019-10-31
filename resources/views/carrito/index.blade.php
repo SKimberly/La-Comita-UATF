@@ -21,6 +21,7 @@
 @endsection
 
 @section('content')
+@include('pedido.cancelarModal')
 <section class="content">
     <div class="container-fluid">
       <div class="card card-info">
@@ -79,9 +80,16 @@
                     <form method="POST" action="{{ route('realizar.orden') }}">
                       @csrf
                       @if($detalles->count() !== 0)
-                          <button class="btn colorcard">
-                            <i class="fas fa-money-check-alt"></i> Realizar pedido
-                          </button>
+                          @if($detalle->carrito->estado == 'Activo')
+                            <button class="btn colorcard" type="submit">
+                              <i class="fas fa-money-check-alt"></i> Realizar pedido
+                            </button>
+                          @else
+                            <a class="btn colorprin text-white" data-toggle="modal" data-target="#modalCancelar">
+                            <i class="fas fa-comment-dollar"></i>
+                                Concretar el pago/anticipo
+                            </a>
+                          @endif
                       @endif
                     </form>
                   </div>
@@ -91,3 +99,23 @@
     </div>
 </section>
 @endsection
+
+@push('scripts')
+@unless(request()->is('admin/carrito/'.$carrito->id.'/show'))
+<script>
+    if(window.location.hash === '#enviar')
+    {
+        $('#modalCancelar').modal('show');
+    }
+    $('#modalCancelar').on('hide.bs.modal', function(){
+      //console.log('El modal se cierra');
+      window.location.hash = '#';
+    });
+    $('#modalCancelar').on('shown.bs.modal', function(){
+       $('#anticipo').focus();
+       window.location.hash = '#enviar';
+    });
+</script>
+@endunless
+@endpush
+
