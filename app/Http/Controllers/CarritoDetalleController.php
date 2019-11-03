@@ -17,7 +17,8 @@ class CarritoDetalleController extends Controller
     public function index()
     {
         $detalles = auth()->user()->carrito->detalles;
-        return view('carrito.index',compact('detalles'));
+        $carrito = auth()->user()->carrito;
+        return view('carrito.index',compact('detalles', 'carrito'));
     }
 
     /**

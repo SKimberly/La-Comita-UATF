@@ -98,7 +98,10 @@ function(){
 	Route::resource('pedidos','PedidoController');
 	Route::post('/pedidos', 'PedidoController@store')->name('cancelar.pedido');
 
+	Route::resource('tallas','TallaController');
+	Route::resource('materiales','MaterialController');
 
+	Route::resource('ventas','VentaController');
 
 });
 

@@ -117,7 +117,7 @@ class CotizacionController extends Controller
     public function update(Request $request, $id)
     {
         $cotizacion = Cotizacion::findOrFail($id);
-        $cotizacion->codigo = $id.'/'.$cotizacion->created_at->format('Y-M-d');
+        $cotizacion->codigo = $id.'/'.$cotizacion->created_at->format('Y-M-d').'-Coti';
         $cotizacion->cantidad = $request['cantidad'];
         $cotizacion->descripcion = $request['descripcion'];
         $cotizacion->save();

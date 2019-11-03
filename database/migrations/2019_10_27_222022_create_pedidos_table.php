@@ -20,7 +20,7 @@ class CreatePedidosTable extends Migration
 
             $table->unsignedInteger('anticipo')->default(0);
             $table->date('fecha_entrega')->nullable();
-            $table->string('observaciones')->default('Ninguno');
+            $table->string('observaciones')->default('Ninguno')->nullable();
             $table->timestamps();
         });
     }

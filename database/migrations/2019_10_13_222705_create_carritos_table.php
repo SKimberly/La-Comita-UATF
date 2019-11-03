@@ -15,7 +15,9 @@ class CreateCarritosTable extends Migration
     {
         Schema::create('carritos', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('codigo')->unique()->nullable();
             $table->timestamp('fecha_orden')->nullable();
+
             $table->string('estado');
 
             $table->integer('user_id')->unsigned();

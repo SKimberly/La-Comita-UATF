@@ -1,18 +1,18 @@
 @extends('layouts.master')
 
-@section('titulo','Listar Categorias')
+@section('titulo','Listar Materiales')
 
 @section('cabecera')
 <div class="content-header">
 	<div class="container-fluid">
 		<div class="row mb-2">
 			<div class="col-sm-6">
-				<h1 class="m-0 text-dark">Lista de Categorias</h1>
+				<h1 class="m-0 text-dark">Lista de Materiales</h1>
 			</div>
 			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right">
 					<li class="breadcrumb-item"> <a href="{{ route('admin') }}">Inicio</a></li>
-					<li class="breadcrumb-item"> <a href="{{ route('admin.categorias') }}">Categorias</a></li>
+					<li class="breadcrumb-item"> <a href="{{ route('materiales.index') }}">Materiales</a></li>
 					<li class="breadcrumb-item active">Listar</li>
 				</ol>
 			</div>
@@ -22,13 +22,13 @@
 @endsection
 
 @section('content')
-@include('admin.categorias.create')
+@include('admin.materiales.create')
 <section class="content">
 	<div class="container-fluid">
 		<div class="card card-info">
 			<div class="card-header" >
-				<button type="button" class="btn" style="background-color: rgb(18, 216, 250);" data-toggle="modal" data-target="#modalCategoria">
-				   <i class="fas fa-sitemap"></i> Crear Categoria
+				<button type="button" class="btn" style="background-color: rgb(18, 216, 250);" data-toggle="modal" data-target="#modalMaterial">
+				   <i class="fas fa-sort-numeric-up"></i> Nuevo Material
 				</button>
 			</div>
 			<div class="card-body">
@@ -39,28 +39,24 @@
 									<th scope="col">#</th>
 									<th scope="col">Nombre</th>
 									<th scope="col">Descripción</th>
-									<th scope="col">Imágen</th>
 									<th scope="col">Creación</th>
 									<th scope="col">Opciones</th>
 								</tr>
 							</thead>
 							<tbody>
-								@foreach($categorias as $categoria)
+								@foreach($materiales as $key => $material)
 								<tr>
-									<th scope="row">{{ $categoria->id }}</th>
-									<td>{{ $categoria->nombre }}</td>
-									<td>{{ $categoria->descripcion }}</td>
+									<th class="text-center">{{ ++$key }}</th>
+									<td class="text-center">{{ $material->nombre }}</td>
+									<td>{{ $material->descripcion }}</td>
+									<td class="text-center">{{ $material->created_at->format('M d') }}</td>
 									<td class="text-center">
-										<img src="{{ asset($categoria->urlcate) }}" class="img-fluid" style="width: 30%;" alt="Categoria Foto">
-									</td>
-									<td>{{ $categoria->created_at }}</td>
-									<td>
-										<a href="{{ route('admin.categorias.edit',$categoria->id) }}" class="btn btn-sm btn-block btn-info">
-											Editar
-										</a>
-										<form method="post" action="{{ route('admin.categorias.delete', $categoria->id) }}">
+										<form method="post" action="{{ route('materiales.destroy', $material->id) }}">
 											@method('DELETE') @csrf
-											<button class="btn btn-sm btn-block btn-danger" type="submit">
+											<a href="{{ route('materiales.edit',$material->id) }}" class="btn btn-sm btn-info">
+												Editar
+											</a>
+											<button class="btn btn-sm  btn-danger" type="submit">
 												Eliminar
 											</button>
 										</form>
@@ -69,7 +65,7 @@
 								@endforeach
 							</tbody>
 						</table>
-						{{ $categorias->links() }}
+						{{ $materiales->links() }}
 					</div>
 			</div>
 		</div>

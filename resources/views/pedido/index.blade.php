@@ -35,6 +35,7 @@
                         <tr class="text-center">
                           <th scope="col">#</th>
                           <th scope="col">Nombre</th>
+                          <th scope="col">Código</th>
                           <th scope="col">Tiempo</th>
                           <th scope="col">Anticipo</th>
                           <th scope="col">Entrega</th>
@@ -48,9 +49,11 @@
                           <td class="text-center">{{ ++$key }}</td>
                           @if($pedido->carrito_id != 0)
                               <td>{{ $pedido->carrito->user->fullname }}</td>
+                              <td class="text-center">{!! DNS1D::getBarcodeHTML($pedido->carrito->codigo, "C128",0.5,50,"black", true) !!}</td>
                               <td class="text-center">{{ $pedido->carrito->fecha_orden->format('M d') }} - {{ $pedido->carrito->fecha_orden->diffForHumans() }}</td>
                           @else
                               <td>{{ $pedido->cotizacion->user->fullname }}</td>
+                              <td class="text-center">{!! DNS1D::getBarcodeHTML($pedido->cotizacion->codigo, "C128",0.5,50,"black", true) !!}</td>
                               <td class="text-center">{{ $pedido->cotizacion->fecha_orden->format('M d') }} - {{ $pedido->cotizacion->fecha_orden->diffForHumans() }}</td>
                           @endif
                           <td class="text-center {{ ($pedido->anticipo == 0) ? 'colorprin' : 'colorcard' }}">{{ $pedido->anticipo }}</td>

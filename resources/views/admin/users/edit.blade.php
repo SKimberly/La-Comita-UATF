@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('titulo', 'Crear-Usuario')
+@section('titulo', 'Editar-Usuario')
 
 @section('cabecera')
 <div class="content-header">

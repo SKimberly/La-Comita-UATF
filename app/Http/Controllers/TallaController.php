@@ -3,9 +3,9 @@
 namespace Lacomita\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Lacomita\Models\Material;
+use Lacomita\Models\Talla;
 
-class MaterialController extends Controller
+class TallaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class MaterialController extends Controller
      */
     public function index()
     {
-        $materiales = Material::orderBy('id', 'DESC')->paginate(10);
-        return view('admin.materiales.index', compact('materiales'));
+        $tallas = Talla::orderBy('id', 'DESC')->paginate(10);
+        return view('admin.tallas.index', compact('tallas'));
     }
 
     /**
@@ -36,8 +36,9 @@ class MaterialController extends Controller
      */
     public function store(Request $request)
     {
-        Material::create($request->all());
-        return redirect('admin/materiales')->with('success', 'Nuevo material creado correctamente');
+        //dd($request->all());
+        Talla::create($request->all());
+        return redirect('admin/tallas')->with('success', 'Nueva talla creada correctamente');
     }
 
     /**
@@ -59,8 +60,8 @@ class MaterialController extends Controller
      */
     public function edit($id)
     {
-        $material = Material::find($id);
-        return view('admin.materiales.edit', compact('material'));
+        $talla = Talla::find($id);
+        return view('admin.tallas.edit', compact('talla'));
     }
 
     /**
@@ -72,11 +73,12 @@ class MaterialController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $material = Material::find($id);
-        $material->nombre = $request['nombre'];
-        $material->descripcion = $request['descripcion'];
-        $material->save();
-        return redirect('admin/materiales')->with('success', 'Material actualizado correctamente');
+        //dd($request->all());
+        $talla = Talla::find($id);
+        $talla->nombre = $request['nombre'];
+        $talla->descripcion = $request['descripcion'];
+        $talla->save();
+        return redirect('admin/tallas')->with('success', 'Talla actualizada correctamente');
     }
 
     /**
@@ -87,8 +89,9 @@ class MaterialController extends Controller
      */
     public function destroy($id)
     {
-        $material = Material::find($id);
-        $material->delete();
-        return redirect('admin/materiales')->with('success', 'Material eliminado Correctamente');
+        //dd($id);
+        $talla = Talla::find($id);
+        $talla->delete();
+        return redirect('admin/tallas')->with('success', 'Talla eliminada Correctamente');
     }
 }

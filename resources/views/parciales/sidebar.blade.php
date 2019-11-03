@@ -23,14 +23,14 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item">
+          {{-- <li class="nav-item">
             <a href="{{ route('admin') }}" class="nav-link {{ request()->is('admin') ? 'active' : '' }}">
               <img src="{{ asset('img/sidebar/escritorio.svg') }}" alt="" class="nav-icon">
               <p>
                 Escritorio
               </p>
             </a>
-          </li>
+          </li>   --}}
           <li class="nav-item">
             <a href="{{ route('admin.users.index') }}" class="nav-link {{ request()->is('admin/users*') ? 'active' : '' }}">
               <img src="{{ asset('img/sidebar/users.svg') }}" alt="usuarios" class="nav-icon">
@@ -39,13 +39,34 @@
               </p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="{{ route('admin.categorias') }}" class="nav-link {{ request()->is('admin/categorias*') ? 'active' : '' }}">
-              <img src="{{ asset('img/sidebar/categorias.svg') }}" alt="categorias" class="nav-icon">
+          <li class="nav-item has-treeview {{ request()->is('admin/categorias*') || request()->is('admin/tallas*') || request()->is('admin/materiales*') ? 'menu-open' : '' }}">
+            <a href="#" class="nav-link {{ request()->is('admin/categorias*') || request()->is('admin/tallas*') || request()->is('admin/materiales*') ? 'active' : '' }}">
+              <img src="{{ asset('img/sidebar/otros.svg') }}" alt="complementos" class="nav-icon">
               <p>
-                  Categorias
+                  Complementos
+                <i class="right fas fa-angle-left"></i>
               </p>
             </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('admin.categorias') }}" class="nav-link {{ request()->is('admin/categorias') ? 'active' : '' }}">
+                  <i class="nav-icon fas fa-sitemap"></i>
+                  <p>Categorias</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('tallas.index') }}" class="nav-link {{ request()->is('admin/tallas') ? 'active' : '' }}">
+                  <i class="nav-icon fas fa-sort-numeric-up"></i>
+                  <p>Tallas</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('materiales.index') }}" class="nav-link {{ request()->is('admin/materiales') ? 'active' : '' }}">
+                  <i class="nav-icon fas fa-tshirt"></i>
+                  <p>Materiales</p>
+                </a>
+              </li>
+            </ul>
           </li>
           <li class="nav-item has-treeview {{ request()->is('admin/productos*') ? 'menu-open' : '' }}">
             <a href="#" class="nav-link {{ request()->is('admin/productos*') ? 'active' : '' }}">
@@ -63,7 +84,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('admin.productos.create') }}" class="nav-link {{ request()->is('admin/productos/crear') ? 'active' : '' }}">
+                <a href="{{ route('admin.productos.create') }}" class="nav-link {{ request()->is('admin/productos/create') ? 'active' : '' }}">
                   <i class="fas fa-share-square"></i>
                   <p>Agregar nuevo</p>
                 </a>
@@ -71,10 +92,10 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="{{ route('pedidos.index') }}" class="nav-link {{ request()->is('admin/pedidos*') ? 'active' : '' }}">
-              <img src="{{ asset('img/sidebar/pedidos.svg') }}" alt="pedidos" class="nav-icon">
+            <a href="{{ route('carrito.detalle') }}" class="nav-link {{ request()->is('carrito/detalle*') ? 'active' : '' }}">
+              <img src="{{ asset('img/sidebar/carrito.svg') }}" alt="pedidos" class="nav-icon">
               <p>
-                  Pedidos
+                  Carrito
               </p>
             </a>
           </li>
@@ -86,28 +107,21 @@
               </p>
             </a>
           </li>
-          <li class="nav-item has-treeview ">
-            <a href="#" class="nav-link ">
-              <img src="{{ asset('img/sidebar/ventas.svg') }}" alt="calendario" class="nav-icon">
+          <li class="nav-item">
+            <a href="{{ route('pedidos.index') }}" class="nav-link {{ request()->is('admin/pedidos*') ? 'active' : '' }}">
+              <img src="{{ asset('img/sidebar/pedidos.svg') }}" alt="pedidos" class="nav-icon">
               <p>
-                  Ventas
-                <i class="right fas fa-angle-left"></i>
+                  Pedidos
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="#" class="nav-link ">
-                  <i class="nav-icon fas fa-file-invoice-dollar"></i>
-                  <p>Ver lista</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-file-signature"></i>
-                  <p>Agregar nuevo</p>
-                </a>
-              </li>
-            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('ventas.index') }}" class="nav-link {{ request()->is('admin/ventas*') ? 'active' : '' }}">
+              <img src="{{ asset('img/sidebar/ventas.svg') }}" alt="categorias" class="nav-icon">
+              <p>
+                  Ventas
+              </p>
+            </a>
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
