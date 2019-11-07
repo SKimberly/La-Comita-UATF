@@ -5,7 +5,7 @@ namespace Lacomita\Http\Controllers;
 use Illuminate\Http\Request;
 use Lacomita\Models\Pedido;
 
-class VentaController extends Controller
+class CalendarioController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class VentaController extends Controller
     public function index()
     {
         $pedidos = Pedido::where('anticipo','!=',0)->orderBy('id','DESC')->get();
-        //dd($pedido->cotizacion->user_id);
-        return view('ventas.index', compact('pedidos'));
+        //d($pedidos);
+        return view('calendario.index',compact('pedidos'));
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace Lacomita\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Lacomita\Models\Carrito;
@@ -17,7 +18,7 @@ class PedidoController extends Controller
      */
     public function index()
     {
-        $pedidos = Pedido::orderBy('id','DESC')->get();
+        $pedidos = Pedido::where('anticipo',0)->orderBy('id','DESC')->get();
         //dd($pedido->cotizacion->user_id);
         return view('pedido.index', compact('pedidos'));
     }
@@ -53,7 +54,7 @@ class PedidoController extends Controller
                 $carrito->save();
 
                 Carrito::where('id', $request->carrito_id)
-                      ->update(['estado' => 'Procesando']);
+                      ->update(['estado' => 'Procesando', 'fecha_orden' => Carbon::now()]);
 
             }else{
                 $cotizacion = Pedido::where('cotizacion_id', $request['cotizacion_id'])->first();
@@ -63,7 +64,7 @@ class PedidoController extends Controller
                 $cotizacion->save();
 
                 Cotizacion::where('id', $request->cotizacion_id)
-                      ->update(['estado' => 'Procesando']);
+                      ->update(['estado' => 'Procesando', 'fecha_orden' => Carbon::now()]);
             }
 
         }else{

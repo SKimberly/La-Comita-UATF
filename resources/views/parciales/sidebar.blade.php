@@ -124,7 +124,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{ route('calendarios.index') }}" class="nav-link {{ request()->is('admin/calendarios*') ? 'active' : '' }}">
               <img src="{{ asset('img/sidebar/calendario.svg') }}" alt="calendario" class="nav-icon">
               <p>
                 Calendario

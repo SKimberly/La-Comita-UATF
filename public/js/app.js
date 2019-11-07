@@ -45739,6 +45739,26 @@ module.exports = function(module) {
  */
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); //window.Vue = require('vue');
 
+/*
+document.addEventListener('DOMContentLoaded', function() {
+  var calendarEl = document.getElementById('calendar');
+
+  var calendar = new Calendar(calendarEl, {
+    plugins: [ dayGridPlugin ],
+    locale: 'es',
+      buttonText: {
+        today: 'HOY',
+        month: 'MES',
+        week : 'SEMANA',
+        day  : 'DÍA'
+      },
+    events: 'https://fullcalendar.io/demo-events.json?overload-day'
+   });
+
+  calendar.render();
+
+});*/
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

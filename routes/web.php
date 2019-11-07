@@ -103,6 +103,8 @@ function(){
 
 	Route::resource('ventas','VentaController');
 
+	Route::resource('calendarios','CalendarioController');
+
 });
 
 
