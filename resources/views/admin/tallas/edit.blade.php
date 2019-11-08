@@ -35,7 +35,7 @@
 			            <label for="nombre">Nombre:</label>
 			            <input class="form-control bg-light shadow-sm {{ $errors->has('nombre') ? ' is-invalid' : 'border-0' }}"
 			                    id="nombre" name="nombre"
-			                    placeholder="Ingrese el nombre de la talla" value="{{ old('nombre', $talla->nombre) }}" required>
+			                    placeholder="Ingrese el nombre de la talla" value="{{ old('nombre', $talla->nombre) }}" >
 			            @if ($errors->has('nombre'))
 			                    <span class="invalid-feedback" role="alert">
 			                    	<strong>{{ $errors->first('nombre') }}</strong>
@@ -44,7 +44,7 @@
 			        </div>
 			        <div class="form-group">
 			            <label for="descripcion">Descripción</label>
-	                    <textarea class="form-control {{ $errors->has('descripcion') ? ' is-invalid' : 'border-1' }}" rows="2" name="descripcion" id="descripcion"  placeholder="Ingrese una breve descripción de la talla" required>{{ old('descripcion', $talla->descripcion) }}</textarea>
+	                    <textarea class="form-control {{ $errors->has('descripcion') ? ' is-invalid' : 'border-1' }}" rows="2" name="descripcion" id="descripcion"  placeholder="Ingrese una breve descripción de la talla" >{{ old('descripcion', $talla->descripcion) }}</textarea>
 	                    @if ($errors->has('descripcion'))
 			                <span class="invalid-feedback" role="alert">
 			                    <strong>{{ $errors->first('descripcion') }}</strong>

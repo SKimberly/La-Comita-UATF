@@ -8,7 +8,7 @@
         </button>
       </div>
         <div class="modal-body">
-            <form method="POST" action="{{ route('materiales.store','#create') }}" class="bg-white shadow rounded py-3 px-4 was-validated" enctype="multipart/form-data" >
+            <form method="POST" action="{{ route('materiales.store','#mate') }}" class="bg-white shadow rounded py-3 px-4 was-validated" enctype="multipart/form-data" >
 			@csrf
 		        <div class="form-group">
 		            <label for="nombre">Nombre:</label>
@@ -23,7 +23,7 @@
 		        </div>
 		        <div class="form-group">
 		            <label for="descripcion">Descripción</label>
-                    <textarea class="form-control {{ $errors->has('descripcion') ? ' is-invalid' : 'border-1' }}" rows="2" name="descripcion" id="descripcion"  placeholder="Ingrese una breve descripción del material" required>{{ old('descripcion') }}</textarea>
+                    <textarea class="form-control {{ $errors->has('descripcion') ? ' is-invalid' : 'border-1' }}" rows="2" name="descripcion" id="descripcion"  placeholder="Ingrese una breve descripción del material" >{{ old('descripcion') }}</textarea>
                     @if ($errors->has('descripcion'))
 		                <span class="invalid-feedback" role="alert">
 		                    <strong>{{ $errors->first('descripcion') }}</strong>

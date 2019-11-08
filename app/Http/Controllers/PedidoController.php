@@ -30,7 +30,7 @@ class PedidoController extends Controller
      */
     public function create()
     {
-        //
+        return "estas aqui";
     }
 
     /**
@@ -71,7 +71,7 @@ class PedidoController extends Controller
             \Alert::error('La fecha de entrega no puede ser menor a la fecha actual!', 'Oops!')->persistent("Cerrar");
             return back();
         }
-        return redirect('/admin/pedidos')->with('success', "Excelente... ahora el pedido está en PROCESO!");
+        return redirect('/admin/ventas')->with('success', "Excelente... ahora el pedido está en PROCESO!");
 
     }
 

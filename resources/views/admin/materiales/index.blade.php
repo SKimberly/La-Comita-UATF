@@ -74,20 +74,21 @@
 @endsection
 
 @push('scripts')
-@unless(request()->is('admin/categorias/*'))
+@unless(request()->is('admin/materiales/*'))
 <script>
-    if(window.location.hash === '#create')
+    if(window.location.hash === '#mate')
     {
-       	$('#modalCategoria').modal('show');
+       	$('#modalMaterial').modal('show');
     }
-    $('#modalCategoria').on('hide.bs.modal', function(){
+    $('#modalMaterial').on('hide.bs.modal', function(){
       //console.log('El modal se cierra');
       window.location.hash = '#';
     });
-    $('#modalCategoria').on('shown.bs.modal', function(){
-       $('#fullname').focus();
-       window.location.hash = '#create';
+    $('#modalMaterial').on('shown.bs.modal', function(){
+       $('#nombre').focus();
+       window.location.hash = '#mate';
     });
 </script>
 @endunless
 @endpush
+

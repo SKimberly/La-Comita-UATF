@@ -36,8 +36,12 @@ class MaterialController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'nombre' => 'required'
+        ]);
+
         Material::create($request->all());
-        return redirect('admin/materiales')->with('success', 'Nuevo material creado correctamente');
+        return redirect('admin/materiales#')->with('success', 'Nuevo material creado correctamente');
     }
 
     /**
@@ -72,6 +76,10 @@ class MaterialController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'nombre' => 'required'
+        ]);
+
         $material = Material::find($id);
         $material->nombre = $request['nombre'];
         $material->descripcion = $request['descripcion'];

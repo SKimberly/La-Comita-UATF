@@ -36,9 +36,12 @@ class TallaController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'nombre' => 'required'
+        ]);
         //dd($request->all());
         Talla::create($request->all());
-        return redirect('admin/tallas')->with('success', 'Nueva talla creada correctamente');
+        return redirect('admin/tallas#')->with('success', 'Nueva talla creada correctamente');
     }
 
     /**
@@ -74,6 +77,10 @@ class TallaController extends Controller
     public function update(Request $request, $id)
     {
         //dd($request->all());
+        $this->validate($request, [
+            'nombre' => 'required'
+        ]);
+
         $talla = Talla::find($id);
         $talla->nombre = $request['nombre'];
         $talla->descripcion = $request['descripcion'];

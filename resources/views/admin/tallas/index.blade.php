@@ -74,19 +74,19 @@
 @endsection
 
 @push('scripts')
-@unless(request()->is('admin/categorias/*'))
+@unless(request()->is('admin/tallas/*'))
 <script>
-    if(window.location.hash === '#create')
+    if(window.location.hash === '#talla')
     {
-       	$('#modalCategoria').modal('show');
+       	$('#modalTalla').modal('show');
     }
-    $('#modalCategoria').on('hide.bs.modal', function(){
+    $('#modalTalla').on('hide.bs.modal', function(){
       //console.log('El modal se cierra');
       window.location.hash = '#';
     });
-    $('#modalCategoria').on('shown.bs.modal', function(){
-       $('#fullname').focus();
-       window.location.hash = '#create';
+    $('#modalTalla').on('shown.bs.modal', function(){
+       $('#nombre').focus();
+       window.location.hash = '#talla';
     });
 </script>
 @endunless
