@@ -63,19 +63,19 @@
                           <td class="text-center">
                             @if($pedido->carrito_id != 0)
                               @if($pedido->carrito->estado != 'Finalizado')
-                                <button type="button" class="btn colorcard  btn-sm" data-toggle="modal" data-target="#pagarPedido" data-whatever="{{ $pedido->id  }}"> <i class="fas fa-hand-holding-usd"></i> Completar Pago</button>
+                                <button type="button" class="btn colorprin  btn-sm" data-toggle="modal" data-target="#pagarPedido" data-whatever="{{ $pedido->id  }}"> <i class="fas fa-hand-holding-usd"></i> Completar Pago</button>
 
                                 <a href="{{ route('ventas.show', $pedido->id) }}" class="btn btn-primary  btn-sm"><i class="fas fa-vote-yea"></i> Finalizar Venta</a>
                               @else
-                                <strong>Ver factura de carrito</strong>
+                                <a href="{{ route('ventas.edit', $pedido->id) }}" class="btn colorcard btn-sm" target="__blanck"><i class="fas fa-file-pdf"></i> Imprimir Factura</a>
                               @endif
                             @else
                                 @if($pedido->cotizacion->estado != 'Finalizado')
-                                  <button type="button" class="btn colorcard  btn-sm" data-toggle="modal" data-target="#pagarPedido" data-whatever="{{ $pedido->id  }}"> <i class="fas fa-hand-holding-usd"></i> Completar Pago</button>
+                                  <button type="button" class="btn colorprin  btn-sm" data-toggle="modal" data-target="#pagarPedido" data-whatever="{{ $pedido->id  }}"> <i class="fas fa-hand-holding-usd"></i> Completar Pago</button>
 
                                   <a href="{{ route('ventas.show', $pedido->id) }}" class="btn btn-primary  btn-sm"><i class="fas fa-vote-yea"></i> Finalizar Venta</a>
                                 @else
-                                  <strong>Ver factura de cotizacion</strong>
+                                  <a href="{{ route('ventas.edit', $pedido->id) }}" class="btn colorcard btn-sm" target="__blanck"><i class="fas fa-file-pdf"></i> Imprimir Factura</a>
                                 @endif
                               @endif
                           </td>

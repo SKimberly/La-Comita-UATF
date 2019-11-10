@@ -2,6 +2,7 @@
 
 namespace Lacomita\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Lacomita\Models\Carrito;
 use Lacomita\Models\Cotizacion;
@@ -73,7 +74,27 @@ class VentaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $pedido = Pedido::find($id);
+        $carrito = "";
+        $cotizacion = "";
+        if ($pedido->carrito_id != 0) {
+            $carrito = Carrito::find($pedido->carrito_id);
+        }else{
+            $cotizacion = Cotizacion::find($pedido->cotizacion_id);
+        }
+
+        $fecha = Carbon::now();
+
+        if(!empty($carrito)){
+            $view =  \View::make('ventas.pdfcarrito', compact('pedido','carrito','cotizacion','fecha'))->render();
+        }else{
+            $view =  \View::make('ventas.pdfcoti', compact('pedido','carrito','cotizacion','fecha'))->render();
+        }
+
+
+        $pdf  = \App::make('dompdf.wrapper');
+        $pdf->loadHTML($view)->setPaper('carta', 'portrat');
+        return $pdf->stream('Venta/'.$pedido->id.'.pdf');
     }
 
     /**
