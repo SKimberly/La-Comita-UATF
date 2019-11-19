@@ -59,7 +59,7 @@ class CarritoDetalleController extends Controller
 
             $cartDetail->tallas()->attach($request->get('tallas'));
 
-            return redirect('/#producto')->with('success', 'Producto agregado al carrito!');
+            return redirect('/carrito/detalle')->with('success', 'Producto agregado al carrito!');
         }
 
     }

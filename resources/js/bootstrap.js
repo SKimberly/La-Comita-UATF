@@ -15,6 +15,7 @@ try {
     require('admin-lte');
     require('sweetalert2');
     require('select2');
+    require('chart.js');
 } catch (e) {}
 
 /**

@@ -23,14 +23,14 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          {{-- <li class="nav-item">
+          <li class="nav-item">
             <a href="{{ route('admin') }}" class="nav-link {{ request()->is('admin') ? 'active' : '' }}">
               <img src="{{ asset('img/sidebar/escritorio.svg') }}" alt="" class="nav-icon">
               <p>
                 Escritorio
               </p>
             </a>
-          </li>   --}}
+          </li>
           <li class="nav-item">
             <a href="{{ route('admin.users.index') }}" class="nav-link {{ request()->is('admin/users*') ? 'active' : '' }}">
               <img src="{{ asset('img/sidebar/users.svg') }}" alt="usuarios" class="nav-icon">
@@ -128,11 +128,11 @@
               <img src="{{ asset('img/sidebar/calendario.svg') }}" alt="calendario" class="nav-icon">
               <p>
                 Calendario
-                <span class="right badge badge-success">Date</span>
+                <span class="right badge badge-success">FECHA</span>
               </p>
             </a>
           </li>
-          <li class="nav-item">
+          {{--  <li class="nav-item">
             <a href="#" class="nav-link">
               <img src="{{ asset('img/sidebar/reportes.svg') }}" alt="reportes" class="nav-icon">
               <p>
@@ -140,22 +140,22 @@
                 <span class="right badge badge-warning">PDF</span>
               </p>
             </a>
-          </li>
+          </li> --}}
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{ route('estadisticas.index') }}" class="nav-link {{ request()->is('admin/estadisticas*') ? 'active' : '' }}">
               <img src="{{ asset('img/sidebar/resultados.svg') }}" alt="resportes" class="nav-icon">
               <p>
                 Estadisticas
-                <span class="right badge badge-primary">G</span>
+                <span class="right badge badge-primary">GRÁFICA</span>
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{ route('recibos.index') }}" class="nav-link {{ request()->is('admin/recibos*') ? 'active' : '' }}">
               <img src="{{ asset('img/sidebar/facturas.svg') }}" alt="facturas" class="nav-icon">
               <p>
-                Facturaciones
-                <span class="right badge badge-danger">Fac</span>
+                Recibos
+                <span class="right badge badge-danger">PDF</span>
               </p>
             </a>
           </li>

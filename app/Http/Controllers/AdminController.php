@@ -3,6 +3,7 @@
 namespace Lacomita\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Lacomita\Models\Categoria;
 
 class AdminController extends Controller
 {
@@ -23,6 +24,8 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $categorias = Categoria::orderBy('id','DESC')->get();
+        //dd($categorias);
+        return view('home', compact('categorias'));
     }
 }

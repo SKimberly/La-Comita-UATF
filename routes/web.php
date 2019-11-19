@@ -105,6 +105,10 @@ function(){
 
 	Route::resource('calendarios','CalendarioController');
 
+	Route::resource('estadisticas','EstadisticaController');
+
+	Route::resource('recibos','ReciboController');
+
 });
 
 
