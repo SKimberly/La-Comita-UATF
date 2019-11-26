@@ -26,7 +26,8 @@ class WellcomeController extends Controller
      */
     public function create($id)
     {
-        $productos = Producto::orderBy('id','DESC')->paginate(20);
+        //dd($id);
+        $productos = Producto::where('categoria_id',$id)->orderBy('id','DESC')->paginate(20);
         return view('productos',compact('productos'));
     }
 

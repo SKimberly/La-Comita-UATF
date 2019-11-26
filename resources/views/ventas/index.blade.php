@@ -39,6 +39,7 @@
                           <th scope="col">Código</th>
                           <th scope="col">Entrega</th>
                           <th scope="col">Anticipo</th>
+                          <th scope="col">Deuda</th>
                           <th scope="col">Total Bs.</th>
                           <th scope="col">Estado</th>
                           <th scope="col">Opciones</th>
@@ -57,15 +58,18 @@
                           @endif
                           <td class="text-center colorcard">{{ $pedido->fecha_entrega }}</td>
                           <td class="text-center colorcard ">{{ $pedido->anticipo }}</td>
-                          <td class="text-center colorprin ">{{ $pedido->anticipo + $pedido->pago }}</td>
+                          <td class="text-center colorprin ">{{ $pedido->montototal-($pedido->anticipo+$pedido->pago) }}</td>
+                          <td class="text-center colorcard ">{{ $pedido->anticipo + $pedido->pago }}</td>
                           <td class="text-center">{{ ($pedido->carrito_id != 0) ? $pedido->carrito->estado : $pedido->cotizacion->estado }}</td>
 
                           <td class="text-center">
                             @if($pedido->carrito_id != 0)
                               @if($pedido->carrito->estado != 'Finalizado')
-                                <button type="button" class="btn colorprin  btn-sm" data-toggle="modal" data-target="#pagarPedido" data-whatever="{{ $pedido->id  }}"> <i class="fas fa-hand-holding-usd"></i> Completar Pago</button>
-
-                                <a href="{{ route('ventas.show', $pedido->id) }}" class="btn btn-primary  btn-sm"><i class="fas fa-vote-yea"></i> Finalizar Venta</a>
+                                @if(($pedido->anticipo+$pedido->pago) == $pedido->montototal)
+                                    <a href="{{ route('ventas.show', $pedido->id) }}" class="btn btn-primary  btn-sm"><i class="fas fa-vote-yea"></i> Finalizar Venta</a>
+                                @else
+                                    <button type="button" class="btn colorprin  btn-sm" data-toggle="modal" data-target="#pagarPedido" data-whatever="{{ $pedido->id  }}"> <i class="fas fa-hand-holding-usd"></i> Completar Pago</button>
+                                @endif
                               @else
                                 <a href="{{ route('ventas.edit', $pedido->id) }}" class="btn colorcard btn-sm" target="__blanck"><i class="fas fa-file-pdf"></i> Imprimir Factura</a>
                               @endif

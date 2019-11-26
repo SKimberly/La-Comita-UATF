@@ -6,6 +6,7 @@ use Auth;
 use Illuminate\Http\Request;
 use Lacomita\Models\Carrito;
 use Lacomita\Models\CarritoDetalle;
+use Lacomita\Models\Producto;
 
 class CarritoDetalleController extends Controller
 {
@@ -59,7 +60,10 @@ class CarritoDetalleController extends Controller
 
             $cartDetail->tallas()->attach($request->get('tallas'));
 
-            return redirect('/carrito/detalle')->with('success', 'Producto agregado al carrito!');
+            $rutapro = Producto::find($cartDetail->producto_id);
+            //dd($rutapro->categoria_id);
+
+            return redirect('/categoria/'.$rutapro->categoria_id.'/productos')->with('success', 'Producto agregado al carrito!');
         }
 
     }

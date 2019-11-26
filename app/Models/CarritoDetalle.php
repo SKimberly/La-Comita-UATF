@@ -21,4 +21,5 @@ class CarritoDetalle extends Model
     {
         return $this->belongsTo(Carrito::class);
     }
+
 }

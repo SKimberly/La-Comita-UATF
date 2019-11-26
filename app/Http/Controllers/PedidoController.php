@@ -6,8 +6,10 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Lacomita\Models\Carrito;
+use Lacomita\Models\CarritoDetalle;
 use Lacomita\Models\Cotizacion;
 use Lacomita\Models\Pedido;
+use Lacomita\Models\Producto;
 
 class PedidoController extends Controller
 {
@@ -47,8 +49,19 @@ class PedidoController extends Controller
         ]);
         if($request->fecha_entrega > date('Y-m-d')){
             if(isset($request->carrito_id)){
+
+                //Aqui encuentro el carrito para la suma del total del precio del producto
+                $carris = CarritoDetalle::where('carrito_id',$request['carrito_id'])->get();
+                $totalpre = 0;
+                foreach($carris as $carri){
+                    $pro = Producto::find($carri->producto_id);
+                    $totalpre = $totalpre+$pro->precio;
+                }
+                ////
+
                 $carrito = Pedido::where('carrito_id', $request['carrito_id'])->first();
                 $carrito->anticipo = $request['anticipo'];
+                $carrito->montototal =  $totalpre;
                 $carrito->fecha_entrega = $request['fecha_entrega'];
                 $carrito->observaciones = $request['observaciones'];
                 $carrito->save();
@@ -58,6 +71,7 @@ class PedidoController extends Controller
 
             }else{
                 $cotizacion = Pedido::where('cotizacion_id', $request['cotizacion_id'])->first();
+                $cotizacion->montototal = $request['montototal'];
                 $cotizacion->anticipo = $request['anticipo'];
                 $cotizacion->fecha_entrega = $request['fecha_entrega'];
                 $cotizacion->observaciones = $request['observaciones'];

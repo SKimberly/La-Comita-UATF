@@ -13,6 +13,20 @@
                  @csrf
                  @if(isset($cotizacion))
                       <input type="hidden" value="{{ $cotizacion->id }}" name="cotizacion_id">
+                      <div class="form-group row">
+                        <label for="montototal" class="col-sm-6 col-form-label">Monto total Bs.:</label>
+                        <div class="col-sm-6">
+                            <input class="form-control bg-light shadow-sm {{ $errors->has('montototal') ? ' is-invalid' : 'border-0' }}"
+                            id="montototal"
+                            name="montototal"
+                            placeholder="Ingrese el monto total" type="number" value="{{ old('montototal') }}">
+                            @if ($errors->has('montototal'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('montototal') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                     </div>
                  @else
                       <input type="hidden" value="{{ $carrito->id }}" name="carrito_id">
                  @endif

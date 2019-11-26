@@ -48,12 +48,6 @@
 
 <script>
 $(function () {
-    /* initialize the external events
-     -----------------------------------------------------------------*/
-
-    /* initialize the calendar
-     -----------------------------------------------------------------*/
-    //Date for the calendar events (dummy data)
 
     $('#calendar').fullCalendar({
       lang: 'es',
@@ -102,7 +96,7 @@ $(function () {
         //url:'events'
           @foreach($pedidos as $pedido)
           {
-              title : '{{ ($pedido->carrito_id == 0) ? $pedido->cotizacion->user->fullname : $pedido->carrito->user->fullname }}',
+              title : '{{ ($pedido->carrito_id == 0) ? $pedido->cotizacion->user->fullname : $pedido->carrito->user->fullname }} -  {{ $pedido->anticipo }}Bs.',
               start : '{{ $pedido->fecha_entrega }}',
               end   : '{{ $pedido->fecha_entrega}}',
               estado: '{{ ($pedido->carrito_id == 0) ? $pedido->cotizacion->estado : $pedido->carrito->estado }}',
