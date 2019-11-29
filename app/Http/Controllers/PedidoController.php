@@ -20,7 +20,14 @@ class PedidoController extends Controller
      */
     public function index()
     {
-        $pedidos = Pedido::where('anticipo',0)->orderBy('id','DESC')->get();
+        //dd(auth()->user()->id);
+        if( auth()->user()->hasRole('Super-Admin') || auth()->user()->hasRole('Administrador') || auth()->user()->hasRole('Ventas')){
+            $pedidos = Pedido::where('anticipo',0)->orderBy('id','DESC')->get();
+        }
+        if( auth()->user()->hasRole('Cliente')){
+            $pedidos = Pedido::where('usuario',auth()->user()->id)->where('anticipo',0)->orderBy('id','DESC')->get();
+        }
+        //dd($pedidos);
         //dd($pedido->cotizacion->user_id);
         return view('pedido.index', compact('pedidos'));
     }
@@ -43,22 +50,25 @@ class PedidoController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request->all());
         $this->validate($request, [
-            'anticipo' => 'required',
+            'anticipo' => 'required|regex:/^[1-9][0-9]+$/i|not_in:0',
             'fecha_entrega' => 'required'
         ]);
         if($request->fecha_entrega > date('Y-m-d')){
             if(isset($request->carrito_id)){
 
                 //Aqui encuentro el carrito para la suma del total del precio del producto
-                $carris = CarritoDetalle::where('carrito_id',$request['carrito_id'])->get();
+                $detalles = CarritoDetalle::where('carrito_id',$request['carrito_id'])->get();
                 $totalpre = 0;
-                foreach($carris as $carri){
-                    $pro = Producto::find($carri->producto_id);
-                    $totalpre = $totalpre+$pro->precio;
+                foreach($detalles as $detalle){
+                    $totalpre = $totalpre+($detalle->producto->precio*$detalle->cantidad);
                 }
                 ////
-
+                if($request['anticipo'] > $totalpre){
+                    \Alert::error('El anticipo no puede ser mayor al monto total!', 'Oops!')->persistent("Cerrar");
+                    return back();
+                }
                 $carrito = Pedido::where('carrito_id', $request['carrito_id'])->first();
                 $carrito->anticipo = $request['anticipo'];
                 $carrito->montototal =  $totalpre;

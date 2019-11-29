@@ -74,10 +74,10 @@
 		                <label for="tipo">Tipo:</label>
 		                <select class="form-control {{ $errors->has('tipo') ? ' is-invalid' : 'border-1' }}" name="tipo">
 		                    <option value="">Seleccione una opción</option>
-		                    <option value="supervisor">Supervisor</option>
-		                    <option value="secretaria">Secretaria</option>
-		                    <option value="vendedor">Vendedor</option>
-		                    <option value="cliente">Cliente</option>
+		                    <option value="Super-Admin">Super-Admin</option>
+		                    <option value="Administrador">Administrador</option>
+		                    <option value="Ventas">Ventas</option>
+		                    <option value="Cliente">Cliente</option>
 	                    </select>
 		                @if ($errors->has('tipo'))
 		                        <span class="invalid-feedback" role="alert">

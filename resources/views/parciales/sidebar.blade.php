@@ -13,8 +13,8 @@
         <div class="image">
           <img src="{{ asset('img/sidebar/userdefault.svg') }}" class="img-circle elevation-2" alt="User Image">
         </div>
-        <div class="info">
-          <a href="{{ route('admin.users.show',Auth::user()->id) }}" class="d-block "><b>{{ Auth::user()->fullname }}</b></a>
+        <div class="info ">
+          <a href="{{ route('admin.users.show',Auth::user()->id) }}" class="text-center" ><b>Perfil: ({{ Auth::user()->roles->first()->name }})</b> </a>
         </div>
       </div>
 
@@ -93,7 +93,7 @@
           </li>
           <li class="nav-item">
             <a href="{{ route('carrito.detalle') }}" class="nav-link {{ request()->is('carrito/detalle*') ? 'active' : '' }}">
-              <img src="{{ asset('img/sidebar/carrito.svg') }}" alt="pedidos" class="nav-icon">
+              <img src="{{ asset('img/sidebar/carrito.svg') }}" alt="carrito" class="nav-icon">
               <p>
                   Carrito
               </p>

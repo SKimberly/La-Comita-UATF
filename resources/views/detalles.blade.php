@@ -26,8 +26,8 @@
         <div class="col-12 col-sm-10 col-lg-6 mx-auto">
             <div class="card shadow">
                 <div class="card-body">
-                    <div style="text-align: center;">
-                    <img src="{{ $producto->favoritoimagenurl }}" class="card-img-top"> </div>
+                    <center>
+                    <img src="{{ $producto->favoritoimagenurl }}" class="d-block w-80" style="max-height: 250px !important;"> </center>
                     <h3 class="text-center">{{ $producto->nombre }}</h3>
                     <p class="text-justify">
                         {{ $producto->descripcion }}

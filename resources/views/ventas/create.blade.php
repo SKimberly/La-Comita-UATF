@@ -8,7 +8,7 @@
         </button>
       </div>
       <form class="bg-white shadow rounded py-3 px-4 was-validated"
-          method="POST" action="{{ route('ventas.store','#pago') }}">
+          method="POST" action="{{ route('ventas.store') }}">
           @csrf
           <div class="modal-body">
               <div class="form-group row">

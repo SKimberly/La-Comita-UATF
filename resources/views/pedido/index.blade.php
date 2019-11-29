@@ -37,9 +37,9 @@
                           <th scope="col">Nombre</th>
                           <th scope="col">Código</th>
                           <th scope="col">Tiempo</th>
+                          <th scope="col">Estado</th>
                           <th scope="col">Anticipo</th>
                           <th scope="col">Entrega</th>
-                          <th scope="col">Observaciones</th>
                           <th scope="col">Opciones</th>
                         </tr>
                       </thead>
@@ -51,14 +51,16 @@
                               <td>{{ $pedido->carrito->user->fullname }}</td>
                               <td class="text-center">{!! DNS1D::getBarcodeHTML($pedido->carrito->codigo, "C128",0.5,50,"black", true) !!}</td>
                               <td class="text-center">{{ $pedido->carrito->fecha_orden->format('M d') }} - {{ $pedido->carrito->fecha_orden->diffForHumans() }}</td>
+                              <td>{{ $pedido->carrito->estado }}</td>
                           @else
                               <td>{{ $pedido->cotizacion->user->fullname }}</td>
                               <td class="text-center">{!! DNS1D::getBarcodeHTML($pedido->cotizacion->codigo, "C128",0.5,50,"black", true) !!}</td>
                               <td class="text-center">{{ $pedido->cotizacion->fecha_orden->format('M d') }} - {{ $pedido->cotizacion->fecha_orden->diffForHumans() }}</td>
+                              <td>{{ $pedido->cotizacion->estado }}</td>
                           @endif
                           <td class="text-center colorprin ">{{ $pedido->anticipo }}</td>
                           <td class="text-center colorprin">Sin Fecha</td>
-                          <td>{{ $pedido->observaciones }}</td>
+
                           <td>
                             @if($pedido->carrito_id != 0)
                                 <a href="{{ route('carrito.show',$pedido->carrito_id) }}" class="btn btn-sm colorcard btn-block" target="_blanck"><i class="fas fa-hand-holding-usd"></i> Concretar</a>

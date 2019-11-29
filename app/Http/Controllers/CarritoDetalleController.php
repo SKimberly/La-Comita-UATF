@@ -41,7 +41,7 @@ class CarritoDetalleController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'cantidad' => 'required',
+            'cantidad' => 'required|regex:/^[0-9]+$/i|not_in:0',
             'tallas' => 'required'
         ]);
 

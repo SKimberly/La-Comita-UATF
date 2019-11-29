@@ -17,7 +17,13 @@ class VentaController extends Controller
      */
     public function index()
     {
-        $pedidos = Pedido::where('anticipo','!=',0)->orderBy('updated_at','DESC')->get();
+
+        if( auth()->user()->hasRole('Super-Admin') || auth()->user()->hasRole('Administrador') || auth()->user()->hasRole('Ventas')){
+            $pedidos = Pedido::where('anticipo','!=',0)->orderBy('updated_at','DESC')->get();
+        }
+        if( auth()->user()->hasRole('Cliente')){
+            $pedidos = Pedido::where('anticipo','!=',0)->where('usuario',auth()->user()->id)->orderBy('updated_at','DESC')->get();
+        }
         //dd($pedido->cotizacion->user_id);
         return view('ventas.index', compact('pedidos'));
     }
@@ -40,9 +46,31 @@ class VentaController extends Controller
      */
     public function store(Request $request)
     {
+
+        $this->validate($request, [
+            //'pago' => 'required|regex:/^[1-9][0-9]+$/i|not_in:0'
+            'pago' => 'required|regex:/^[0-9]+$/i|not_in:0'
+        ]);
+        //dd($request->all());
         $pedido = Pedido::find($request['pedido_id']);
+        $deuda = $pedido->montototal-($pedido->anticipo+$pedido->pago);
+        //dd($pedido);
+        if($request['pago'] > $deuda ){
+            \Alert::error('El anticipo no puede ser mayor al monto total!', 'Oops!')->persistent("Cerrar");
+            return redirect('/admin/ventas');
+        }
         $pedido->pago = $pedido->pago+$request['pago'];
         $pedido->save();
+
+        if($pedido->montotal === ($pedido->anticipo+$pedido->pago)){
+            if($pedido->carrito_id != 0){
+                Carrito::where('id',$pedido->carrito_id)
+                        ->update(['estado'=>'Finalizado']);
+            }else{
+                Cotizacion::where('id',$pedido->cotizacion_id)
+                        ->update(['estado'=>'Finalizado']);
+            }
+        }
 
         return redirect('admin/ventas#')->with('success', "Excelente... El pago fue actualizado!");
     }

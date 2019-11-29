@@ -16,7 +16,16 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::orderBy('id', 'DESC')->paginate(10);
+        if( auth()->user()->hasRole('Super-Admin') ){
+            $users = User::where('id','!=',auth()->user()->id)->orderBy('id', 'DESC')->paginate(10);
+        }
+        if( auth()->user()->hasRole('Administrador')){
+            $users = User::where('id','!=',auth()->user()->id)->where('tipo','!=','Super-Admin')->orderBy('id', 'DESC')->paginate(10);
+        }
+        if( auth()->user()->hasRole('Ventas')){
+            $users = User::where('id','!=',auth()->user()->id)->where('tipo','!=','Administrador')->where('tipo','!=','Super-Admin')->orderBy('id', 'DESC')->paginate(10);
+        }
+
         //dd(User::paginate(10));
         return view('admin.users.index', compact('users'));
     }

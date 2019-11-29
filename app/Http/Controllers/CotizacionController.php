@@ -87,8 +87,9 @@ class CotizacionController extends Controller
     public function show($id)
     {
         $cotizacion = Cotizacion::findOrFail($id);
-
-        return view('cotizacion.show', compact('cotizacion'));
+        $pedido = Pedido::where('cotizacion_id',$cotizacion->id)->first();
+        //dd($pedido);
+        return view('cotizacion.show', compact('cotizacion','pedido'));
     }
 
     /**
@@ -116,6 +117,13 @@ class CotizacionController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        $this->validate($request, [
+            'cantidad' => 'required|regex:/^[0-9]+$/i|not_in:0',
+            'tallas' => 'required',
+            'descripcion' => 'required|min:5|max:500',
+        ]);
+
         $cotizacion = Cotizacion::findOrFail($id);
         $cotizacion->codigo = $id.'/'.$cotizacion->created_at->format('Y-M-d').'-Coti';
         $cotizacion->cantidad = $request['cantidad'];
@@ -185,7 +193,8 @@ class CotizacionController extends Controller
 
         Pedido::create([
             'carrito_id' => 0,
-            'cotizacion_id' => $cotizacion->id
+            'cotizacion_id' => $cotizacion->id,
+            'usuario' => auth()->user()->id
         ]);
 
         //aqui se recibe el usuario para enviar la notificacion

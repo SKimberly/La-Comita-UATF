@@ -46,11 +46,14 @@
                         </tr>
                       </thead>
                       <tbody>
+                        @php
+                          $res=0;
+                        @endphp
                       @foreach($detalles as $key => $detalle)
                       <tr>
                          <td class="text-center">{{ ++$key }}</td>
                          <td class="text-center">
-                            <img src="{{ asset($detalle->producto->favoritoimagenurl) }}" class="img-responsive img-thumbnail h-50 mr-0" alt="Producto Foto">
+                            <img src="{{ asset($detalle->producto->favoritoimagenurl) }}" class="img-responsive img-thumbnail mr-0" style="height: 5em" alt="Producto Foto">
                           </td>
                          <td>
                             <a href="{{ route('productos.detalles',$detalle->producto->id) }}" target="_blank">{{ $detalle->producto->nombre }}</a>
@@ -64,6 +67,9 @@
                          <td class="text-center">{{ $detalle->producto->precio }}</td>
                          <td class="text-center">{{ $detalle->cantidad }}</td>
                          <td class="text-center"><b>Bs.</b> {{ $detalle->producto->precio*$detalle->cantidad }}</td>
+                         @php
+                           $res = $res+($detalle->producto->precio*$detalle->cantidad);
+                         @endphp
                          <td>
                            <form method="POST" action="{{ route('carrito.eliminar', $detalle->id) }}">
                              @csrf @method('DELETE')
@@ -76,6 +82,9 @@
                       @endforeach
                       </tbody>
                   </table>
+                  <div class="col-12 col-sm-10 col-lg-4 mx-auto">
+                    <p class="text-center colorcard"><strong> Monto total: {{ $res }} Bs. </strong></p>
+                  </div>
                   <div class="text-center">
                     <form method="POST" action="{{ route('realizar.orden') }}">
                       @csrf
@@ -94,6 +103,7 @@
                     </form>
                   </div>
                 </div>
+
             </div>
       </div>
     </div>

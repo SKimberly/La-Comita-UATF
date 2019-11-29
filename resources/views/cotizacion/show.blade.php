@@ -36,7 +36,11 @@
 				            <span class="description" style="color: #fff;">Fecha: {{ $cotizacion->updated_at->format('M d') }}</span>
 				        </div>
 				        <div class="card-tools">
-			                <strong>Celular:</strong>{{ $cotizacion->user->telefono }}
+				        	@if($pedido != null)
+			                   	<strong>Total Bs.:</strong>{{ $pedido->montototal }}
+			                @else
+			                	<strong>Celular:</strong>{{ $cotizacion->user->telefono }}
+			                @endif
 				        </div>
 				    </div>
 				    <div class="card-body">

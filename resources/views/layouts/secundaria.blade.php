@@ -56,6 +56,15 @@
                                        {{ strtoupper(Auth::user()->fullname) }}
                                     </a>
                             </li>
+                            <li class="nav-item dropdown">
+                              <a class="text-white"  href="{{ route('carrito.detalle') }}">
+                                <img src="{{ asset('img/sidebar/carrito.svg') }}" alt="pedidos" width="40" class="">
+                                @if($nummsj = auth()->user()->carrito->detalles->count())
+                                  <span class="badge badge-warning navbar-badge">{{ $nummsj }}</span>
+                                @endif
+                              </a>
+                            </li>
+
                         @endguest
                     </ul>
                 </div>

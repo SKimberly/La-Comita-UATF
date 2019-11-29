@@ -8,7 +8,7 @@ use Lacomita\Models\Cotizacion;
 
 class Pedido extends Model
 {
-	protected $fillable = ['id','carrito_id','cotizacion_id','anticipo','fecha_entrega','observaciones'];
+	protected $fillable = ['id','carrito_id','cotizacion_id','anticipo','fecha_entrega','observaciones','usuario'];
 
     public function carrito()
     {

@@ -37,7 +37,8 @@ class CarritoController extends Controller
 
         Pedido::create([
             'carrito_id' => $carrito->id,
-            'cotizacion_id' => 0
+            'cotizacion_id' => 0,
+            'usuario' => auth()->user()->id
         ]);
 
         $admin = User::where('tipo','Administrador')->first();

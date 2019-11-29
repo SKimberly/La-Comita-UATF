@@ -57,27 +57,21 @@
                               <td class="text-center">{!! DNS1D::getBarcodeHTML($pedido->cotizacion->codigo, "C128",0.5,50,"black", true) !!}</td>
                           @endif
                           <td class="text-center colorcard">{{ $pedido->fecha_entrega }}</td>
-                          <td class="text-center colorcard ">{{ $pedido->anticipo }}</td>
-                          <td class="text-center colorprin ">{{ $pedido->montototal-($pedido->anticipo+$pedido->pago) }}</td>
                           <td class="text-center colorcard ">{{ $pedido->anticipo + $pedido->pago }}</td>
+                          <td class="text-center colorprin ">{{ $pedido->montototal-($pedido->anticipo+$pedido->pago) }}</td>
+                          <td class="text-center colorcard ">{{ $pedido->montototal }}</td>
                           <td class="text-center">{{ ($pedido->carrito_id != 0) ? $pedido->carrito->estado : $pedido->cotizacion->estado }}</td>
 
                           <td class="text-center">
                             @if($pedido->carrito_id != 0)
-                              @if($pedido->carrito->estado != 'Finalizado')
-                                @if(($pedido->anticipo+$pedido->pago) == $pedido->montototal)
-                                    <a href="{{ route('ventas.show', $pedido->id) }}" class="btn btn-primary  btn-sm"><i class="fas fa-vote-yea"></i> Finalizar Venta</a>
-                                @else
+                                @if((($pedido->anticipo+$pedido->pago) < $pedido->montototal))
                                     <button type="button" class="btn colorprin  btn-sm" data-toggle="modal" data-target="#pagarPedido" data-whatever="{{ $pedido->id  }}"> <i class="fas fa-hand-holding-usd"></i> Completar Pago</button>
+                                @else
+                                  <a href="{{ route('ventas.edit', $pedido->id) }}" class="btn colorcard btn-sm" target="__blanck"><i class="fas fa-file-pdf"></i> Imprimir Factura</a>
                                 @endif
-                              @else
-                                <a href="{{ route('ventas.edit', $pedido->id) }}" class="btn colorcard btn-sm" target="__blanck"><i class="fas fa-file-pdf"></i> Imprimir Factura</a>
-                              @endif
                             @else
-                                @if($pedido->cotizacion->estado != 'Finalizado')
+                                @if((($pedido->anticipo+$pedido->pago) < $pedido->montototal))
                                   <button type="button" class="btn colorprin  btn-sm" data-toggle="modal" data-target="#pagarPedido" data-whatever="{{ $pedido->id  }}"> <i class="fas fa-hand-holding-usd"></i> Completar Pago</button>
-
-                                  <a href="{{ route('ventas.show', $pedido->id) }}" class="btn btn-primary  btn-sm"><i class="fas fa-vote-yea"></i> Finalizar Venta</a>
                                 @else
                                   <a href="{{ route('ventas.edit', $pedido->id) }}" class="btn colorcard btn-sm" target="__blanck"><i class="fas fa-file-pdf"></i> Imprimir Factura</a>
                                 @endif
@@ -104,17 +98,6 @@
           // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
           var modal = $(this)
           modal.find('.modal-footer input').val(recipient)
-    });
-    if(window.location.hash === '#pago')
-    {
-        $('#pagarPedido').modal('show');
-    }
-    $('#pagarPedido').on('hide.bs.modal', function(){
-      //console.log('El modal se cierra');
-      window.location.hash = '#';
-    });
-    $('#pagarPedido').on('shown.bs.modal', function(){
-       window.location.hash = '#pago';
     });
 </script>
 @endunless

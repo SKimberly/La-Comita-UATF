@@ -17,6 +17,7 @@ class CreatePedidosTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('carrito_id')->nullable();
             $table->unsignedInteger('cotizacion_id')->nullable();
+            $table->unsignedInteger('usuario')->nullable();
 
             $table->unsignedInteger('anticipo')->default(0);
             $table->float('montototal')->default(0);

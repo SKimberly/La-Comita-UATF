@@ -30,7 +30,7 @@
               <div class="widget-user-header text-white"
                    style="background-color: #B43CCA;" >
                 <h3 class="widget-user-username text-right">{{ $user->fullname }}</h3>
-                <h5 class="widget-user-desc text-right">{{ $user->tipo }}</h5>
+                <h5 class="widget-user-desc text-right">{{ Auth::user()->roles->first()->name }}</h5>
               </div>
               <div class="widget-user-image">
                 <img class="img-circle" src="{{ asset('/img/sidebar/userdefault.svg') }}" alt="User Avatar">
