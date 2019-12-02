@@ -96,6 +96,9 @@
               <img src="{{ asset('img/sidebar/carrito.svg') }}" alt="carrito" class="nav-icon">
               <p>
                   Carrito
+                  @if($nummsj = auth()->user()->carrito->detalles->count())
+                      <span class="right badge badge-warning">{{ $nummsj }}</span>
+                  @endif
               </p>
             </a>
           </li>

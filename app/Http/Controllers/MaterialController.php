@@ -3,6 +3,7 @@
 namespace Lacomita\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Lacomita\Models\Categoria;
 use Lacomita\Models\Material;
 
 class MaterialController extends Controller
@@ -14,6 +15,7 @@ class MaterialController extends Controller
      */
     public function index()
     {
+        $this->authorize('create', new Categoria);
         $materiales = Material::orderBy('id', 'DESC')->paginate(10);
         return view('admin.materiales.index', compact('materiales'));
     }

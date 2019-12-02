@@ -4,6 +4,7 @@ namespace Lacomita\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Lacomita\Models\Carrito;
+use Lacomita\Models\Categoria;
 use Lacomita\Models\Cotizacion;
 use Lacomita\Models\Pedido;
 
@@ -16,6 +17,9 @@ class ReciboController extends Controller
      */
     public function index()
     {
+
+        $this->authorize('create', new Categoria);
+
         $pedidos = Pedido::where('pago','!=',0)->orderBy('id','DESC')->get();
 
         return view('recibos.index', compact('pedidos'));

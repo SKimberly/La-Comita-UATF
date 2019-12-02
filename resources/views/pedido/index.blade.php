@@ -64,10 +64,10 @@
                           <td>
                             @if($pedido->carrito_id != 0)
                                 <a href="{{ route('carrito.show',$pedido->carrito_id) }}" class="btn btn-sm colorcard btn-block" target="_blanck"><i class="fas fa-hand-holding-usd"></i> Concretar</a>
-                                <a href="" class="btn btn-sm btn-danger btn-block"><i class="fas fa-backspace"></i> Dar/Baja</a>
+                                <a href="{{ route('pedidos.edit',$pedido->carrito_id) }}" class="btn btn-sm btn-danger btn-block"><i class="fas fa-backspace"></i> Dar/Baja</a>
                             @else
-                                <a href="{{ route('cotizaciones.show',$pedido->cotizacion_id) }}" class="btn btn-sm colorcard btn-block" target="_blanck"><i class="fas fa-hand-holding-usd"></i> Concretar</a>
-                                <a href="" class="btn btn-sm btn-danger btn-block"><i class="fas fa-backspace"></i> Dar/Baja</a>
+                                <a href="{{ route('pedidos.show',$pedido->cotizacion_id) }}" class="btn btn-sm colorcard btn-block" target="_blanck"><i class="fas fa-hand-holding-usd"></i> Concretar</a>
+                                <a href="{{ route('pedido.baja',$pedido->cotizacion_id) }}" class="btn btn-sm btn-danger btn-block"><i class="fas fa-backspace"></i> Dar/Baja</a>
                             @endif
                           </td>
                       </tr>

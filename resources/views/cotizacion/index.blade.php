@@ -45,6 +45,7 @@
 									<th scope="col">Productos</th>
 									<th scope="col">Tallas</th>
 									<th scope="col">Cantidad</th>
+									<th scope="col">Estado</th>
 									<th scope="col">Opciones</th>
 								</tr>
 							</thead>
@@ -65,6 +66,7 @@
 										@endforeach
 									</td>
 									<td class="text-center">{{ $cotizacion->cantidad }}</td>
+									<td class="text-center">{{ $cotizacion->estado }}</td>
 									<td>
 										<form method="post" action="{{ route('admin.cotizaciones.eliminar', $cotizacion->id) }}" style="display:inline">
 											@method('DELETE') @csrf

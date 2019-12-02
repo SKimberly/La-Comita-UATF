@@ -3,6 +3,7 @@
 namespace Lacomita\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Lacomita\Models\Categoria;
 
 class EstadisticaController extends Controller
 {
@@ -13,6 +14,8 @@ class EstadisticaController extends Controller
      */
     public function index()
     {
+
+        $this->authorize('create', new Categoria);
 
         return view('estadisticas.index');
     }

@@ -3,6 +3,7 @@
 namespace Lacomita\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Lacomita\Models\Categoria;
 use Lacomita\Models\Pedido;
 
 class CalendarioController extends Controller
@@ -14,6 +15,8 @@ class CalendarioController extends Controller
      */
     public function index()
     {
+        $this->authorize('create', new Categoria);
+
         $pedidos = Pedido::where('anticipo','!=',0)->orderBy('id','DESC')->get();
         //d($pedidos);
         return view('calendario.index',compact('pedidos'));

@@ -20,20 +20,24 @@ Route::get('redirect', function(){
 	return redirect('/home')->with('success', 'Bienvenido!');
 });
 
-Route::get('categoria/{id}/productos','WellcomeController@create')->name('categoria.productos');
-Route::get('categoria/producto/{id}/detalle','WellcomeController@show')->name('productos.detalles');
-
-//Rutas para el carrito
-Route::get('/carrito/detalle', 'CarritoDetalleController@index')->name('carrito.detalle');
-Route::post('/carrito', 'CarritoDetalleController@store')->name('carrito.store');
-Route::delete('/carrito/{id}/eliminar','CarritoDetalleController@destroy')->name('carrito.eliminar');
-Route::post('/realizar/pedido', 'CarritoController@create')->name('realizar.orden');
-
-Route::get('/carrito/{id}/show', 'CarritoDetalleController@show')->name('carrito.show');
-
-
+	Route::get('categoria/{id}/productos','WellcomeController@create')->name('categoria.productos');
+	Route::get('categoria/producto/{id}/detalle','WellcomeController@show')->name('productos.detalles');
 //Rutas para enviar mensajes de contacto ants de iniciar sesión
-Route::resource('smscontactos','ContactoController');
+	Route::resource('smscontactos','ContactoController');
+
+Route::group([
+	'middleware' => 'auth'],
+function(){
+	//Rutas para el carrito
+	Route::get('/carrito/detalle', 'CarritoDetalleController@index')->name('carrito.detalle');
+	Route::post('/carrito', 'CarritoDetalleController@store')->name('carrito.store');
+	Route::delete('/carrito/{id}/eliminar','CarritoDetalleController@destroy')->name('carrito.eliminar');
+	Route::post('/realizar/pedido', 'CarritoController@create')->name('realizar.orden');
+
+	Route::get('/carrito/{id}/show', 'CarritoDetalleController@show')->name('carrito.show');
+
+});
+
 
 Route::group([
 	'prefix' => 'admin',
@@ -97,6 +101,7 @@ function(){
 
 	Route::resource('pedidos','PedidoController');
 	Route::post('/pedidos', 'PedidoController@store')->name('cancelar.pedido');
+	Route::get('/pedidos/{id}/baja', 'PedidoController@bajacotiza')->name('pedido.baja');
 
 	Route::resource('tallas','TallaController');
 	Route::resource('materiales','MaterialController');

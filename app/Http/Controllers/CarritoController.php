@@ -30,6 +30,7 @@ class CarritoController extends Controller
     public function create()
     {
         $carrito = auth()->user()->carrito;
+        $this->authorize('view',$carrito);
         $carrito->codigo = $carrito->id.'/'.date('Y-M-d').'-Carri';
         $carrito->estado = 'Pendiente';
         $carrito->fecha_orden = Carbon::now();

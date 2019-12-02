@@ -14,6 +14,8 @@ class CategoriaController extends Controller
      */
     public function index()
     {
+        $this->authorize('create', new Categoria);
+
         $categorias = Categoria::orderBy('id','DESC')->paginate(2);
 
         return view('admin.categorias.index', compact('categorias'));
@@ -26,6 +28,8 @@ class CategoriaController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', new Categoria);
+
         return view('admin.categorias.create');
     }
 
@@ -77,6 +81,8 @@ class CategoriaController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize('update', new Categoria);
+
         $categoria = Categoria::findOrFail($id);
         return view('admin.categorias.edit', compact('categoria'));
     }
@@ -136,6 +142,7 @@ class CategoriaController extends Controller
     {
         //Primero eliminaremos la imagen del proyecto
         $categoriaFoto = Categoria::find($id);
+        $this->authorize('delete', new Categoria);
         if(substr($categoriaFoto->imagen, 0, 4)==="http"){ // = = =
             $deleted = true;
         }else{

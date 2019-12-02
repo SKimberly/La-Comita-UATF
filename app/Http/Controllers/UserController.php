@@ -16,6 +16,9 @@ class UserController extends Controller
      */
     public function index()
     {
+
+        $this->authorize('view', new User);
+
         if( auth()->user()->hasRole('Super-Admin') ){
             $users = User::where('id','!=',auth()->user()->id)->orderBy('id', 'DESC')->paginate(10);
         }
@@ -37,6 +40,8 @@ class UserController extends Controller
      */
     public function create(Request $request, $id)
     {
+
+
         $this->validate($request, [
             'telefono' => 'required|min:5|max:12'
         ]);
@@ -76,6 +81,8 @@ class UserController extends Controller
             'tipo' => 'required',
         ]);*/
         //dd($request->all());
+        $this->authorize('create', new User);
+
         $user = new User;
         $user->fullname = $request['fullname'];
         $user->cedula = $request['cedula'];
@@ -108,6 +115,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize('create', new User);
         $user = User::find($id);
         return view('admin.users.edit', compact('user'));
     }
@@ -152,6 +160,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('create', new User);
         $user = User::findOrFail($id);
         $user->delete();
 

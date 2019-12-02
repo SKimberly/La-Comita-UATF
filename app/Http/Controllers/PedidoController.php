@@ -22,10 +22,10 @@ class PedidoController extends Controller
     {
         //dd(auth()->user()->id);
         if( auth()->user()->hasRole('Super-Admin') || auth()->user()->hasRole('Administrador') || auth()->user()->hasRole('Ventas')){
-            $pedidos = Pedido::where('anticipo',0)->orderBy('id','DESC')->get();
+            $pedidos = Pedido::where('observaciones','!=','Baja')->where('anticipo',0)->orderBy('id','DESC')->get();
         }
         if( auth()->user()->hasRole('Cliente')){
-            $pedidos = Pedido::where('usuario',auth()->user()->id)->where('anticipo',0)->orderBy('id','DESC')->get();
+            $pedidos = Pedido::where('usuario',auth()->user()->id)->where('observaciones','!=','Baja')->where('anticipo',0)->orderBy('id','DESC')->get();
         }
         //dd($pedidos);
         //dd($pedido->cotizacion->user_id);
@@ -39,7 +39,7 @@ class PedidoController extends Controller
      */
     public function create()
     {
-        return "estas aqui";
+
     }
 
     /**
@@ -50,6 +50,8 @@ class PedidoController extends Controller
      */
     public function store(Request $request)
     {
+        //dd(auth()->user()->roles->first()->name);
+        $this->authorize('create', new Pedido);
         //dd($request->all());
         $this->validate($request, [
             'anticipo' => 'required|regex:/^[1-9][0-9]+$/i|not_in:0',
@@ -98,29 +100,52 @@ class PedidoController extends Controller
         return redirect('/admin/ventas')->with('success', "Excelente... ahora el pedido está en PROCESO!");
 
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \Lacomita\Pedido  $pedido
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Pedido $pedido)
+    public function show($id)
     {
-        //
+        $cotizacion = Cotizacion::findOrFail($id);
+        $pedido = Pedido::where('cotizacion_id',$cotizacion->id)->first();
+
+        $this->authorize('create',new Pedido);
+        //dd($pedido);
+        return view('cotizacion.show', compact('cotizacion','pedido'));
+    }
+    /**
+     Esto ES PARA DAR DE BAJA A UNA COTIZACION
+     */
+    public function bajacotiza($id)
+    {
+        $pedido = Pedido::where('cotizacion_id',$id)->first();
+        $this->authorize('view',$pedido);
+            //return "es coti ".$id;
+        $cotizacion = Cotizacion::findOrFail($id);
+        $cotizacion->estado = 'Activo';
+        $cotizacion->save();
+
+        Pedido::where('cotizacion_id',$id)->update(['observaciones' => 'Baja']);
+
+        return back()->with('success', "Excelente... tu pedido fue dado de baja!");
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \Lacomita\Pedido  $pedido
-     * @return \Illuminate\Http\Response
+     ESTA FINCION ES PARA DAR DE BAJA A UN CARRITO
      */
-    public function edit(Pedido $pedido)
+    public function edit($id)
     {
-        //
-    }
+        $pedido = Pedido::where('carrito_id',$id)->first();
+        $this->authorize('view',$pedido);
+        //dd($id);
+        $nuevoca = Carrito::where('user_id',auth()->user()->id)->where('estado','Activo')->first();
 
+        CarritoDetalle::where('carrito_id',$nuevoca->id)->update(['carrito_id' => $id ]);
+
+        Carrito::where('id',$nuevoca->id)->where('estado','Activo')->delete();
+
+        Carrito::where('id',$id)->update(['estado' => 'Activo']);
+
+        Pedido::where('carrito_id',$id)->update(['observaciones' => 'Baja']);
+
+        return back()->with('success', "Excelente... tu pedido fue dado de baja!");
+    }
     /**
      * Update the specified resource in storage.
      *

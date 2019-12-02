@@ -18,6 +18,9 @@ class FotoController extends Controller
     }
     public function store(Request $request, $id)
     {
+
+        $this->authorize('create', new Producto);
+
         $this->validate($request, [
 
             'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
@@ -41,6 +44,8 @@ class FotoController extends Controller
     }
     public function destroy(Request $request, $id)
     {
+
+        $this->authorize('create', new Producto);
         //Primero eliminaremos la imagen del proyecto
         $productoFoto = ProductoFoto::find($request->foto_id);
         if(substr($productoFoto->imagen, 0, 4)==="http"){ // = = =
@@ -58,6 +63,9 @@ class FotoController extends Controller
 
     public function select($id, $image)
     {
+
+        $this->authorize('create', new Producto);
+
         ProductoFoto::where('producto_id',$id)->update([
             'favorito' => false
         ]);

@@ -3,6 +3,7 @@
 namespace Lacomita\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Lacomita\Models\Categoria;
 use Lacomita\Models\Talla;
 
 class TallaController extends Controller
@@ -14,6 +15,8 @@ class TallaController extends Controller
      */
     public function index()
     {
+        $this->authorize('create', new Categoria);
+
         $tallas = Talla::orderBy('id', 'DESC')->paginate(10);
         return view('admin.tallas.index', compact('tallas'));
     }

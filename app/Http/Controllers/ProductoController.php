@@ -20,6 +20,7 @@ class ProductoController extends Controller
 
     //Aqui enviamos a la vista create.blade.php
     public function create(){
+        $this->authorize('create', new Producto);
     	//Aqui devuelves a la vista donde esta el formulario de registro de productos
         $categorias = Categoria::orderBy('id','DESC')->get();
         //Le mandamos tambien las tallas
@@ -63,6 +64,7 @@ class ProductoController extends Controller
 
     //Aqui vamos a edevolver a la vista edit.blade.php
     public function edit($id){
+        $this->authorize('update', new Producto);
     	//Aqui devolvemos datos del producto a editar a la vista edit.blade.php reciviendo un (id) del producto
         $producto = Producto::find($id);
         $categorias = Categoria::orderBy('id','DESC')->get();
@@ -98,6 +100,9 @@ class ProductoController extends Controller
 
     //Recibimos el id del producto a eliminar
     public function destroy($id){
+
+        $this->authorize('delete', new Producto);
+
         $producto = Producto::findOrFail($id);
         $producto->delete();
 

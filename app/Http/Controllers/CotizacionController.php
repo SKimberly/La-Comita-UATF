@@ -24,8 +24,17 @@ class CotizacionController extends Controller
      */
     public function index()
     {
-        $cotizaciones = Cotizacion::where('estado','Activo')->orderBy('id', 'DESC')->paginate(2);
+        if( auth()->user()->hasRole('Super-Admin') || auth()->user()->hasRole('Administrador')){
+            $cotizaciones = Cotizacion::where('estado','Activo')->orderBy('id', 'DESC')->paginate(5);
+        }
+        if( auth()->user()->hasRole('Cliente')){
+            $cotizaciones = Cotizacion::where('user_id',auth()->user()->id)->where('estado','Activo')->orderBy('id', 'DESC')->paginate(5);
+        }
+
         $productos = Producto::orderBy('id', 'ASC')->get();
+
+        //$cotizaciones = auth()->user()->cotizaciones;
+
         return view('cotizacion.index', compact('cotizaciones','productos'));
     }
 
@@ -59,7 +68,7 @@ class CotizacionController extends Controller
             'user_id' => auth()->user()->id,
             'estado'  => 'Activo'
         ]);
-
+        //Aqui estoy introduciendo todos los productos para crear una cotización
         $cotizacion->productos()->attach($request->get('productos'));
         return redirect()->route('admin.cotizaciones.edit', $cotizacion);
         //return redirect('cotizacion.edit',compact('cotizacion'));
@@ -88,6 +97,8 @@ class CotizacionController extends Controller
     {
         $cotizacion = Cotizacion::findOrFail($id);
         $pedido = Pedido::where('cotizacion_id',$cotizacion->id)->first();
+
+        $this->authorize('restore',$cotizacion);
         //dd($pedido);
         return view('cotizacion.show', compact('cotizacion','pedido'));
     }
@@ -101,6 +112,9 @@ class CotizacionController extends Controller
     public function edit($id)
     {
         $cotizacion = Cotizacion::findOrFail($id);
+
+        $this->authorize('view',$cotizacion);
+
         $productos = Producto::orderBy('id', 'ASC')->get();
         $tallas = Talla::orderBy('id', 'ASC')->get();
         $materiales = Material::orderBy('id', 'ASC')->get();
@@ -125,6 +139,9 @@ class CotizacionController extends Controller
         ]);
 
         $cotizacion = Cotizacion::findOrFail($id);
+
+        $this->authorize('update',$cotizacion);
+
         $cotizacion->codigo = $id.'/'.$cotizacion->created_at->format('Y-M-d').'-Coti';
         $cotizacion->cantidad = $request['cantidad'];
         $cotizacion->descripcion = $request['descripcion'];
@@ -152,6 +169,7 @@ class CotizacionController extends Controller
      */
     public function destroy($id)
     {
+
         $foto = CotizacionFoto::find($id);
         //Aqui eliminamos la foto de la base de datos
         $foto->delete();
@@ -166,6 +184,8 @@ class CotizacionController extends Controller
     public function eliminartodo($id)
     {
         $cotizacion = Cotizacion::findOrFail($id);
+
+        $this->authorize('delete',$cotizacion);
 
         $cotizacion->productos()->detach();
         $cotizacion->tallas()->detach();
@@ -187,6 +207,9 @@ class CotizacionController extends Controller
     public function cotiapedido($id)
     {
         $cotizacion = Cotizacion::find($id);
+
+        $this->authorize('view',$cotizacion);
+
         $cotizacion->estado = 'Pendiente';
         $cotizacion->fecha_orden = Carbon::now();
         $cotizacion->save();

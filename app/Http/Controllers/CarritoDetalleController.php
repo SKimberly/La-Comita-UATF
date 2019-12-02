@@ -6,6 +6,7 @@ use Auth;
 use Illuminate\Http\Request;
 use Lacomita\Models\Carrito;
 use Lacomita\Models\CarritoDetalle;
+use Lacomita\Models\Pedido;
 use Lacomita\Models\Producto;
 
 class CarritoDetalleController extends Controller
@@ -19,6 +20,9 @@ class CarritoDetalleController extends Controller
     {
         $detalles = auth()->user()->carrito->detalles;
         $carrito = auth()->user()->carrito;
+
+        //$carrito = Carrito::where('estado','Activo')->get();
+
         return view('carrito.index',compact('detalles', 'carrito'));
     }
 
@@ -78,6 +82,11 @@ class CarritoDetalleController extends Controller
     {
         $carrito = Carrito::findOrFail($id);
         $detalles = $carrito->detalles;
+
+        $pedido = Pedido::where('carrito_id',$id)->first();
+
+        $this->authorize('create', new Pedido);
+
         return view('carrito.index',compact('detalles','carrito'));
     }
 
@@ -112,7 +121,12 @@ class CarritoDetalleController extends Controller
      */
     public function destroy($id)
     {
+
         $detalle = CarritoDetalle::find($id);
+
+        $carrito = Carrito::where('id',$detalle->carrito_id)->first();
+        $this->authorize('delete',$carrito);
+
         //si el id del carrito es igual al usuario autentificado su carrito_id, hara la eliminacion
         if ($detalle->carrito_id == auth()->user()->carrito->id) {
             $detalle->delete();

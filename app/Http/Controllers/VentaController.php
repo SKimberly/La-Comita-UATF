@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Lacomita\Models\Carrito;
 use Lacomita\Models\Cotizacion;
 use Lacomita\Models\Pedido;
+use Lacomita\Models\Venta;
 
 class VentaController extends Controller
 {
@@ -46,6 +47,7 @@ class VentaController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', new Venta);
 
         $this->validate($request, [
             //'pago' => 'required|regex:/^[1-9][0-9]+$/i|not_in:0'

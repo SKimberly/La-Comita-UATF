@@ -39,7 +39,7 @@
                         </li>
                         @yield('linknavbar')
                         <li class="nav-item active">
-                            <a href="javascript:history.back(-1);" class="" >VOLVER</a>
+                            <a href="/#producto" class="" >VOLVER</a>
                         </li>
                         @guest
                             <li class="nav-item active">
