@@ -3,9 +3,9 @@
 namespace Lacomita\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-use Lacomita\User;
 use Lacomita\Http\Requests\UserGuardarRequest;
+use Lacomita\User;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -20,17 +20,19 @@ class UserController extends Controller
         $this->authorize('view', new User);
 
         if( auth()->user()->hasRole('Super-Admin') ){
-            $users = User::where('id','!=',auth()->user()->id)->orderBy('id', 'DESC')->paginate(10);
+            $users = User::where('id','!=',auth()->user()->id)->orderBy('id', 'DESC')->paginate();
         }
         if( auth()->user()->hasRole('Administrador')){
-            $users = User::where('id','!=',auth()->user()->id)->where('tipo','!=','Super-Admin')->orderBy('id', 'DESC')->paginate(10);
+            $users = User::where('id','!=',auth()->user()->id)->where('tipo','!=','Super-Admin')->orderBy('id', 'DESC')->paginate();
         }
         if( auth()->user()->hasRole('Ventas')){
-            $users = User::where('id','!=',auth()->user()->id)->where('tipo','!=','Administrador')->where('tipo','!=','Super-Admin')->orderBy('id', 'DESC')->paginate(10);
+            $users = User::where('id','!=',auth()->user()->id)->where('tipo','!=','Administrador')->where('tipo','!=','Super-Admin')->orderBy('id', 'DESC')->paginate();
         }
 
         //dd(User::paginate(10));
-        return view('admin.users.index', compact('users'));
+        $roles = Role::where('name','!=','Super-Admin')->get();
+
+        return view('admin.users.index', compact('users','roles'));
     }
 
     /**
@@ -89,8 +91,10 @@ class UserController extends Controller
         $user->telefono = $request['telefono'];
         $user->email = $request['email'];
         $user->password = bcrypt($request['password']);
-        $user->tipo = $request['tipo'];
+        $user->tipo = $request->roles[0];
         $user->save();
+        //Aqui guardo al rol del usuario en la tabla roles
+        $user->assignRole($request->roles);
 
         return redirect('/admin/users#')->with('success', 'Usuario registrado correctamente');
     }
@@ -117,7 +121,8 @@ class UserController extends Controller
     {
         $this->authorize('create', new User);
         $user = User::find($id);
-        return view('admin.users.edit', compact('user'));
+        $roles = Role::where('name','!=','Super-Admin')->get();
+        return view('admin.users.edit', compact('user', 'roles'));
     }
 
     /**
@@ -129,6 +134,7 @@ class UserController extends Controller
      */
     public function update(UserGuardarRequest $request, $id)
     {
+        //dd($request->all());
         //Estoy validando via UserGuardarRequest
         /*$this->validate($request, [
             'fullname' => 'required',
@@ -146,8 +152,9 @@ class UserController extends Controller
         {
             $user->password = bcrypt($request['password']);
         }
-        $user->tipo = $request['tipo'];
         $user->save();
+
+        $user->syncRoles($request->roles);
 
         return redirect('admin/users')->with('success', 'Usuario actualizado');
     }

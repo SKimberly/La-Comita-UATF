@@ -17,7 +17,7 @@ class TallaController extends Controller
     {
         $this->authorize('create', new Categoria);
 
-        $tallas = Talla::orderBy('id', 'DESC')->paginate(10);
+        $tallas = Talla::orderBy('id', 'DESC')->paginate();
         return view('admin.tallas.index', compact('tallas'));
     }
 
@@ -66,6 +66,8 @@ class TallaController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize('update', new Categoria);
+
         $talla = Talla::find($id);
         return view('admin.tallas.edit', compact('talla'));
     }
@@ -99,6 +101,7 @@ class TallaController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('delete', new Categoria);
         //dd($id);
         $talla = Talla::find($id);
         $talla->delete();

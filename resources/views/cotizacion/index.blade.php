@@ -36,7 +36,7 @@
 			</div>
 			<div class="card-body">
 					<div class="table-responsive">
-						<table class="table table-striped">
+						<table class="table table-striped" id="tabla-cotizacion">
 							<thead>
 								<tr class="text-center">
 									<th scope="col">#</th>
@@ -70,21 +70,24 @@
 									<td>
 										<form method="post" action="{{ route('admin.cotizaciones.eliminar', $cotizacion->id) }}" style="display:inline">
 											@method('DELETE') @csrf
-											<a href="{{ route('cotizaciones.edit',$cotizacion->id) }}" class="btn btn-sm btn-block colorcard">
-												@if($cotizacion->tallas->count())
-													Editar
-												@else
-													COMPLETAR
-												@endif
-											</a>
-											<button class="btn btn-sm btn-block btn-danger" type="submit" onclick="return confirm('¿Estás seguro de eliminar esta cotización?')">
-												Eliminar
-											</button>
+											@can('update', $cotizacion)
+												<a href="{{ route('cotizaciones.edit',$cotizacion->id) }}" class="btn btn-sm btn-block colorcard">
+													@if($cotizacion->tallas->count())
+														Editar
+													@else
+														COMPLETAR
+													@endif
+												</a>
+												<button class="btn btn-sm btn-block btn-danger" type="submit" onclick="return confirm('¿Estás seguro de eliminar esta cotización?')">
+													Eliminar
+												</button>
+
+												<a href="{{ route('cotizaciones.cotiapedido',$cotizacion->id) }}" class="btn btn-sm btn-block colorcard">
+														Realizar Pedido
+												</a>
+											@endcan
 											<a href="{{ route('cotizaciones.show',$cotizacion->id) }}" class="btn btn-sm btn-block colorcard">
 													Ver cotización
-											</a>
-											<a href="{{ route('cotizaciones.cotiapedido',$cotizacion->id) }}" class="btn btn-sm btn-block colorcard">
-													Realizar Pedido
 											</a>
 										</form>
 									</td>
@@ -101,7 +104,15 @@
 @endsection
 
 
+
+@push('styles')
+<link href="{{ asset('datatable/dataTables.bootstrap4.css') }}" rel="stylesheet">
+@endpush
+
 @push('scripts')
+<script src="{{ asset('datatable/jquery.dataTables.js') }}" ></script>
+<script src="{{ asset('datatable/dataTables.bootstrap4.js') }}" ></script>
+
 <script>
 	$(function () {
 	    //Initialize Select2 Elements
@@ -123,6 +134,20 @@
     $('#modalCotizacion').on('shown.bs.modal', function(){
        window.location.hash = '#crear';
     });
+
+    $(function () {
+	    $('#tabla-cotizacion').DataTable({
+	      "paging": true,
+	      "lengthChange": true,
+	      "searching": true,
+	      "ordering": true,
+	      "info": true,
+	      "autoWidth": true,
+	      "language": {
+	            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+	        }
+	    });
+	  });
 </script>
 @endunless
 @endpush

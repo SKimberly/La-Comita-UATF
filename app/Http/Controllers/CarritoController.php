@@ -18,7 +18,7 @@ class CarritoController extends Controller
      */
     public function index()
     {
-        $carritos = Carrito::where('estado','Pendiente')->orderBy('updated_at', 'DESC')->paginate(10);
+        $carritos = Carrito::where('estado','Pendiente')->orderBy('updated_at', 'DESC')->paginate();
         return view('pedido.index', compact('carritos'));
     }
 

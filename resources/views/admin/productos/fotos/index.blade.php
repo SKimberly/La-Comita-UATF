@@ -27,20 +27,22 @@
       <div class="card card-info">
           <div class="card-header d-flex justify-content-between align-items-center">
             Producto: {{ $producto->nombre }}
-            <form class="form-inline" method="POST" action="" enctype="multipart/form-data">
-                @csrf
-                <div class="form-group">
+            @can('create', $producto)
+              <form class="form-inline" method="POST" action="" enctype="multipart/form-data">
+                  @csrf
+                  <div class="form-group">
 
-                    <div class="form-group">
-                      <input type="file" name="foto" class="form-control-file mb-2 mr-sm-2" id="imagenes" required>
-                    </div>
-                    <div class="form-group">
+                      <div class="form-group">
+                        <input type="file" name="foto" class="form-control-file mb-2 mr-sm-2" id="imagenes" required>
+                      </div>
+                      <div class="form-group">
 
-                    <button type="submit" class="btn btn-default mb-2" style="background-color: #12d8fa;"> Subir nueva imagen</button>
-                    </div>
-                    <a href="{{ route('admin.productos.index') }}" class="btn btn-default  mb-2" style="background-color: #1AB2CB;" >Cancelar</a>
-                </div>
-            </form>
+                      <button type="submit" class="btn btn-default mb-2" style="background-color: #12d8fa;"> Subir nueva imagen</button>
+                      </div>
+                      <a href="{{ route('admin.productos.index') }}" class="btn btn-default  mb-2" style="background-color: #1AB2CB;" >Cancelar</a>
+                  </div>
+              </form>
+            @endcan
           </div>
           <div class="card-body">
               <div class="row">
@@ -52,13 +54,17 @@
                           <form method="POST" action="">
                             @method('DELETE') @csrf
                             <input type="hidden" name="foto_id" value="{{ $foto->id }}">
+                            @can('create', $producto)
                             <button class="btn btn-sm btn-danger" type="submit">ELIMINAR</button>
+                            @endcan
                             @if ($foto->favorito)
                                 <button type="button" class="btn btn-success btn-fab btn-fab-mini btn-round" rel="tooltip" title="Esta imagen es favorita" ><i class="fas fa-heart"></i></button>
                             @else
-                                <a href="{{ url('/admin/productos/'.$producto->id.'/foto/select/'.$foto->id) }}" class="btn btn-success btn-sm">
+                              @can('create', $producto)
+                                 <a href="{{ url('/admin/productos/'.$producto->id.'/foto/select/'.$foto->id) }}" class="btn btn-success btn-sm">
                                     ¿Favorito?
                                  </a>
+                              @endcan
                             @endif
                           </form>
                         </div>

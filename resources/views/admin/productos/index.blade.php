@@ -29,7 +29,7 @@
           </div>
             <div class="card-body">
                 <div class="table-responsive">
-                  <table class="table table-striped">
+                  <table class="table table-striped" id="tabla-productos">
                       <thead>
                         <tr class="text-center">
                           <th scope="col">#</th>
@@ -43,9 +43,9 @@
                         </tr>
                       </thead>
                       <tbody>
-                         @foreach($productos as $producto)
+                         @foreach($productos as $key => $producto)
                             <tr>
-                                <th scope="row">{{ $producto->id }}</th>
+                                <th scope="row">{{ ++$key }}</th>
                                 <td>{{ $producto->nombre }}</td>
                                 <td>{{ $producto->descripcion }}</td>
                                 <td>{{ $producto->detallelargo }}</td>
@@ -53,19 +53,22 @@
                                 <td>{{ $producto->categoria->nombre }}</td>
                                 {{--  <td><img src="{{ $producto->fotos->first()->imagen   }}" alt="" ></td> --}}
                                 <td>{{ $producto->created_at }}</td>
-                                <td>
+                                <td class="text-center">
 
                                   <form method="post" action="{{ route('admin.productos.delete', $producto->id) }}">
                                       @method('DELETE') @csrf
 
-                                      <a href="{{ route('admin.productos.edit',$producto->id) }}" class="btn btn-sm btn-block colorcard">
-                                        Editar
+                                      <a href="{{ url('admin/productos/'.$producto->id.'/foto') }}" class="btn btn-sm btn-block colorcard">
+                                        <i class="fa fa-eye"></i> Ver Fotos
                                       </a>
-                                      <a href="{{ url('admin/productos/'.$producto->id.'/foto') }}" class="btn btn-sm btn-block btn-warning">Fotos</a>
-                                      <button class="btn btn-sm btn-block btn-danger" type="submit">
-                                        Eliminar
-                                      </button>
-
+                                      @can('create',$producto)
+                                        <a href="{{ route('admin.productos.edit',$producto->id) }}" class="btn btn-sm btn-block colorprin">
+                                          Editar
+                                        </a>
+                                        <button class="btn btn-sm btn-block btn-danger" type="submit">
+                                          Eliminar
+                                        </button>
+                                      @endcan
                                   </form>
 
                                 </td>
@@ -73,10 +76,37 @@
                          @endforeach
                       </tbody>
                     </table>
-                    {{ $productos->links() }}
                 </div>
             </div>
       </div>
     </div>
 </section>
 @endsection
+
+@push('styles')
+<link href="{{ asset('datatable/dataTables.bootstrap4.css') }}" rel="stylesheet">
+@endpush
+
+@push('scripts')
+<script src="{{ asset('datatable/jquery.dataTables.js') }}" ></script>
+<script src="{{ asset('datatable/dataTables.bootstrap4.js') }}" ></script>
+
+
+<script>
+    $(function () {
+      $('#tabla-productos').DataTable({
+        "paging": true,
+        "lengthChange": true,
+        "searching": true,
+        "ordering": true,
+        "info": true,
+        "autoWidth": true,
+        "language": {
+              "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+          }
+      });
+    });
+</script>
+@endpush
+
+

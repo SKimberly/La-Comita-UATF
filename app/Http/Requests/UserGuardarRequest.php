@@ -29,14 +29,14 @@ class UserGuardarRequest extends FormRequest
             'telefono' => 'required|min:5|max:12',
             'email' => 'unique:users,email',
             'password' => 'required|min:5',
-            'tipo' => 'required',
+            'roles' => 'required',
         ];
         if($this->method() !== 'POST'){
             $reglas = [
                 'fullname' => 'required',
                 'cedula' => 'required',
                 'telefono' => 'required',
-                'tipo' => 'required',
+                'roles' => 'required',
             ];
         }
 

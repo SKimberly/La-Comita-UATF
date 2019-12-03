@@ -92,12 +92,14 @@
 			                </div>
 			                <div class="col-md-6">
 				                <label for="tipo">Tipo:</label>
-				                <select class="form-control {{ $errors->has('tipo') ? ' is-invalid' : 'border-1' }}" name="tipo">
+				                <select class="form-control {{ $errors->has('tipo') ? ' is-invalid' : 'border-1' }}" name="roles[]">
 				                    <option value="">Seleccione una opción</option>
-				                    <option value="supervisor" {{ $user->tipo == 'supervisor' ? 'selected' : '' }} >Supervisor</option>
-				                    <option value="secretaria" {{ $user->tipo == 'secretaria' ? 'selected' : '' }}>Secretaria</option>
+				                    @foreach($roles as $rol)
+				                    	<option value="{{ $rol->name }}" {{ old('roles',$user->roles->first()->name) == $rol->name ? 'selected' : '' }}>{{ $rol->name }}</option>
+				                    @endforeach
+				                    {{-- <option value="secretaria" {{ $user->tipo == 'secretaria' ? 'selected' : '' }}>Secretaria</option>
 				                    <option value="vendedor" {{ $user->tipo == 'vendedor' ? 'selected' : '' }}>Vendedor</option>
-				                    <option value="cliente" {{ $user->tipo == 'cliente' ? 'selected' : '' }}>Cliente</option>
+				                    <option value="cliente" {{ $user->tipo == 'cliente' ? 'selected' : '' }}>Cliente</option> --}}
 			                    </select>
 				                @if ($errors->has('tipo'))
 				                        <span class="invalid-feedback" role="alert">

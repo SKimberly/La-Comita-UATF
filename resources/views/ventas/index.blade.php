@@ -31,7 +31,7 @@
           </div>
             <div class="card-body">
                 <div class="table-responsive-xl">
-                  <table class="table table-striped">
+                  <table class="table table-striped" id="tabla-ventas">
                       <thead>
                         <tr class="text-center">
                           <th scope="col">#</th>
@@ -64,16 +64,25 @@
 
                           <td class="text-center">
                             @if($pedido->carrito_id != 0)
+
                                 @if((($pedido->anticipo+$pedido->pago) < $pedido->montototal))
+                                  @can('delete', $pedido)
                                     <button type="button" class="btn colorprin  btn-sm" data-toggle="modal" data-target="#pagarPedido" data-whatever="{{ $pedido->id  }}"> <i class="fas fa-hand-holding-usd"></i> Completar Pago</button>
+                                  @elsecan('restore',$pedido)
+                                    <p class="bg-black" >Sin Acceso</p>
+                                  @endcan
                                 @else
-                                  <a href="{{ route('ventas.edit', $pedido->id) }}" class="btn colorcard btn-sm" target="__blanck"><i class="fas fa-file-pdf"></i> Imprimir Factura</a>
+                                  <a href="{{ route('ventas.edit', $pedido->id) }}" class="btn colorcard btn-sm" target="__blanck"><i class="fas fa-file-pdf"></i> Imprimir Recibo</a>
                                 @endif
                             @else
                                 @if((($pedido->anticipo+$pedido->pago) < $pedido->montototal))
-                                  <button type="button" class="btn colorprin  btn-sm" data-toggle="modal" data-target="#pagarPedido" data-whatever="{{ $pedido->id  }}"> <i class="fas fa-hand-holding-usd"></i> Completar Pago</button>
+                                  @can('delete', $pedido)
+                                    <button type="button" class="btn colorprin  btn-sm" data-toggle="modal" data-target="#pagarPedido" data-whatever="{{ $pedido->id  }}"> <i class="fas fa-hand-holding-usd"></i> Completar Pago</button>
+                                  @elsecan('restore',$pedido)
+                                    <p class="bg-black" >Sin Acceso</p>
+                                  @endcan
                                 @else
-                                  <a href="{{ route('ventas.edit', $pedido->id) }}" class="btn colorcard btn-sm" target="__blanck"><i class="fas fa-file-pdf"></i> Imprimir Factura</a>
+                                  <a href="{{ route('ventas.edit', $pedido->id) }}" class="btn colorcard btn-sm" target="__blanck"><i class="fas fa-file-pdf"></i> Imprimir Recibo</a>
                                 @endif
                               @endif
                           </td>
@@ -88,7 +97,14 @@
 </section>
 @endsection
 
+@push('styles')
+<link href="{{ asset('datatable/dataTables.bootstrap4.css') }}" rel="stylesheet">
+@endpush
+
 @push('scripts')
+<script src="{{ asset('datatable/jquery.dataTables.js') }}" ></script>
+<script src="{{ asset('datatable/dataTables.bootstrap4.js') }}" ></script>
+
 @unless(request()->is('admin/ventas/'))
 <script>
     $('#pagarPedido').on('show.bs.modal', function (event) {
@@ -98,6 +114,20 @@
           // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
           var modal = $(this)
           modal.find('.modal-footer input').val(recipient)
+    });
+
+    $(function () {
+      $('#tabla-ventas').DataTable({
+        "paging": true,
+        "lengthChange": true,
+        "searching": true,
+        "ordering": true,
+        "info": true,
+        "autoWidth": true,
+        "language": {
+              "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+          }
+      });
     });
 </script>
 @endunless

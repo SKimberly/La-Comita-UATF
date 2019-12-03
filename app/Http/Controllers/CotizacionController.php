@@ -24,11 +24,11 @@ class CotizacionController extends Controller
      */
     public function index()
     {
-        if( auth()->user()->hasRole('Super-Admin') || auth()->user()->hasRole('Administrador')){
-            $cotizaciones = Cotizacion::where('estado','Activo')->orderBy('id', 'DESC')->paginate(5);
+        if( auth()->user()->hasRole('Super-Admin') || auth()->user()->hasRole('Administrador') || auth()->user()->hasRole('Ventas')){
+            $cotizaciones = Cotizacion::where('estado','Activo')->orderBy('id', 'DESC')->paginate();
         }
         if( auth()->user()->hasRole('Cliente')){
-            $cotizaciones = Cotizacion::where('user_id',auth()->user()->id)->where('estado','Activo')->orderBy('id', 'DESC')->paginate(5);
+            $cotizaciones = Cotizacion::where('user_id',auth()->user()->id)->where('estado','Activo')->orderBy('id', 'DESC')->paginate();
         }
 
         $productos = Producto::orderBy('id', 'ASC')->get();

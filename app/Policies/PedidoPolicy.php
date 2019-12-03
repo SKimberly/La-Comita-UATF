@@ -43,7 +43,7 @@ class PedidoPolicy
      */
     public function update(User $user, Pedido $pedido)
     {
-        //
+        return $user->roles->first()->name === 'Ventas';
     }
 
     /**
@@ -55,7 +55,7 @@ class PedidoPolicy
      */
     public function delete(User $user, Pedido $pedido)
     {
-        //
+        return $user->roles->first()->name === 'Administrador' || $user->roles->first()->name === 'Ventas' || $user->roles->first()->name === 'Super-Admin';
     }
 
     /**
@@ -67,7 +67,7 @@ class PedidoPolicy
      */
     public function restore(User $user, Pedido $pedido)
     {
-        //
+        return $user->roles->first()->name === 'Cliente';
     }
 
     /**

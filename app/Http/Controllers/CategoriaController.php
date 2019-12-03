@@ -16,7 +16,7 @@ class CategoriaController extends Controller
     {
         $this->authorize('create', new Categoria);
 
-        $categorias = Categoria::orderBy('id','DESC')->paginate(2);
+        $categorias = Categoria::orderBy('id','DESC')->paginate();
 
         return view('admin.categorias.index', compact('categorias'));
     }

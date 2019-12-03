@@ -67,7 +67,7 @@ class CotizacionPolicy
      */
     public function restore(User $user, Cotizacion $cotizacion)
     {
-        return $user->roles->first()->name === 'Administrador' || $user->roles->first()->name === 'Super-Admin' || $user->id === $cotizacion->user_id;
+        return $user->roles->first()->name === 'Administrador' || $user->roles->first()->name === 'Ventas' || $user->roles->first()->name === 'Super-Admin' || $user->id === $cotizacion->user_id;
     }
 
     /**

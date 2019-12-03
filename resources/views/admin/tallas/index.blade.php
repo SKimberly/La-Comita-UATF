@@ -33,7 +33,7 @@
 			</div>
 			<div class="card-body">
 					<div class="table-responsive">
-						<table class="table table-striped">
+						<table class="table table-striped" id="tabla-tallas">
 							<thead>
 								<tr class="text-center">
 									<th scope="col">#</th>
@@ -65,7 +65,6 @@
 								@endforeach
 							</tbody>
 						</table>
-						{{ $tallas->links() }}
 					</div>
 			</div>
 		</div>
@@ -73,7 +72,13 @@
 </section>
 @endsection
 
+@push('styles')
+<link href="{{ asset('datatable/dataTables.bootstrap4.css') }}" rel="stylesheet">
+@endpush
+
 @push('scripts')
+<script src="{{ asset('datatable/jquery.dataTables.js') }}" ></script>
+<script src="{{ asset('datatable/dataTables.bootstrap4.js') }}" ></script>
 @unless(request()->is('admin/tallas/*'))
 <script>
     if(window.location.hash === '#talla')
@@ -88,6 +93,20 @@
        $('#nombre').focus();
        window.location.hash = '#talla';
     });
+
+    $(function () {
+	    $('#tabla-tallas').DataTable({
+	      "paging": true,
+	      "lengthChange": true,
+	      "searching": true,
+	      "ordering": true,
+	      "info": true,
+	      "autoWidth": true,
+	      "language": {
+	            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+	        }
+	    });
+	  });
 </script>
 @endunless
 @endpush

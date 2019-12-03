@@ -33,7 +33,7 @@
 			</div>
 			<div class="card-body">
 					<div class="table-responsive">
-						<table class="table table-striped">
+						<table class="table table-striped" id="tabla-categoria">
 							<thead>
 								<tr class="text-center">
 									<th scope="col">#</th>
@@ -45,9 +45,9 @@
 								</tr>
 							</thead>
 							<tbody>
-								@foreach($categorias as $categoria)
+								@foreach($categorias as $key => $categoria)
 								<tr>
-									<th scope="row">{{ $categoria->id }}</th>
+									<th scope="row">{{ ++$key }}</th>
 									<td>{{ $categoria->nombre }}</td>
 									<td>{{ $categoria->descripcion }}</td>
 									<td class="text-center">
@@ -69,7 +69,6 @@
 								@endforeach
 							</tbody>
 						</table>
-						{{ $categorias->links() }}
 					</div>
 			</div>
 		</div>
@@ -77,7 +76,14 @@
 </section>
 @endsection
 
+@push('styles')
+<link href="{{ asset('datatable/dataTables.bootstrap4.css') }}" rel="stylesheet">
+@endpush
+
 @push('scripts')
+<script src="{{ asset('datatable/jquery.dataTables.js') }}" ></script>
+<script src="{{ asset('datatable/dataTables.bootstrap4.js') }}" ></script>
+
 @unless(request()->is('admin/categorias/*'))
 <script>
     if(window.location.hash === '#create')
@@ -92,6 +98,19 @@
        $('#fullname').focus();
        window.location.hash = '#create';
     });
+    $(function () {
+	    $('#tabla-categoria').DataTable({
+	      "paging": true,
+	      "lengthChange": true,
+	      "searching": true,
+	      "ordering": true,
+	      "info": true,
+	      "autoWidth": true,
+	      "language": {
+	            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+	        }
+	    });
+	  });
 </script>
 @endunless
 @endpush

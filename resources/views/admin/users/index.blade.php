@@ -26,13 +26,15 @@
 	<div class="container-fluid">
 		<div class="card card-info">
 			<div class="card-header" >
-				<button type="button" class="btn btn-default" style="background-color: rgb(18, 216, 250);" data-toggle="modal" data-target="#myModal">
-				 <i class="fas fa-user-check"></i> Nuevo Usuario
-				</button>
+				@can('create', $users[0])
+					<button type="button" class="btn btn-default" style="background-color: rgb(18, 216, 250);" data-toggle="modal" data-target="#myModal">
+				 	<i class="fas fa-user-check"></i> Nuevo Usuario
+					</button>
+				@endcan
 			</div>
 			<div class="card-body">
 					<div class="table-responsive">
-						<table class="table table-striped">
+						<table class="table table-striped" id="tabla-user">
 							<thead>
 								<tr class="text-center">
 									<th scope="col">#</th>
@@ -40,22 +42,21 @@
 									<th scope="col">Cédula</th>
 									<th scope="col">Celular/Teléfono</th>
 									<th scope="col">Correo Electrónico</th>
-									<th scope="col">Tipo</th>
-									<th scope="col">Activo</th>
+									<th scope="col">Rol</th>
 									<th scope="col">Opciones</th>
 								</tr>
 							</thead>
 							<tbody>
-								@foreach($users as $user)
+								@foreach($users as $key => $user)
 								<tr>
-									<th scope="row">{{ $user->id }}</th>
+									<th scope="row">{{ ++$key }}</th>
 									<td>{{ $user->fullname }}</td>
 									<td>{{ $user->cedula }}</td>
 									<td>{{ $user->telefono }}</td>
 									<td>{{ $user->email }}</td>
-									<td>{{ $user->tipo }}</td>
-									<td>{{ $user->activo }}</td>
-									<td>
+									<td>{{ $user->getRoleNames()->implode(', ') }}</td>
+									<td class="text-center">
+										@can('create', $user)
 										<a href="{{ route('admin.users.edit',$user->id) }}" class="btn btn-sm btn-block btn-info">
 											Editar
 										</a>
@@ -65,6 +66,9 @@
 												Eliminar
 											</button>
 										</form>
+										@elsecan('view', $user)
+											<p class="bg-black">sin acceso</p>
+										@endcan
 									</td>
 								</tr>
 								@endforeach
@@ -79,7 +83,14 @@
 <!-- Modal -->
 @endsection
 
+@push('styles')
+<link href="{{ asset('datatable/dataTables.bootstrap4.css') }}" rel="stylesheet">
+@endpush
+
 @push('scripts')
+<script src="{{ asset('datatable/jquery.dataTables.js') }}" ></script>
+<script src="{{ asset('datatable/dataTables.bootstrap4.js') }}" ></script>
+
 @unless(request()->is('admin/users/*'))
 <script>
     if(window.location.hash === '#create')
@@ -94,6 +105,20 @@
        $('#fullname').focus();
        window.location.hash = '#create';
     });
+
+    $(function () {
+	    $('#tabla-user').DataTable({
+	      "paging": true,
+	      "lengthChange": true,
+	      "searching": true,
+	      "ordering": true,
+	      "info": true,
+	      "autoWidth": true,
+	      "language": {
+	            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+	        }
+	    });
+	  });
 </script>
 @endunless
 @endpush

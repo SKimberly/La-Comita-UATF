@@ -13,7 +13,7 @@ class ProductoController extends Controller
 	//Aqui enviaremos los datos para mostrarlos en index.blade.php
     public function index(){
     	//Aqui devuelves a un vista
-    	$productos = Producto::orderBy('id','DESC')->paginate(10);
+    	$productos = Producto::orderBy('id','DESC')->paginate();
     	//dd(Producto::paginate(10));
     	return view('admin.productos.index', compact('productos'));
     }

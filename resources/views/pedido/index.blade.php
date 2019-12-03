@@ -30,7 +30,7 @@
           </div>
             <div class="card-body">
                 <div class="table-responsive-xl">
-                  <table class="table table-striped">
+                  <table class="table table-striped" id="tabla-pedido">
                       <thead>
                         <tr class="text-center">
                           <th scope="col">#</th>
@@ -61,13 +61,24 @@
                           <td class="text-center colorprin ">{{ $pedido->anticipo }}</td>
                           <td class="text-center colorprin">Sin Fecha</td>
 
-                          <td>
+                          <td class="text-center">
+
                             @if($pedido->carrito_id != 0)
-                                <a href="{{ route('carrito.show',$pedido->carrito_id) }}" class="btn btn-sm colorcard btn-block" target="_blanck"><i class="fas fa-hand-holding-usd"></i> Concretar</a>
-                                <a href="{{ route('pedidos.edit',$pedido->carrito_id) }}" class="btn btn-sm btn-danger btn-block"><i class="fas fa-backspace"></i> Dar/Baja</a>
+                                @can('create', $pedido)
+                                  <a href="{{ route('carrito.show',$pedido->carrito_id) }}" class="btn btn-sm colorcard btn-block" target="_blanck"><i class="fas fa-hand-holding-usd"></i> Concretar</a>
+                                @elsecan('update', $pedido)
+                                  <p class="bg-black"> Sin Acceso</p>
+                                @endcan
+                                @can('view', $pedido)
+                                  <a href="{{ route('pedidos.edit',$pedido->carrito_id) }}" class="btn btn-sm btn-danger btn-block"><i class="fas fa-backspace"></i> Dar/Baja</a>
+                                @endcan
                             @else
-                                <a href="{{ route('pedidos.show',$pedido->cotizacion_id) }}" class="btn btn-sm colorcard btn-block" target="_blanck"><i class="fas fa-hand-holding-usd"></i> Concretar</a>
-                                <a href="{{ route('pedido.baja',$pedido->cotizacion_id) }}" class="btn btn-sm btn-danger btn-block"><i class="fas fa-backspace"></i> Dar/Baja</a>
+                                @can('create', $pedido)
+                                  <a href="{{ route('pedidos.show',$pedido->cotizacion_id) }}" class="btn btn-sm colorcard btn-block" target="_blanck"><i class="fas fa-hand-holding-usd"></i> Concretar</a>
+                                @endcan
+                                @can('view', $pedido)
+                                  <a href="{{ route('pedido.baja',$pedido->cotizacion_id) }}" class="btn btn-sm btn-danger btn-block"><i class="fas fa-backspace"></i> Dar/Baja</a>
+                                @endcan
                             @endif
                           </td>
                       </tr>
@@ -80,3 +91,29 @@
     </div>
 </section>
 @endsection
+
+@push('styles')
+<link href="{{ asset('datatable/dataTables.bootstrap4.css') }}" rel="stylesheet">
+@endpush
+
+@push('scripts')
+<script src="{{ asset('datatable/jquery.dataTables.js') }}" ></script>
+<script src="{{ asset('datatable/dataTables.bootstrap4.js') }}" ></script>
+
+<script>
+    $(function () {
+      $('#tabla-pedido').DataTable({
+        "paging": true,
+        "lengthChange": true,
+        "searching": true,
+        "ordering": true,
+        "info": true,
+        "autoWidth": true,
+        "language": {
+              "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+          }
+      });
+    });
+</script>
+@endpush
+

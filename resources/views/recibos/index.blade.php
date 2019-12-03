@@ -29,7 +29,7 @@
           </div>
             <div class="card-body">
                 <div class="table-responsive-xl">
-                  <table class="table table-striped">
+                  <table class="table table-striped" id="tabla-recibo">
                       <thead>
                         <tr class="text-center">
                           <th scope="col">#</th>
@@ -81,9 +81,28 @@
 </section>
 @endsection
 
-@push('scripts')
-<script>
+@push('styles')
+<link href="{{ asset('datatable/dataTables.bootstrap4.css') }}" rel="stylesheet">
+@endpush
 
+@push('scripts')
+<script src="{{ asset('datatable/jquery.dataTables.js') }}" ></script>
+<script src="{{ asset('datatable/dataTables.bootstrap4.js') }}" ></script>
+
+<script>
+  $(function () {
+      $('#tabla-recibo').DataTable({
+        "paging": true,
+        "lengthChange": true,
+        "searching": true,
+        "ordering": true,
+        "info": true,
+        "autoWidth": true,
+        "language": {
+              "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+          }
+      });
+    });
 </script>
 @endpush
 

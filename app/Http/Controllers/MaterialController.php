@@ -16,7 +16,7 @@ class MaterialController extends Controller
     public function index()
     {
         $this->authorize('create', new Categoria);
-        $materiales = Material::orderBy('id', 'DESC')->paginate(10);
+        $materiales = Material::orderBy('id', 'DESC')->paginate();
         return view('admin.materiales.index', compact('materiales'));
     }
 
@@ -65,6 +65,7 @@ class MaterialController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize('update', new Categoria);
         $material = Material::find($id);
         return view('admin.materiales.edit', compact('material'));
     }
@@ -97,6 +98,7 @@ class MaterialController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('delete', new Categoria);
         $material = Material::find($id);
         $material->delete();
         return redirect('admin/materiales')->with('success', 'Material eliminado Correctamente');
